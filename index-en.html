@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>火星时钟 | 作者：James Tauber ；改进：星际移民中心</title>
+        <title>Mars Clock by James Tauber</title>
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,700,300,400" rel="stylesheet" type="text/css">
 
         <style>
@@ -100,22 +100,27 @@
 
     <body>
         <div class="container">
-            <h1>火星时钟 <br><span>作者：James Tauber</span> <span>改进：<a href="http://interimm.org" target="_blank">星际移民中心</a></span></h1>
+            <h1>Mars Clock <span>by James Tauber</span></h1>
 
             <p>
-                火星钟表，包括好奇号和机遇号的一些时刻表。
+                This is a live calculation of the time on Mars including mission times for MSL Curiosity and MER-B Opportunity.
             </p>
             <div style="margin-bottom: 50px;">
-                <div style="font-size:80%;"><span><a href="https://gratipay.com/~jtauber/" target="_blank">在 gratipay 上付钱给作者 James Tauber</a></span>
-                    <span> | </span><span>关注<a href="http://interimm.org" target="_blank">星际移民中心</a></span></div>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-via="jtauber" data-related="jtauber">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <a href="https://twitter.com/jtauber" class="twitter-follow-button" data-show-count="true">Follow @jtauber</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <iframe style="border: 0; margin: 0; padding: 0;"
+                    src="https://www.gittip.com/jtauber/widget.html"
+                    width="48pt" height="20pt"></iframe>
             </div>
 
             <div class="column">
-                <h2>地球时刻</h2>
+                <h2>Earth</h2>
 
                 <div class="earth-date-input">
                     <span class="automatic-input">
-                        <a class="utc-time" title="点击此处可以输入日期"></a>
+                        <a class="utc-time" title="Click here to enter a date"></a>
                     </span>
                     <span class="manual-input" style="display:none;">
                         <input type="datetime" name="custom-datetime" class="custom-datetime" />
@@ -124,7 +129,7 @@
                 </div>
 
                 <div class="manual-input-invalid" style="display:none;">
-                    <p>请输入一个有效的日期，格式可以使用 &ldquo;August 6, 2012&rdquo;.</p>
+                    <p>Please enter a valid date in a well-known format such as &ldquo;August 6, 2012&rdquo;.</p>
                 </div>
 
                 <div class="date-conversion-results">
@@ -141,19 +146,19 @@
                     </div>
 
                     <div class="clock explanation-link" data-explanation="#j2000-explanation">
-                        <h3>自从 <a href="https://en.wikipedia.org/?title=Epoch_(astronomy)#Julian_years_and_J2000" target="_blank" title="点击此处查看解释">J2000</a> 之后的时间</h3>
+                        <h3>Days Since J2000 Epoch</h3>
                         <span class="time j2000"></span>
                     </div>
 
                     <h2>Mars</h2>
 
                     <div class="clock explanation-link" data-explanation="#msd-explanation">
-                        <h3>火星太阳日</h3>
+                        <h3>Mars Sol Date</h3>
                         <div class="time msd"></div>
                     </div>
 
                     <div class="clock explanation-link" data-explanation="#mtc-explanation">
-                        <h3><a href="https://en.wikipedia.org/wiki/Timekeeping_on_Mars#Coordinated_Mars_Time_.28MTC.29" target="_blank">Coordinated Mars Time</a></h3>
+                        <h3>Coordinated Mars Time</h3>
                         <div class="time mtc"></div>
                     </div>
 
@@ -166,97 +171,101 @@
                     <div class="explanation-link" data-explanation="#e-explanation">
                         <i>e</i> = <span class="e"></span>
                     </div>
+                    <div>
+                        PBS = <span class="pbs"></span>&deg;
+                    </div>
                     <div class="explanation-link" data-explanation="#nu_m-explanation">
                         &nu; - M = <span class="nu_m"></span>&deg;
                     </div>
+                    &nu; = <span class="nu"></span>&deg;
                     <div class="explanation-link" data-explanation="#l_s-explanation">
                         <i>L</i><sub>s</sub> = <span class="l_s"></span>&deg;<br>
-                    </div>
-                    &nu; = <span class="nu"></span>&deg;
-                    <div>
-                        PBS = <span class="pbs"></span>&deg;
                     </div>
                     <div>
                         EOT = <span class="eot"></span>&deg; = <span class="eot_h"></span>
                     </div>
 
-                    <h2>好奇号<br><span>137.4&deg;E longitude</span></h2>
+                    <h2>Curiosity<br><span>137.4&deg;E longitude</span></h2>
 
                     <div class="clock">
-                        <h3>任务的太阳日数目</h3>
+                        <h3>Mission Sol</h3>
                         <div class="time curiosity_sol"></div>
                     </div>
 
                     <div class="clock">
-                        <h3>当地平太阳时 (LMST)</h3>
+                        <h3>Mission Time (Landing LMST)</h3>
                         <div class="time curiosity_lmst"></div>
                     </div>
 
                     <div class="clock">
-                        <h3>当地<a href="https://zh.wikipedia.org/wiki/%E5%A4%AA%E9%98%B3%E6%97%A5#.E8.A6.96.E5.A4.AA.E9.99.BD.E6.97.A5" target="_blank">视太阳时</a></h3>
+                        <h3>Local True Solar Time</h3>
                         <div class="time curiosity_ltst"></div>
                     </div>
 
-                    <h2>机遇号</h2>
+                    <h2>Opportunity</h2>
 
                     <div class="clock">
-                        <h3>任务的太阳日数目</h3>
+                        <h3>Mission Sol</h3>
                         <div class="time opportunity_sol"></div>
                     </div>
 
                     <div class="clock">
-                        <h3>当地时间 (HLST)</h3>
+                        <h3>Mission Time (HLST)</h3>
                         <div class="time opportunity_mission"></div>
                     </div>
 
                     <div class="clock">
-                        <h3>当地<a href="https://zh.wikipedia.org/wiki/%E5%A4%AA%E9%98%B3%E6%97%A5#.E8.A6.96.E5.A4.AA.E9.99.BD.E6.97.A5" target="_blank">视太阳时</a></h3>
+                        <h3>Local True Solar Time</h3>
                         <div class="time opportunity_ltst"></div>
                     </div>
                 </div>
             </div>
 
             <div class="column">
-                <p class="help">鼠标放在左侧条目上可以看到相关解释。</p>
+                <p class="help">Mouse over a number on the left to get an explanation below<br>(in progress)</p>
                 <div class="explanation" id="millis-explanation">
                     <div class="clock">
-                        <h3>UNIX 时间开始之后的<br>毫秒数</h3>
+                        <h3>Milliseconds since<br>Unix Epoch</h3>
                         <span class="time millis"></span>
                     </div>
-                    <p>UNIX 时间是从 1970 年 1 月 1 日的 0 点（UTC 时间）开始的。这里显示了从这个之后的毫秒数。</p>
-                    <p>这个数字是从你的浏览器直接获取的。</p>
+                    <p>This is the number of milliseconds since<br>1 January 1970 00:00:00 UTC.</p>
+                    <p>We get this straight from your browser.</p>
                 </div>
                 <div class="explanation" id="jd_ut-explanation">
                     <div class="clock">
-                        <h3>儒略日 (UT，世界时)</h3>
+                        <h3>Julian Date (UT)</h3>
                         <span class="time jd_ut"></span>
                     </div>
-                    <p>这里显示了<a href="https://zh.wikipedia.org/wiki/%E5%84%92%E7%95%A5%E6%97%A5" target="_blank">儒略日</a>天数。儒略日（Julian day）是指由公元前4713年1月1日，协调世界时中午12时开始所经过的天数。</p>
+                    <p>This is the number of days (rather than milliseconds) since a much older epoch than Unix time.</p>
                     <p>
-                        计算这个天数的时候，并不是从我们常用的格里高利历转换成儒略日获得的。而是用 UNIX 时间（毫秒数）除以 86,400,000 毫秒得到天数，再用这个天数加上 UNIX 时间开始的时刻所对应的儒略日数目 2,440,587.5，
+                        Rather than an elaborate conversion from the Gregorian date to the Julian date, we just divide
+                        <i>millis</i> by 86,400,000 to get the number of days since the Unix epoch and add that number
+                        to 2,440,587.5, the Julian Date at the Unix epoch.
                     </p>
                     <p>JD<sub>UT</sub> = 2,440,587.5 + (<i>millis</i> / 8.64 &times; 10<sup>7</sup> ms/day)</p>
                 </div>
                 <div class="explanation" id="jd_tt-explanation">
                     <div class="clock">
-                        <h3>儒略日 (TT，地球时)</h3>
+                        <h3>Julian Date (TT)</h3>
                         <span class="time jd_ut"></span>
                     </div>
                     <p>
-                        在换算中我们需要使用地球时（TT），而不是 UTC 时间。所以我们需要在上面计算的 UTC 时间上加上省去的闰秒，但是只从 2012 年 7 月 1 日开始的，共有 35 + 32.184 秒。
+                        We actually need the Terrestrial Time (TT) Julian Date rather than the UTC-based one.
+                        This means we basically just add the leap seconds which, since 1 July 2012 are 35 + 32.184.
                     </p>
                     <p>JD<sub>TT</sub> = JD<sub>UT</sub> + (35 + 32.184) / 86,400</p>
                 </div>
                 <div class="explanation" id="j2000-explanation">
                     <div class="clock">
-                        <h3>J2000 之后的时间</h3>
+                        <h3>Days Since J2000 Epoch</h3>
                         <span class="time j2000"></span>
                     </div>
                     <p>
-                        这个时间是我们后面要换算火星时间的时候直接用到的地球上的时间。计算的是 2000 年 1 月 1 日 12:00 之后的地球日天数（保留小数）。
+                        This is the number we're going to use as the input to many of our Mars calculations.
+                        It's the number of (fractional) days since<br>12:00 on 1 January 2000<br>in Terrestrial Time.
                     </p>
                     <p>
-                        我们已知 JD<sub>TT</sub> 在 J2000 时是 2,451,545.0 个地球日，所以转换公式是，
+                        We know what JD<sub>TT</sub> was at the J2000 epoch (2,451,545.0) so it's trivial to convert.
                     </p>
                     <p>
                         &Delta;t<sub>J2000</sub> = JD<sub>TT</sub> - 2,451,545.0
@@ -264,23 +273,25 @@
                 </div>
                 <div class="explanation" id="msd-explanation">
                     <div class="clock">
-                        <h3>火星太阳日</h3>
+                        <h3>Mars Sol Date</h3>
                         <div class="time msd"></div>
                     </div>
                     <p>
-                        地球上的儒略日对应的是火星上的太阳日。
+                        The equivalent of the Julian Date for Mars is the Mars Sol Date.
                     </p>
                     <p>
-                        2000 年 1 月 6 日午夜的时候(&Delta;t<sub>J2000</sub> = 4.5)，在火星的零度经线上也是午夜。所以我们计算火星太阳日的时候以这个时间为参考点来计算，考虑到地球上并不是恰恰午夜而是相差 4.5 秒，所以我们这里也需要修正，火星太阳日的计算的开始时间是 &Delta;t<sub>J2000</sub> &minus; 4.5。
+                        At midnight on the 6th January 2000 (&Delta;t<sub>J2000</sub> = 4.5) it was midnight at the Martian
+                        prime meridian, so our starting point for Mars Sol Date is &Delta;t<sub>J2000</sub> &minus; 4.5.
                     </p>
                     <p>
-                        火星太阳日的长度和地球上儒略日的长度之比是 1.027491252，所以我们把地球的儒略日除以这个数可以获得火星上的太阳日的天数。
+                        The length of a Martian day and Earth (Julian) day differ by a ratio of 1.027491252 so we divide by that.
                     </p>
                     <p>
-                        按照约定，我们需要保证直到 1873 年 12 月 29 日 MSD （火星太阳日）是正值，所以我们加上 44,796。
+                        By convention, to keep the MSD positive going back to midday December 29th 1873, we add 44,796.
                     </p>
                     <p>
-                        实际上上面说的火星和地球午夜的对齐并不严格，还有一个 &minus;0.00072 的差异（根据 Allison, M., and M. McEwen 2000）。不过 <a href="http://www.giss.nasa.gov/tools/mars24/" target="_blank">Mars24</a> （这是 NASA 的一个火星时间计算程序，可自行搜索查看）用的是 &minus;0.00096，这是一个更加新的数据。
+                        There is a slight adjustment as the midnights weren't perfectly aligned. Allison, M., and M. McEwen 2000 has &minus;0.00072 but
+                        the Mars24 site gives a more up-to-date &minus;0.00096.
                     </p>
                     <p>
                         MSD = ([(&Delta;t<sub>J2000</sub> &minus; 4.5) / 1.027491252] &plus; 44,796.0 &minus; 0.00096)
@@ -292,7 +303,8 @@
                         <div class="time mtc"></div>
                     </div>
                     <p>
-                        <i>Coordinated Mars Time</i> (简称 MTC) 是地球上 UTC 在火星的对应。因为 MTC 是一种平均计时方法，所以可以直接从火星太阳日来计算，
+                        <i>Coordinated Mars Time</i> (or MTC) is like UTC but for Mars. Because it is just a mean time,
+                        it can be calculated directly from the Mars Sol Date as follows:
                     </p>
                     <p>
                         MTC = (24 h &times; MSD) mod 24
@@ -300,65 +312,81 @@
                 </div>
                 <div class="explanation" id="m-explanation">
                     <div class="clock">
-                        <h3>火星平近点角</h3>
+                        <h3>Mars Mean Anomaly</h3>
                         <span class="time"><span class="m"></span>&deg;</span>
                     </div>
                     <p>
-                        平近点角（Mean Anomaly）在轨道力学中是轨道上的物体在辅助圆上相对于中心点的运行角度，在测量上不同于其他的近点角，平近点角与时间的关系是线性的。因为与时间是线性的关系，因此要计算在轨道上两点之间移动所需的时间是非常容易的。平近点角是从近日点开始计算的。
+                        The mean anomaly is a measure of where an orbiting body is in its orbit. More precisely,
+                        it's a measure of how far into the full orbit the body is since its last periapsis (the point
+                        in the ellipse closest to the focus).
                     </p>
                     <p>
-                        计算两点之间的平近点角就能得知其间的不同，只要知道，两点之间的移动时间相对于整个轨道 2&pi; 的周期是一个简单的比例式。
-                        平近点角并不代表什么实质上的角度，这只是一个方便使用的理论概念，平近点角是正比于时间的。
+                        The mean anomaly is the ratio (time-wise) into the full orbit, multiplied by 2&pi; (radians) or 360&deg; although the value doesn't truly correspond to any angle. The mean anomaly is proportional to time (and
+                        hence area swept) rather that the actual angle of the body from the
+                        focus (which would be the <i>true anomaly</i>).
                     </p>
                     <p>
-                        平近点角可以利用 &Delta;t<sub>J2000</sub> 来计算，因为我们知道 J2000 时的平近点角是 19.3870&deg; ，而且平均每天运动的角度（360&deg; / 天数）。
+                        So the mean anomaly can be calculated from &Delta;t<sub>J2000</sub> if we know the mean
+                        anomaly at the J2000 epoch (19.3870&deg;) and the mean daily motion (360&deg; / length of anomalistic orbit in days).
                     </p>
                     <p>
-                        也就是是计算方法是，
+                        This gives us:
                     </p>
                     <p>
                         M = 19.3870&deg; + 0.52402075&deg;&Delta;t<sub>J2000</sub>
                     </p>
+                    <p>
+                        for Mars.
+                    </p>
                 </div>
                 <div class="explanation" id="alpha_fms-explanation">
                     <div class="clock">
-                        <h3>假想平太阳角（）</h3>
+                        <h3>Angle of Fictitious Mean Sun</h3>
                         <span class="time"><span class="alpha_fms"></span>&deg;</span>
                     </div>
                     <p>
-                        火星围绕太阳转动，但是从火星的角度来看，太阳是在围绕火星转动的。
+                        Mars goes around the Sun, but viewed from Mars's point of view, the Sun goes around Mars.
+                        I'm not talking about the daily motion of the Sun caused by Mars's rotation, but the year-long
+                        motion of the Sun viewed from Mars.
                     </p>
                     <p>
-                        因为火星的轨道是个椭圆，在火星上看到的太阳运动也是椭圆的，所以太阳有时候在天球上运动的快，有时候会变慢。现在我们假想一个太阳，围绕火星一周的时间跟真的太阳是一样的，但是我们现在假定这个太阳的转动速度是恒定的，而不会时快时慢。这样就是太阳的平均运动。这样我们可以根据火星上的时间来计算这个平均运动。
+                        Because the orbit is an ellipse, the Sun will go faster some times than others. Imagine a
+                        fictitious Sun, though, that took the same Martian year to go around Mars but which orbited at a
+                        constant angular velocity (the mean of the real Sun). This is the <i>fictitious mean Sun</i>
+                        and it's easier to calculate its angle first because, like the mean anomaly, it is proportional
+                        to time.
                     </p>
                     <p>
-                        根据实际的观测，Allison 和 McEwen 得到的 J2000 时的角度是 270.3863&deg; ，而且角度变动的速率是  0.52403840&deg; / day 。
+                        Based on observations, Allison and McEwen give the angle at J2000 and the daily change (based on
+                        tropical orbit period) as 270.3863&deg; and 0.52403840&deg; / day respectively.
                     </p>
-                    <p>这样我们可以计算这个平均角度，
+                    <p>This gives us:
                     <p>
                         &alpha;<sub>FMS</sub> = 270.3863&deg; + 0.52403840&deg;&Delta;t<sub>J2000</sub>
                     </p>
                 </div>
                 <div class="explanation" id="e-explanation">
                     <div class="clock">
-                        <h3>偏心率</h3>
+                        <h3>Eccentricity</h3>
                         <span class="time"><span class="e"></span></span>
                     </div>
                     <p>
-                        偏心率是用来表征轨道的椭圆跟一个完美的圆相差多少的一个量。偏心率随着时间缓慢的变化。对于火星来说，<br>
-                        <i>e</i> = 0.09340 &plus; 2.477 &times 10<sup>-9</sup> / day &Delta;t<sub>J2000</sub> = <span class="e"></span>。
+                        The eccentricity is the deviation of the orbit's ellipse from being a perfect circle. It varies
+                        ever so slightly over time and for Mars is given by <i>e</i> = 0.09340 &plus; 2.477 &times 10<sup>-9</sup> / day &Delta;t<sub>J2000</sub> = <span class="e"></span>.
                     </p>
                 </div>
                 <div class="explanation" id="nu_m-explanation">
                     <div class="clock">
-                        <h3>中心差</h3>
+                        <h3>Equation of Center</h3>
                         <span class="time"><span class="nu_m"></span>&deg;</span>
                     </div>
                     <p>
-                        中心差（Equation of Center）是指的太阳的真实位置和上面提到的假想位置之间的差异，等价的说是真近点角和平近点角之间的差异。
+                        The difference between the actual position of the Sun and the fictitious mean Sun is the same as
+                        the difference between the true anomaly and mean anomaly. This is called the <i>Equation of Center</i>.
                     </p>
                     <p>
-                        对于一个两体问题来说，轨道都是 Kepler 轨道，这个差异可以使用 Fourier-Bessel 级数来近似，不过需要给定平近点角 M 和偏心率 <i>e</i> 。
+                        For a two-body Kepler orbit, this difference can be approximated using a Fourier-Bessel series given
+                        the mean anomaly M and eccentricity <i>e</i>. This results in:
                     </p>
                     <p>
                         (10.691&deg; &plus; 3&deg; &times 10<sup>-7</sup> &Delta;<i>t</i><sub>J2000</sub>) sin <i>M</i>
@@ -368,34 +396,38 @@
                         <br>&plus; 0.0005&deg; sin 5<i>M</i>
                     </p>
                     <p>
-                        但是实际上的火星和太阳运动并不是一个两体问题，而是有来自其它天体的扰动。
+                        We're not quite done yet as the above assumes a two-body Kepler motion and we need to include the
+                        perturbations caused by other planets previously calculated.
                     </p>
+                    <p>Once they have been added, we have our equation of center.</p>
                     <p>
-                        考虑了这些扰动之后，我们有一个新的平近点角 M，也能够计算出新的真近点角 &nu; = <span class="nu"></span>&deg;
+                        By adding this to our mean anomaly, M, we also get our true anomaly &nu; = <span class="nu"></span>&deg;
                     </p>
                 </div>
                 <div class="explanation" id="l_s-explanation">
                     <div class="clock">
-                        <h3>以火星为中心的太阳经度</h3>
+                        <h3>Areocentric Solar Longitude</h3>
                         <span class="time"><span class="l_s"></span>&deg;</span>
                     </div>
                     <p>
-                        以火星为中心的太阳经度（Areocentric Solar Longitude）是在火星上的太阳的实际的高度，
+                        We can now calculate the actual position of the Sun as follows:
                     </p>
                     <p>
                         <i>L</i><sub>S</sub> = &alpha;<sub>FMS</sub> &plus; (&nu; &minus; M)
                     </p>
                     <p>
-                        这并不是火星自转导致的太阳的运动，而是一年中在火星上看到的太阳运动。
+                        Remember, this is not the daily motion of the Sun caused by Mars's rotation,
+                        but the year-long motion of the Sun viewed from Mars. Think of it as where Mars is in its
+                        orbit around the Sun, flipped around to be from Mars's perspective (hence "areocentric").
                     </p>
                 </div>
             </div>
 
             <div class="clear"></div>
             <div class="credits">
-                部分公式来自
+                Formulae from
                 Allison, M., and M. McEwen 2000. <a href="http://pubs.giss.nasa.gov/abs/al05000n.html">A post-Pathfinder evaluation of aerocentric solar coordinates with improved timing recipes for Mars seasonal/diurnal climate studies.</a> <i>Planet. Space Sci.</i> <b>48</b>, 215-235.
-                以及 <a href="http://www.giss.nasa.gov/tools/mars24/help/algorithm.html">Mars24 Algorithm and Worked Examples</a>
+                and <a href="http://www.giss.nasa.gov/tools/mars24/help/algorithm.html">Mars24 Algorithm and Worked Examples</a>
             </div>
 
         </div>
