@@ -187,13 +187,13 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="earth-date-input form-group">
-                                            <label>地球时间：</label>
+                                            <label>地球时间（输入格式举例：Thu, 16 Jun 2016 01:58:16 GMT）：</label>
                                             <span class="automatic-input">
-                                                <a class="utc-time" title="点击此处可以输入日期"></a>
+                                                <a class="utc-time form-control border-input" title="点击此处可以输入日期"></a>
                                             </span>
                                             <span class="manual-input" style="display:none;">
-                                                <input type="datetime" name="custom-datetime" class="custom-datetime" />
-                                                <a class="clear-button">&#x232b;</a>
+                                                <input type="datetime" name="custom-datetime" class="custom-datetime form-control border-input" />
+                                                <!-- <a class="clear-button">&#x232b;</a> -->
                                             </span>
                                         </div>
                                     </div>
@@ -201,20 +201,70 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="clock col-md-3">
-                                            <h3>火星日历</h3>
-                                            <div class="time msd"></div>
+
+                                                <div class="card">
+                                                    <div class="content">
+                                                        <div class="row">
+                                                            <div class="time mymd_interimm"></div>
+                                                        </div>
+                                                        <div class="footer">
+                                                            <hr>
+                                                            <div class="stats">
+                                                                火星日期
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
                                         </div>
                                         <div class="clock col-md-3">
-                                            <h3><a href="http://book.interimm.org/navigator/mars.html#marstime" target="_blank">火星 0 时区时间</a></h3>
-                                            <div class="time mtc_interimm"></div>
+                                            <div class="card">
+                                                <div class="content">
+                                                    <div class="row">
+                                                        <div class="time mtc_interimm"></div>
+                                                    </div>
+                                                    <div class="footer">
+                                                        <hr>
+                                                        <div class="stats">
+                                                            <a href="http://book.interimm.org/navigator/mars.html#marstime" target="_blank">火星 0 时区时间</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="clock col-md-3">
-                                            <h3><a href="https://en.wikipedia.org/wiki/Timekeeping_on_Mars#Coordinated_Mars_Time_.28MTC.29" target="_blank">协调火星时</a></h3>
-                                            <div class="time mtc"></div>
+
+                                            <div class="card">
+                                                <div class="content">
+                                                    <div class="row">
+                                                        <div class="time mtc"></div>
+                                                    </div>
+                                                    <div class="footer">
+                                                        <hr>
+                                                        <div class="stats">
+                                                            <a href="https://en.wikipedia.org/wiki/Timekeeping_on_Mars#Coordinated_Mars_Time_.28MTC.29" target="_blank">协调火星时</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div class="clock col-md-3">
-                                            <h3>火星太阳日</h3>
-                                            <div class="time msd"></div>
+                                            <div class="card">
+                                                <div class="content">
+                                                    <div class="row">
+                                                        <div class="time msd"></div>
+                                                    </div>
+                                                    <div class="footer">
+                                                        <hr>
+                                                        <div class="stats">
+                                                            火星太阳日
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 

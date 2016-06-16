@@ -109,6 +109,12 @@ function cos(deg) {
       var msd = (((j2000 - 4.5) / 1.027491252) + 44796.0 - 0.00096);
       var mtc = (24 * msd) % 24;
 
+      mymd_year = 1; // mars calendar year
+      mymd_month = 1; // mars calendar month
+      mymd_day = 1; // mars calendar day
+
+      var mymd_interimm = mymd_year + " " + mymd_month + " " + mymd_day;// calculate mars calendar day
+
       var curiosity_lambda = 360 - 137.4;
       var curiosity_sol = Math.floor(msd - curiosity_lambda / 360) - 49268;
       var curiosity_lmst = within_24(mtc - curiosity_lambda * 24 / 360);
@@ -133,7 +139,7 @@ function cos(deg) {
       $(".eot").text(eot.toFixed(5));
       $(".eot_h").text(h_to_hms(eot_h.toFixed(5)));
       $(".msd").text(add_commas(msd.toFixed(5)));
-      $(".msd_interimm").text(add_commas(msd.toFixed(5))); // the year layout using interimm's calendar
+      $(".mymd_interimm").text(mymd_interimm); // the year layout using interimm's calendar
       $(".mtc").text(h_to_hms(mtc));
       $(".mtc_interimm").text(h_to_hms_interimm(mtc)); // clock using interimm's time keeping
 

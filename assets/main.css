@@ -23,7 +23,7 @@ body {
       margin: 10px auto;
       padding: 5px 10px;
       text-align: center;
-      border: 1px solid lightgrey;
+      /*border: 1px solid lightgrey;*/
    }
    .clock h3 {
       margin: 0;
@@ -55,26 +55,30 @@ body {
    }
 
    .earth-date-input .utc-time {
-      display: block;
+      /*display: inline;*/
       position: relative;
       cursor: pointer;
-      padding: 1px 2px 1px 2px;
-      margin: 2px;
+      /*padding: 1px 2px 1px 2px;*/
+      /*margin: 2px;*/
+      text-align:center;
    }
    .earth-date-input .utc-time:hover,
    .earth-date-input .utc-time:focus {
       text-decoration: underline;
    }
    .earth-date-input .manual-input {
-      position: relative;
-      margin: 0 auto;
+      /*position: relative;*/
+      /*margin: 0 auto;*/
    }
    .earth-date-input .custom-datetime {
-      font: inherit;
-      padding: 1px 22px 0 2px;
-      border: none;
-      border-bottom: dotted 1px #999;
-      margin: 2px;
+      /*font: inherit;*/
+      /*padding: 1px 22px 0 2px;*/
+      /*border: none;*/
+      /*border-bottom: dotted 1px #999;*/
+      /*margin: 2px;*/
+      position: relative;
+      cursor: pointer;
+      text-align:center;
    }
    .earth-date-input .clear-button {
       position: absolute;
@@ -83,11 +87,14 @@ body {
       padding: 7px 2px;
       color: #999;
       cursor: pointer;
-      margin-left: -28px;
+      margin-left: -48px;
       width: 24px;
       overflow: hidden;
    }
    .earth-date-input .clear-button:hover,
    .earth-date-input .clear-button:focus {
       color: #333;
+   }
+   .stats {
+      color:#222 !important;
    }
