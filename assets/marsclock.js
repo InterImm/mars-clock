@@ -108,7 +108,9 @@
       }
      return days;
   }
+  
    // END-InterImm
+
    function update() {
       var input_date = $(".custom-datetime").val();
       if (input_date) {
