@@ -62,6 +62,8 @@
       }
       return n;
    }
+   // The following are some functions customized for InterImm
+   // BEGIN-InterImm
    function is_leap_year_mars(year) {
       // A function that determines whether a year is a leap year on Mars
       var leap_year_flag = 0;
@@ -79,6 +81,34 @@
      }
      return leap_year_flag;
    }
+
+   function year_total_days(year) {
+      return 668 + is_leap_year_mars(year);
+   }
+
+   function month_mod_6_is_not_zero(month) {
+      if ((month) % 6!=0) {
+         return 1;
+      } else {
+         return 0;
+      }
+   }
+
+   function month_total_days(year,month) {
+      var days = 28;
+
+      if (is_leap_year_mars(year) && month == 24) {
+         days = 28;
+      } else if (is_leap_year_mars(year) && month != 24) {
+         days = 27 + month_mod_6_is_not_zero(month);
+      } else if (!(is_leap_year_mars(year))) {
+        days = 27 + month_mod_6_is_not_zero(month);
+      } else {
+        days = Number.NaN;
+      }
+     return days;
+  }
+   // END-InterImm
    function update() {
       var input_date = $(".custom-datetime").val();
       if (input_date) {
