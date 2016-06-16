@@ -1,3 +1,8 @@
+// this script is based on jtauber's work: jtauber.github.io/mars-clock/
+// However his program only runs for Mars 24 hour mode, which is not the one we needed.
+// Thus a lot of functions are added.
+// His work is using MIT license thus we are allowed to use and modify and inherent the MIT license.
+
 function cos(deg) {
       return Math.cos(deg * Math.PI / 180);
    }
@@ -14,6 +19,29 @@ function cos(deg) {
       var ss = Math.round(y % 60);
       if (ss < 10) ss = "0" + ss;
       return hh + ":" + mm + ":" + ss;
+   }
+   function h_to_hms_interimm(h) {
+      var h_interimm = h * 24.659790025/24.0;
+      if (h_interimm < 24 ) {
+         var h_24 = h_interimm - 0.659790025; // to calculate within 24 earth hours
+         var x = h_24 * 3600; // in earth seconds
+         var hh = Math.floor(x / 3600 ); // number of earth hours
+         if (hh < 10) hh = "0" + hh;
+         var y = x % 3600; // the earth seconds left
+         var mm = Math.floor(y / 60);
+         if (mm < 10) mm = "0" + mm;
+         var ss = Math.round(y % 60);
+         if (ss < 10) ss = "0" + ss;
+         return hh + ":" + mm + ":" + ss + " " + "+" + "00" + ":" + "00";
+      } else {
+         var h_extra = h_interimm - 24.0;
+         var total_seconds_extra = h_extra * 3600; // total extra seconds besides the 24 hours
+         var mm_extra = Math.floor(total_seconds_extra / 60);
+         if (mm_extra < 10) mm_extra = "0" + mm_extra;
+         var ss_extra = Math.round(total_seconds_extra % 60);
+         if (ss_extra < 10) ss_extra = "0" + ss_extra;
+         return " " + "+" + mm_extra + ":" + ss_extra;
+      }
    }
    function add_commas(n) {
       n += "";
@@ -105,7 +133,9 @@ function cos(deg) {
       $(".eot").text(eot.toFixed(5));
       $(".eot_h").text(h_to_hms(eot_h.toFixed(5)));
       $(".msd").text(add_commas(msd.toFixed(5)));
+      $(".msd_interimm").text(add_commas(msd.toFixed(5))); // the year layout using interimm's calendar
       $(".mtc").text(h_to_hms(mtc));
+      $(".mtc_interimm").text(h_to_hms_interimm(mtc)); // clock using interimm's time keeping
 
       $(".curiosity_lmst").text(h_to_hms(curiosity_lmst));
       $(".curiosity_ltst").text(h_to_hms(curiosity_ltst));

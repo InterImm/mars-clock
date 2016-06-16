@@ -18,10 +18,12 @@ body {
       text-align: center;
    }
    .clock {
-      background: #F7F7F7;
-      width: 250px;
+      background: white;
+      /*width: 250px;*/
       margin: 10px auto;
       padding: 5px 10px;
+      text-align: center;
+      border: 1px solid lightgrey;
    }
    .clock h3 {
       margin: 0;
