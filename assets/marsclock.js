@@ -3,7 +3,7 @@
 // Thus a lot of functions are added.
 // His work is using MIT license thus we are allowed to use and modify and inherent the MIT license.
 
-function cos(deg) {
+   function cos(deg) {
       return Math.cos(deg * Math.PI / 180);
    }
    function sin(deg) {
@@ -61,6 +61,23 @@ function cos(deg) {
            n -= 24;
       }
       return n;
+   }
+   function is_leap_year_mars(year) {
+      // A function that determines whether a year is a leap year on Mars
+      var leap_year_flag = 0;
+
+      if (year % 3000 == 0) {
+         leap_year_flag = 0;
+     } else if (year % 1000 == 0) {
+        leap_year_flag = 1;
+     } else if (year % 100 == 0) {
+        leap_year_flag = 0;
+     } else if (year % 2 != 0 || year % 10 == 0) {
+        leap_year_flag = 1;
+     } else {
+        leap_year_flag = 0;
+     }
+     return leap_year_flag;
    }
    function update() {
       var input_date = $(".custom-datetime").val();
@@ -139,7 +156,7 @@ function cos(deg) {
       $(".eot").text(eot.toFixed(5));
       $(".eot_h").text(h_to_hms(eot_h.toFixed(5)));
       $(".msd").text(add_commas(msd.toFixed(5)));
-      $(".mymd_interimm").text(mymd_interimm); // the year layout using interimm's calendar
+      $(".mymd_interimm").text(is_leap_year_mars(1000))//mymd_interimm); // the year layout using interimm's calendar
       $(".mtc").text(h_to_hms(mtc));
       $(".mtc_interimm").text(h_to_hms_interimm(mtc)); // clock using interimm's time keeping
 
