@@ -108,7 +108,52 @@
       }
      return days;
   }
-  
+
+	// #InterImm# returns the month and date given a number of dates.
+	// #InterImm# calendar_date(a number of days, which year we are calculating)
+	function mars_calendar_date(days, year) {
+        var days_flag = days;
+        var month_flag = 1;
+        var return_month;
+        var return_day;
+        
+        while (month_flag < 25) {
+           
+            if (month_flag == 24) {     // the last month is special because it might change with year
+            	return_month = month_flag;
+                return_day = days_flag;   // using tuple to avoid modification
+            } else if ( (month_flag < 24) &&  (days_flag < (27 + 1 + (month_flag % 6!= 0 ))) ) {   // the condition for days makes sure that days is never larger than days in that month
+            	return_month = month_flag;
+                return_day = days_flag;
+	            break;
+            } else if ( (month_flag < 24) && ((days_flag) > (27 + (month_flag % 6 != 0))) ) {
+            	days_flag = days_flag - 27 - ( month_flag % 6 != 0 );
+	            continue;
+            } else {
+            return NaN; //"Unhandled in calendar_date(days, year) function! (inner for loop) "
+            break;
+            }
+        }
+        return [return_month,return_day];
+
+    }
+
+  function mars_year_month(days) {
+      var year_flag = 1;
+      var mars_calendar_data_list;
+      
+      var md = days // #InterImm# calculate the total martian days since year 0
+      
+      while (md > (668.0 + is_leap_year_mars(year_flag) ) ) {
+      	year_flag = year_flag + 1
+        md = md - 668.0 - is_leap_year_mars(year_flag)
+      }
+      
+      mars_calendar_data_list = mars_calendar_date(md+1,year_flag-1);
+        
+      return [year_flag, mars_calendar_data_list[0], Math.floor(mars_calendar_data_list[1]) ]
+  }
+
    // END-InterImm
 
    function update() {
@@ -157,12 +202,20 @@
       var eot_h = eot * 24 / 360;
       var msd = (((j2000 - 4.5) / 1.027491252) + 44796.0 - 0.00096);
       var mtc = (24 * msd) % 24;
+       
+      var m2e = 1.027491252; // 88775.0/86400; // #InterImm# the ratio of mars sol day and earth 24-hour day; we can use 1.027491252 or 88775.0/86400 which are different from each other
+       
+      var yeah_0_days_to_j2000 = 10845.1403356/m2e; // #Interimm# calculate the number of days from mars year 0 to j2000
+       
+      var mars_days_from_j2000 = (((j2000 - 4.5) / 1.027491252) - 0.00096) + yeah_0_days_to_j2000 ; // #Interimm# calculate days passed since yeah 0
+		
+      var mars_calendar_list = mars_year_month( mars_days_from_j2000 );
+       
+      var mymd_year = mars_calendar_list[0] ; // #Interimm# mars calendar year
+      var mymd_month = mars_calendar_list[1]; // #Interimm# mars calendar month
+      var mymd_day = mars_calendar_list[2]; // #Interimm# mars calendar day
 
-      mymd_year = 1; // mars calendar year
-      mymd_month = 1; // mars calendar month
-      mymd_day = 1; // mars calendar day
-
-      var mymd_interimm = mymd_year + " " + mymd_month + " " + mymd_day;// calculate mars calendar day
+      var mymd_interimm = mymd_year + " " + mymd_month + " " + mymd_day;// #Interimm# calculate mars calendar day
 
       var curiosity_lambda = 360 - 137.4;
       var curiosity_sol = Math.floor(msd - curiosity_lambda / 360) - 49268;
@@ -188,9 +241,9 @@
       $(".eot").text(eot.toFixed(5));
       $(".eot_h").text(h_to_hms(eot_h.toFixed(5)));
       $(".msd").text(add_commas(msd.toFixed(5)));
-      $(".mymd_interimm").text(is_leap_year_mars(1000))//mymd_interimm); // the year layout using interimm's calendar
+      $(".mymd_interimm").text( mymd_interimm); // #Interimm# the year layout using interimm's calendar
       $(".mtc").text(h_to_hms(mtc));
-      $(".mtc_interimm").text(h_to_hms_interimm(mtc)); // clock using interimm's time keeping
+      $(".mtc_interimm").text(h_to_hms_interimm(mtc)); // #Interimm# clock using interimm's time keeping
 
       $(".curiosity_lmst").text(h_to_hms(curiosity_lmst));
       $(".curiosity_ltst").text(h_to_hms(curiosity_ltst));
