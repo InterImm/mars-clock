@@ -128,11 +128,13 @@
 	            break;
             } else if ( (month_flag < 24) && ((days_flag) > (27 + (month_flag % 6 != 0))) ) {
             	days_flag = days_flag - 27 - ( month_flag % 6 != 0 );
+                month_flag = month_flag +1 ;
 	            continue;
             } else {
             return NaN; //"Unhandled in calendar_date(days, year) function! (inner for loop) "
             break;
             }
+
         }
         return [return_month,return_day];
 
@@ -215,7 +217,7 @@
       var mymd_month = mars_calendar_list[1]; // #Interimm# mars calendar month
       var mymd_day = mars_calendar_list[2]; // #Interimm# mars calendar day
 
-      var mymd_interimm = mymd_year + " " + mymd_month + " " + mymd_day;// #Interimm# calculate mars calendar day
+      var mymd_interimm = mymd_year + "年" + mymd_month + "月" + mymd_day + "日";// #Interimm# calculate mars calendar day
 
       var curiosity_lambda = 360 - 137.4;
       var curiosity_sol = Math.floor(msd - curiosity_lambda / 360) - 49268;
