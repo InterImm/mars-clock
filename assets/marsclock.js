@@ -20,18 +20,21 @@
       if (ss < 10) ss = "0" + ss;
       return hh + ":" + mm + ":" + ss;
    }
-   function h_to_hms_interimm(h) {
-      var h_interimm = h * 24.659790025/24.0;
-      if (h_interimm < 24 ) {
-         var h_24 = h_interimm - 0.659790025; // to calculate within 24 earth hours
+
+   function h_to_hms_interimm(h) { // input h is in unit of martian day
+      var h_interimm = h * 24.659790025;
+      if (h_interimm <= 0) {
+          return NaN
+      } else if (h_interimm < 24 && h_interimm > 0 ) {
+         var h_24 = h_interimm // - 0.659790025; // to calculate within 24 earth hours
          var x = h_24 * 3600; // in earth seconds
          var hh = Math.floor(x / 3600 ); // number of earth hours
-         if (hh < 10) hh = "0" + hh;
+         if (hh < 10 && hh > 0) hh = "0" + hh;
          var y = x % 3600; // the earth seconds left
          var mm = Math.floor(y / 60);
-         if (mm < 10) mm = "0" + mm;
+         if (mm < 10 && mm > 0) mm = "0" + mm;
          var ss = Math.round(y % 60);
-         if (ss < 10) ss = "0" + ss;
+         if (ss < 10 && ss > 0) ss = "0" + ss;
          return hh + ":" + mm + ":" + ss + " " + "+" + "00" + ":" + "00";
       } else {
          var h_extra = h_interimm - 24.0;
@@ -211,8 +214,8 @@
       var yeah_0_days_to_j2000 = 10845.1403356/m2e; // #Interimm# calculate the number of days from mars year 0 to j2000
        
 //      var mars_days_from_j2000 = (((j2000 - 4.5) / 1.027491252) - 0.00096) + yeah_0_days_to_j2000 ; // #Interimm# calculate days passed since yeah 0
-      var mars_days_from_year_0 = msd - 34242.27180  + 1/m2e // 35183.387152777777778/m2e ; // #Interimm# calculate days passed since yeah 0
-	  var mtc_interimm = (24 * mars_days_from_year_0) % 24; // MTC using InterImm method
+      var mars_days_from_year_0 = msd - 34242.27180 - 0.73027  + 1/m2e // 35183.387152777777778/m2e ; // #Interimm# calculate days passed since yeah 0
+	  var mtc_interimm = (mars_days_from_year_0) % 1; // MTC using InterImm method
        
       var mars_calendar_list = mars_year_month( mars_days_from_year_0 );
        
@@ -248,10 +251,23 @@
 //      $(".msd").text(add_commas(msd.toFixed(5)));
       $(".msd").text(add_commas(mars_days_from_year_0.toFixed(5)));       
       $(".mymd_interimm").text( mymd_interimm); // #Interimm# the year layout using interimm's calendar
-      $(".mtc").text(h_to_hms(mtc));
-//	  $(".mtc").text(h_to_hms(mtc_interimm));       
-      $(".mtc_interimm").text(h_to_hms_interimm(mtc)); // #Interimm# clock using interimm's time keeping
-
+//      $(".mtc").text(h_to_hms(mtc));
+       
+      if (mtc_interimm > 0) {
+	      $(".mtc").text(h_to_hms(mtc_interimm));
+	//	  $(".mtc").text(h_to_hms(mtc_interimm));       
+    	  $(".mt_interimm").text(h_to_hms_interimm(mtc_interimm)); // #Interimm# clock using interimm's time keeping
+          $(".msd_interimm").text(add_commas(mars_days_from_year_0.toFixed(5)));       
+          $(".mymd_interimm").text( mymd_interimm); // #Interimm# the year layout using interimm's calendar
+  //      $(".mtc").text(h_to_hms(mtc));
+       
+  } else {
+	      $(".mtc").text("试试更晚的时间");
+          $(".mt_interimm").text("试试更晚的时间"); // #Interimm# clock using interimm's time keeping
+         $(".msd_interimm").text("试试更晚的时间");       
+          $(".mymd_interimm").text("试试更晚的时间"); // #Interimm# the year layout using interimm's calendar
+  //      $(".mtc").text(h_to_hms(mtc));
+  }
       $(".curiosity_lmst").text(h_to_hms(curiosity_lmst));
       $(".curiosity_ltst").text(h_to_hms(curiosity_ltst));
       $(".curiosity_sol").text(curiosity_sol);
@@ -260,6 +276,8 @@
       $(".opportunity_ltst").text(h_to_hms(opportunity_ltst));
       $(".opportunity_sol").text(opportunity_sol);
    }
+
+
    $(function() {
       update();
       $(".explanation").hide();
