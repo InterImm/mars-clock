@@ -140,6 +140,7 @@
 
     }
 
+
   function mars_year_month(days) {
       var year_flag = 1;
       var mars_calendar_data_list;
@@ -209,9 +210,11 @@
        
       var yeah_0_days_to_j2000 = 10845.1403356/m2e; // #Interimm# calculate the number of days from mars year 0 to j2000
        
-      var mars_days_from_j2000 = (((j2000 - 4.5) / 1.027491252) - 0.00096) + yeah_0_days_to_j2000 ; // #Interimm# calculate days passed since yeah 0
-		
-      var mars_calendar_list = mars_year_month( mars_days_from_j2000 );
+//      var mars_days_from_j2000 = (((j2000 - 4.5) / 1.027491252) - 0.00096) + yeah_0_days_to_j2000 ; // #Interimm# calculate days passed since yeah 0
+      var mars_days_from_year_0 = msd - 34242.27180  + 1/m2e // 35183.387152777777778/m2e ; // #Interimm# calculate days passed since yeah 0
+	  var mtc_interimm = (24 * mars_days_from_year_0) % 24; // MTC using InterImm method
+       
+      var mars_calendar_list = mars_year_month( mars_days_from_year_0 );
        
       var mymd_year = mars_calendar_list[0] ; // #Interimm# mars calendar year
       var mymd_month = mars_calendar_list[1]; // #Interimm# mars calendar month
@@ -242,9 +245,11 @@
       $(".l_s").text(l_s.toFixed(5));
       $(".eot").text(eot.toFixed(5));
       $(".eot_h").text(h_to_hms(eot_h.toFixed(5)));
-      $(".msd").text(add_commas(msd.toFixed(5)));
+//      $(".msd").text(add_commas(msd.toFixed(5)));
+      $(".msd").text(add_commas(mars_days_from_year_0.toFixed(5)));       
       $(".mymd_interimm").text( mymd_interimm); // #Interimm# the year layout using interimm's calendar
       $(".mtc").text(h_to_hms(mtc));
+//	  $(".mtc").text(h_to_hms(mtc_interimm));       
       $(".mtc_interimm").text(h_to_hms_interimm(mtc)); // #Interimm# clock using interimm's time keeping
 
       $(".curiosity_lmst").text(h_to_hms(curiosity_lmst));
