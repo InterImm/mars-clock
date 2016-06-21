@@ -187,7 +187,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="earth-date-input form-group">
-                                            <label>地球时间（输入格式举例：16 Jun 2016 01:58:16 GMT）：</label>
+                                            <label>地球时间（输入格式举例：2016-07-16 01:58:16 GMT）：</label>
                                             <span class="automatic-input">
                                                 <a class="utc-time form-control border-input" title="点击此处可以输入日期"></a>
                                             </span>
@@ -196,6 +196,11 @@
                                                 <!-- <a class="clear-button">&#x232b;</a> -->
                                             </span>
                                         </div>
+
+                                        <div class="manual-input-invalid" style="display:none;">
+                                                <p>请输入一个有效的日期，格式可以使用 &ldquo;August 6, 2012&rdquo;，或者 &ldquo;Aug 6, 2012&rdquo;，或者 &ldquo;2012-08-29&rdquo; 等等.</p>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="row">
@@ -268,13 +273,25 @@
                                         </div>
                                     </div>
 
+<div class="col-md-12" id="accordion" role="tablist" aria-multiselectable="true">
+   <div class="panel panel-info" style="background-color:#fff;">
+    <div class="panel-heading" role="tab" id="headingThree" style="background-color:#fff !important;">
+      <h4 class="panel-title" style="text-align:center;">
+        <a style="color:lightblue;" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsetech" aria-expanded="false" aria-controls="collapsetech">
+          点击查看技术细节
+        </a>
+      </h4>
+    </div>
+    <div id="collapsetech" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+     
+
                                     <div class="col-md-6">
                                         <div class="clock-in">
                                             <h3 style="text-align:center;">地球</h3>
 
 
                                             <div class="manual-input-invalid" style="display:none;">
-                                                <p>请输入一个有效的日期，格式可以使用 &ldquo;August 6, 2012&rdquo;.</p>
+                                                <p>请输入一个有效的日期，格式可以使用 &ldquo;August 6, 2012&rdquo; 等等.</p>
                                             </div>
 
 
@@ -329,6 +346,11 @@
                                     </div>
 
 
+    </div>
+  </div>
+</div>
+
+
 
                                         <!-- Annotations of Clock -->
                                         <div class="col-md-12">
@@ -336,7 +358,7 @@
 
                                                 <hr>
                                                 <div class="stats">
-                                                    <i class="ti-info"></i> 感谢 James Tauber 的 <a href="http://jtauber.github.io/mars-clock/" target="_blank">Mars Clock</a>，本程序在其基础上扩建并且添加星际移民中心的计时和历法方案。部分公式来自
+                                                    <i class="ti-info"></i> 感谢 James Tauber 的 <a href="http://jtauber.github.io/mars-clock/" target="_blank">Mars Clock</a>，本程序在其基础上重写并且添加星际移民中心的计时和历法方案。部分公式来自
                                                     Allison, M., and M. McEwen 2000. <a href="http://pubs.giss.nasa.gov/abs/al05000n.html">A post-Pathfinder evaluation of aerocentric solar coordinates with improved timing recipes for Mars seasonal/diurnal climate studies.</a> <i>Planet. Space Sci.</i> <b>48</b>, 215-235.
                                                     以及 <a href="http://www.giss.nasa.gov/tools/mars24/help/algorithm.html">Mars24 Algorithm and Worked Examples</a>
                                                 </div>

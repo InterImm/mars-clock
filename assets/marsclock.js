@@ -262,10 +262,10 @@
   //      $(".mtc").text(h_to_hms(mtc));
        
   } else {
-	      $(".mtc").text("试试更晚的时间");
-          $(".mt_interimm").text("试试更晚的时间"); // #Interimm# clock using interimm's time keeping
-         $(".msd_interimm").text("试试更晚的时间");       
-          $(".mymd_interimm").text("试试更晚的时间"); // #Interimm# the year layout using interimm's calendar
+	      $(".mtc").text("试试其它时间");
+          $(".mt_interimm").text("试试其它时间"); // #Interimm# clock using interimm's time keeping
+         $(".msd_interimm").text("试试其它时间");       
+          $(".mymd_interimm").text("试试其它时间"); // #Interimm# the year layout using interimm's calendar
   //      $(".mtc").text(h_to_hms(mtc));
   }
       $(".curiosity_lmst").text(h_to_hms(curiosity_lmst));
