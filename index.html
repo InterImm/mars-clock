@@ -1,579 +1,610 @@
-<html>
-    <head>
-        <title>火星时钟 | 作者：James Tauber ；改进：星际移民中心</title>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicon/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <link href="assets/googlefonts.css" rel="stylesheet" type="text/css">
+	<title>火星时钟 | 星际移民中心</title>
 
-        <link rel="canonical" href="http://interimm.org/mars-clock/index.html" />
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
 
-        <style>
-            body {
-                font-family: "Open Sans", sans-serif;
-                font-weight: 300;
-                color: #222;
-            }
-            h1, h2 {
-                margin: 1.5em 0 0;
-                font-weight: 700;
-            }
-            h1 span, h2 span {
-                font-weight: 300;
-                color: #666;
-                font-size: 70%;
-            }
-             .container {
-                width: 960px;
-                margin: 50px auto;
-                text-align: center;
-            }
-            .clock {
-                background: #F7F7F7;
-                width: 250px;
-                margin: 10px auto;
-                padding: 5px 10px;
-            }
-            .clock h3 {
-                margin: 0;
-                font-weight: 300;
 
-            }
-            .clock .time {
-                font-size: 180%;
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 
-            }
-            .clear {
-                clear: both;
-            }
-            .credits {
-                font-weight: 400;
-                margin-top: 50px;
-                font-size: 8pt;
+    <!-- Animation library for notifications   -->
+    <link href="assets/css/animate.min.css" rel="stylesheet"/>
 
-            }
-            a {
-                color: #222;
-            }
-            .column {
-                float: left;
-                width: 480px;
-            }
-            .explanation-link {
-                cursor: pointer;
-            }
+    <!--  Paper Dashboard core CSS    -->
+    <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
 
-            .earth-date-input .utc-time {
-                display: block;
-                position: relative;
-                cursor: pointer;
-                padding: 1px 2px 1px 2px;
-                margin: 2px;
-            }
-            .earth-date-input .utc-time:hover,
-            .earth-date-input .utc-time:focus {
-                text-decoration: underline;
-            }
-            .earth-date-input .manual-input {
-                position: relative;
-                margin: 0 auto;
-            }
-            .earth-date-input .custom-datetime {
-                font: inherit;
-                padding: 1px 22px 0 2px;
-                border: none;
-                border-bottom: dotted 1px #999;
-                margin: 2px;
-            }
-            .earth-date-input .clear-button {
-                position: absolute;
-                font-size: 12px;
-                line-height: 1em;
-                padding: 7px 2px;
-                color: #999;
-                cursor: pointer;
-                margin-left: -28px;
-                width: 24px;
-                overflow: hidden;
-            }
-            .earth-date-input .clear-button:hover,
-            .earth-date-input .clear-button:focus {
-                color: #333;
-            }
-        </style>
-    </head>
+    <!-- Bootstrap Slider Bar -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-slider.css">
+    <script type="text/javascript" src="assets/js/bootstrap-slider.min.js"></script>
 
-    <body>
-        <div class="container">
-            <h1>火星时钟 <br><span>作者：James Tauber</span> <span>改进：<a href="http://interimm.org" target="_blank">星际移民中心</a></span></h1>
 
-            <p>
-                火星钟表，包括好奇号和机遇号的一些时刻表。
-            </p>
-            <div style="margin-bottom: 50px;">
-                <div style="font-size:80%;"><span><a href="https://gratipay.com/~jtauber/" target="_blank">在 gratipay 上付钱给 James Tauber</a></span>
-                    <span> | <a href="http://jtauber.github.io/mars-clock/" target="_blank">原作在此</a> | </span><span>关注<a href="http://interimm.org" target="_blank">星际移民中心</a></span></div>
+
+    <!--  Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/themify-icons.css" rel="stylesheet">
+
+    <!-- Mathjax BEGIN -->
+
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        showProcessingMessages: false,
+        messageStyle: 'none',
+        tex2jax: {
+          inlineMath: [['$','$']],
+          displayMath: [['$$','$$']],
+          processEnvironments: false
+        },
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          }
+        },
+        'HTML-CSS': {
+          imageFont: null
+        }
+      });
+    </script>
+
+    <!-- Mathjax END -->
+
+    <!-- Mars Clock Specific BEGIN -->
+    <link href="assets/googlefonts.css" rel="stylesheet" type="text/css">
+
+    <link rel="canonical" href="http://interimm.org/mars-clock/index.html" />
+
+    <link href="assets/main.css" rel="stylesheet" type="text/css">
+    <!-- Mars Clock Specific END -->
+
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+
+
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="sidebar" data-background-color="black" data-active-color="success">
+
+    <!--
+		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
+		Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+	-->
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    火星时钟
+                </a>
             </div>
 
-            <div class="column">
-                <h2>地球时刻</h2>
+            <ul class="nav">
+                <li class="active">
+                    <a href="index.html">
+                        <i class="ti-time"></i>
+                        <p>查询火星时间</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="timing-doc.html">
+                        <i class="ti-book"></i>
+                        <p>火星计时</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="timing-doc.html">
+                        <i class="ti-world"></i>
+                        <p>火星时区</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="cal-doc.html">
+                        <i class="ti-calendar"></i>
+                        <p>火星历法</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="about.html">
+                        <i class="ti-pulse"></i>
+                        <p>关于</p>
+                    </a>
+                </li>
+            </ul>
+    	</div>
+    </div>
 
-                <div class="earth-date-input">
-                    <span class="automatic-input">
-                        <a class="utc-time" title="点击此处可以输入日期"></a>
-                    </span>
-                    <span class="manual-input" style="display:none;">
-                        <input type="datetime" name="custom-datetime" class="custom-datetime" />
-                        <a class="clear-button">&#x232b;</a>
-                    </span>
+    <div class="main-panel">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">切换导航栏</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">查询火星时间</a>
                 </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="http://book.interimm.org/navigator/mars.html#marscalendar">
+                                <i class="ti-notepad"></i>
+								<p>火星计时历法文档</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="ti-rocket"></i>
+                                    <p class="notification"></p>
+									<p>星际移民中心</p>
+									<b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="http://interimm.org/">官网</a></li>
+                                <li><a href="http://book.interimm.org/">星际移民之书</a></li>
+                                <li><a href="https://zhuanlan.zhihu.com/interimm">星海航纪</a></li>
+                                <li><a href="https://github.com/InterImm/mars-clock">源码 @ GitHub</a></li>
+                              </ul>
+                        </li>
+                    </ul>
 
-                <div class="manual-input-invalid" style="display:none;">
-                    <p>请输入一个有效的日期，格式可以使用 &ldquo;August 6, 2012&rdquo;.</p>
-                </div>
-
-                <div class="date-conversion-results">
-                    <div>
-                        <div class="explanation-link" data-explanation="#millis-explanation">
-                            <i>millis</i> = <span class="millis"></span>
-                        </div>
-                        <div class="explanation-link" data-explanation="#jd_ut-explanation">
-                            JD<sub>UT</sub> = <span class="jd_ut"></span>
-                        </div>
-                        <div class="explanation-link" data-explanation="#jd_tt-explanation">
-                            JD<sub>TT</sub> = <span class="jd_tt"></span>
-                        </div>
-                    </div>
-
-                    <div class="clock explanation-link" data-explanation="#j2000-explanation">
-                        <h3>自从 <a href="https://en.wikipedia.org/?title=Epoch_(astronomy)#Julian_years_and_J2000" target="_blank" title="点击此处查看解释">J2000</a> 之后的时间</h3>
-                        <span class="time j2000"></span>
-                    </div>
-
-                    <h2>Mars</h2>
-
-                    <div class="clock explanation-link" data-explanation="#msd-explanation">
-                        <h3>火星太阳日</h3>
-                        <div class="time msd"></div>
-                    </div>
-
-                    <div class="clock explanation-link" data-explanation="#mtc-explanation">
-                        <h3><a href="https://en.wikipedia.org/wiki/Timekeeping_on_Mars#Coordinated_Mars_Time_.28MTC.29" target="_blank">Coordinated Mars Time</a></h3>
-                        <div class="time mtc"></div>
-                    </div>
-
-                    <div class="explanation-link" data-explanation="#m-explanation">
-                        M = <span class="m"></span>&deg;
-                    </div>
-                    <div class="explanation-link" data-explanation="#alpha_fms-explanation">
-                        &alpha;<sub>FMS</sub> = <span class="alpha_fms"></span>&deg;
-                    </div>
-                    <div class="explanation-link" data-explanation="#e-explanation">
-                        <i>e</i> = <span class="e"></span>
-                    </div>
-                    <div class="explanation-link" data-explanation="#nu_m-explanation">
-                        &nu; - M = <span class="nu_m"></span>&deg;
-                    </div>
-                    <div class="explanation-link" data-explanation="#l_s-explanation">
-                        <i>L</i><sub>s</sub> = <span class="l_s"></span>&deg;<br>
-                    </div>
-                    &nu; = <span class="nu"></span>&deg;
-                    <div>
-                        PBS = <span class="pbs"></span>&deg;
-                    </div>
-                    <div>
-                        EOT = <span class="eot"></span>&deg; = <span class="eot_h"></span>
-                    </div>
-
-                    <h2>好奇号<br><span>137.4&deg;E longitude</span></h2>
-
-                    <div class="clock">
-                        <h3>任务的太阳日数目</h3>
-                        <div class="time curiosity_sol"></div>
-                    </div>
-
-                    <div class="clock">
-                        <h3>当地平太阳时 (LMST)</h3>
-                        <div class="time curiosity_lmst"></div>
-                    </div>
-
-                    <div class="clock">
-                        <h3>当地<a href="https://zh.wikipedia.org/wiki/%E5%A4%AA%E9%98%B3%E6%97%A5#.E8.A6.96.E5.A4.AA.E9.99.BD.E6.97.A5" target="_blank">视太阳时</a></h3>
-                        <div class="time curiosity_ltst"></div>
-                    </div>
-
-                    <h2>机遇号</h2>
-
-                    <div class="clock">
-                        <h3>任务的太阳日数目</h3>
-                        <div class="time opportunity_sol"></div>
-                    </div>
-
-                    <div class="clock">
-                        <h3>当地时间 (HLST)</h3>
-                        <div class="time opportunity_mission"></div>
-                    </div>
-
-                    <div class="clock">
-                        <h3>当地<a href="https://zh.wikipedia.org/wiki/%E5%A4%AA%E9%98%B3%E6%97%A5#.E8.A6.96.E5.A4.AA.E9.99.BD.E6.97.A5" target="_blank">视太阳时</a></h3>
-                        <div class="time opportunity_ltst"></div>
-                    </div>
                 </div>
             </div>
+        </nav>
 
-            <div class="column">
-                <p class="help">鼠标放在左侧条目上可以看到相关解释。</p>
-                <div class="explanation" id="millis-explanation">
-                    <div class="clock">
-                        <h3>UNIX 时间开始之后的<br>毫秒数</h3>
-                        <span class="time millis"></span>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">地球—火星时间换算</h4>
+                                <p class="category">地球时间与火星时间的换算</p>
+                            </div>
+                            <div class="content">
+
+
+                                <!-- Input Parameters BEGIN -->
+                                <!--
+                                <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Energy of Neutrinos (MeV)</label>
+                                                <input type="text" class="form-control border-input" placeholder="Energy" id="vacEnergy" value="1">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Mass Squared Difference (×10<sup>-5</sup>eV<sup>2</sup>)</label>
+                                                <input type="text" class="form-control border-input" placeholder="Mass Squared Difference" id="vacMassSquared" value=7.53>
+                                            </div>
+                                        </div>
+                                </div>
+                                -->
+                                <!-- Input Parameters EMD -->
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="earth-date-input form-group">
+                                            <label>地球时间（输入格式举例：2016-07-16 01:58:16 GMT）：</label>
+                                            <span class="automatic-input">
+                                                <a class="utc-time form-control border-input" title="点击此处可以输入日期"></a>
+                                            </span>
+                                            <span class="manual-input" style="display:none;">
+                                                <input type="datetime" name="custom-datetime" class="custom-datetime form-control border-input" />
+                                                <!-- <a class="clear-button">&#x232b;</a> -->
+                                            </span>
+                                        </div>
+
+                                        <div class="manual-input-invalid" style="display:none;">
+                                                <p>请输入一个有效的日期，格式可以使用 &ldquo;August 6, 2012&rdquo;，或者 &ldquo;Aug 6, 2012&rdquo;，或者 &ldquo;2012-08-29&rdquo; 等等.</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="clock col-md-3">
+
+                                                <div class="card">
+                                                    <div class="content">
+                                                        <div class="row">
+                                                            <div class="time mymd_interimm"></div>
+                                                        </div>
+                                                        <div class="footer">
+                                                            <hr>
+                                                            <div class="stats">
+                                                                火星日期
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                        </div>
+                                        <div class="clock col-md-3">
+                                            <div class="card">
+                                                <div class="content">
+                                                    <div class="row">
+                                                        <div class="time mt_interimm"></div>
+                                                    </div>
+                                                    <div class="footer">
+                                                        <hr>
+                                                        <div class="stats">
+                                                            <a href="http://book.interimm.org/navigator/mars.html#marstime" target="_blank">火星 0 时区时间</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clock col-md-3">
+
+                                            <div class="card">
+                                                <div class="content">
+                                                    <div class="row">
+                                                        <div class="time mtc"></div>
+                                                    </div>
+                                                    <div class="footer">
+                                                        <hr>
+                                                        <div class="stats">
+                                                            <a href="https://en.wikipedia.org/wiki/Timekeeping_on_Mars#Coordinated_Mars_Time_.28MTC.29" target="_blank">协调火星时</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="clock col-md-3">
+                                            <div class="card">
+                                                <div class="content">
+                                                    <div class="row">
+                                                        <div class="time msd_interimm"></div>
+                                                    </div>
+                                                    <div class="footer">
+                                                        <hr>
+                                                        <div class="stats">
+                                                            火星太阳日
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+<div class="row"> <!-- BEGIN of Row -->
+<div class="clock col-md-6">
+        <div class="header" style="text-align:center;">
+            <h4 class="title">火星时区时间</h4>
+            <!-- <p class="category">火星上不同时区的时间</p> -->
+        </div>
+ 
+    <div style="text-align:center;">
+        
+        <div class="content">
+            <div class="form-group" style="text-align:center;">
+                <label>选择你所在的火星时区</label>
+                <input id="setLocalTimezone" type="number" class="form-control border-input" placeholder="火星时区" value="0" style="width:50%;text-align:center;margin-left:auto;margin-right:auto;">
+
+            
+                
+            </div>
+
+            <div class="card" style="text-align:center;width:80%;margin-left:auto;margin-right:auto;">
+                <div class="content">
+                    <div class="row">
+                        <div class="time mymd_interimm_tz"></div>
                     </div>
-                    <p>UNIX 时间是从 1970 年 1 月 1 日的 0 点（UTC 时间）开始的。这里显示了从这个之后的毫秒数。</p>
-                    <p>这个数字是从你的浏览器直接获取的。</p>
-                </div>
-                <div class="explanation" id="jd_ut-explanation">
-                    <div class="clock">
-                        <h3>儒略日 (UT，世界时)</h3>
-                        <span class="time jd_ut"></span>
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            当前时区火星日期
+                        </div>
                     </div>
-                    <p>这里显示了<a href="https://zh.wikipedia.org/wiki/%E5%84%92%E7%95%A5%E6%97%A5" target="_blank">儒略日</a>天数。儒略日（Julian day）是指由公元前4713年1月1日，协调世界时中午12时开始所经过的天数。</p>
-                    <p>
-                        计算这个天数的时候，并不是从我们常用的格里高利历转换成儒略日获得的。而是用 UNIX 时间（毫秒数）除以 86,400,000 毫秒得到天数，再用这个天数加上 UNIX 时间开始的时刻所对应的儒略日数目 2,440,587.5，
-                    </p>
-                    <p>JD<sub>UT</sub> = 2,440,587.5 + (<i>millis</i> / 8.64 &times; 10<sup>7</sup> ms/day)</p>
-                </div>
-                <div class="explanation" id="jd_tt-explanation">
-                    <div class="clock">
-                        <h3>儒略日 (TT，地球时)</h3>
-                        <span class="time jd_ut"></span>
-                    </div>
-                    <p>
-                        在换算中我们需要使用地球时（TT），而不是 UTC 时间。所以我们需要在上面计算的 UTC 时间上加上省去的闰秒，但是只从 2012 年 7 月 1 日开始的，共有 35 + 32.184 秒。
-                    </p>
-                    <p>JD<sub>TT</sub> = JD<sub>UT</sub> + (35 + 32.184) / 86,400</p>
-                </div>
-                <div class="explanation" id="j2000-explanation">
-                    <div class="clock">
-                        <h3>J2000 之后的时间</h3>
-                        <span class="time j2000"></span>
-                    </div>
-                    <p>
-                        这个时间是我们后面要换算火星时间的时候直接用到的地球上的时间。计算的是 2000 年 1 月 1 日 12:00 之后的地球日天数（保留小数）。
-                    </p>
-                    <p>
-                        我们已知 JD<sub>TT</sub> 在 J2000 时是 2,451,545.0 个地球日，所以转换公式是，
-                    </p>
-                    <p>
-                        &Delta;t<sub>J2000</sub> = JD<sub>TT</sub> - 2,451,545.0
-                    </p>
-                </div>
-                <div class="explanation" id="msd-explanation">
-                    <div class="clock">
-                        <h3>火星太阳日</h3>
-                        <div class="time msd"></div>
-                    </div>
-                    <p>
-                        地球上的儒略日对应的是火星上的太阳日。
-                    </p>
-                    <p>
-                        2000 年 1 月 6 日午夜的时候(&Delta;t<sub>J2000</sub> = 4.5)，在火星的零度经线上也是午夜。所以我们计算火星太阳日的时候以这个时间为参考点来计算，考虑到地球上并不是恰恰午夜而是相差 4.5 秒，所以我们这里也需要修正，火星太阳日的计算的开始时间是 &Delta;t<sub>J2000</sub> &minus; 4.5。
-                    </p>
-                    <p>
-                        火星太阳日的长度和地球上儒略日的长度之比是 1.027491252，所以我们把地球的儒略日除以这个数可以获得火星上的太阳日的天数。
-                    </p>
-                    <p>
-                        按照约定，我们需要保证直到 1873 年 12 月 29 日 MSD （火星太阳日）是正值，所以我们加上 44,796。
-                    </p>
-                    <p>
-                        实际上上面说的火星和地球午夜的对齐并不严格，还有一个 &minus;0.00072 的差异（根据 Allison, M., and M. McEwen 2000）。不过 <a href="http://www.giss.nasa.gov/tools/mars24/" target="_blank">Mars24</a> （这是 NASA 的一个火星时间计算程序，可自行搜索查看）用的是 &minus;0.00096，这是一个更加新的数据。
-                    </p>
-                    <p>
-                        MSD = ([(&Delta;t<sub>J2000</sub> &minus; 4.5) / 1.027491252] &plus; 44,796.0 &minus; 0.00096)
-                    </p>
-                </div>
-                <div class="explanation" id="mtc-explanation">
-                    <div class="clock">
-                        <h3>Coordinated Mars Time</h3>
-                        <div class="time mtc"></div>
-                    </div>
-                    <p>
-                        <i>Coordinated Mars Time</i> (简称 MTC) 是地球上 UTC 在火星的对应。因为 MTC 是一种平均计时方法，所以可以直接从火星太阳日来计算，
-                    </p>
-                    <p>
-                        MTC = (24 h &times; MSD) mod 24
-                    </p>
-                </div>
-                <div class="explanation" id="m-explanation">
-                    <div class="clock">
-                        <h3>火星平近点角</h3>
-                        <span class="time"><span class="m"></span>&deg;</span>
-                    </div>
-                    <p>
-                        平近点角（Mean Anomaly）在轨道力学中是轨道上的物体在辅助圆上相对于中心点的运行角度，在测量上不同于其他的近点角，平近点角与时间的关系是线性的。因为与时间是线性的关系，因此要计算在轨道上两点之间移动所需的时间是非常容易的。平近点角是从近日点开始计算的。
-                    </p>
-                    <p>
-                        计算两点之间的平近点角就能得知其间的不同，只要知道，两点之间的移动时间相对于整个轨道 2&pi; 的周期是一个简单的比例式。
-                        平近点角并不代表什么实质上的角度，这只是一个方便使用的理论概念，平近点角是正比于时间的。
-                    </p>
-                    <p>
-                        平近点角可以利用 &Delta;t<sub>J2000</sub> 来计算，因为我们知道 J2000 时的平近点角是 19.3870&deg; ，而且平均每天运动的角度（360&deg; / 天数）。
-                    </p>
-                    <p>
-                        也就是是计算方法是，
-                    </p>
-                    <p>
-                        M = 19.3870&deg; + 0.52402075&deg;&Delta;t<sub>J2000</sub>
-                    </p>
-                </div>
-                <div class="explanation" id="alpha_fms-explanation">
-                    <div class="clock">
-                        <h3>假想平太阳角（）</h3>
-                        <span class="time"><span class="alpha_fms"></span>&deg;</span>
-                    </div>
-                    <p>
-                        火星围绕太阳转动，但是从火星的角度来看，太阳是在围绕火星转动的。
-                    </p>
-                    <p>
-                        因为火星的轨道是个椭圆，在火星上看到的太阳运动也是椭圆的，所以太阳有时候在天球上运动的快，有时候会变慢。现在我们假想一个太阳，围绕火星一周的时间跟真的太阳是一样的，但是我们现在假定这个太阳的转动速度是恒定的，而不会时快时慢。这样就是太阳的平均运动。这样我们可以根据火星上的时间来计算这个平均运动。
-                    </p>
-                    <p>
-                        根据实际的观测，Allison 和 McEwen 得到的 J2000 时的角度是 270.3863&deg; ，而且角度变动的速率是  0.52403840&deg; / day 。
-                    </p>
-                    <p>这样我们可以计算这个平均角度，
-                    <p>
-                        &alpha;<sub>FMS</sub> = 270.3863&deg; + 0.52403840&deg;&Delta;t<sub>J2000</sub>
-                    </p>
-                </div>
-                <div class="explanation" id="e-explanation">
-                    <div class="clock">
-                        <h3>偏心率</h3>
-                        <span class="time"><span class="e"></span></span>
-                    </div>
-                    <p>
-                        偏心率是用来表征轨道的椭圆跟一个完美的圆相差多少的一个量。偏心率随着时间缓慢的变化。对于火星来说，<br>
-                        <i>e</i> = 0.09340 &plus; 2.477 &times 10<sup>-9</sup> / day &Delta;t<sub>J2000</sub> = <span class="e"></span>。
-                    </p>
-                </div>
-                <div class="explanation" id="nu_m-explanation">
-                    <div class="clock">
-                        <h3>中心差</h3>
-                        <span class="time"><span class="nu_m"></span>&deg;</span>
-                    </div>
-                    <p>
-                        中心差（Equation of Center）是指的太阳的真实位置和上面提到的假想位置之间的差异，等价的说是真近点角和平近点角之间的差异。
-                    </p>
-                    <p>
-                        对于一个两体问题来说，轨道都是 Kepler 轨道，这个差异可以使用 Fourier-Bessel 级数来近似，不过需要给定平近点角 M 和偏心率 <i>e</i> 。
-                    </p>
-                    <p>
-                        (10.691&deg; &plus; 3&deg; &times 10<sup>-7</sup> &Delta;<i>t</i><sub>J2000</sub>) sin <i>M</i>
-                        <br>&plus; 0.623&deg; sin 2<i>M</i>
-                        <br>&plus; 0.050&deg; sin 3<i>M</i>
-                        <br>&plus; 0.005&deg; sin 4<i>M</i>
-                        <br>&plus; 0.0005&deg; sin 5<i>M</i>
-                    </p>
-                    <p>
-                        但是实际上的火星和太阳运动并不是一个两体问题，而是有来自其它天体的扰动。
-                    </p>
-                    <p>
-                        考虑了这些扰动之后，我们有一个新的平近点角 M，也能够计算出新的真近点角 &nu; = <span class="nu"></span>&deg;
-                    </p>
-                </div>
-                <div class="explanation" id="l_s-explanation">
-                    <div class="clock">
-                        <h3>以火星为中心的太阳经度</h3>
-                        <span class="time"><span class="l_s"></span>&deg;</span>
-                    </div>
-                    <p>
-                        以火星为中心的太阳经度（Areocentric Solar Longitude）是在火星上的太阳的实际的高度，
-                    </p>
-                    <p>
-                        <i>L</i><sub>S</sub> = &alpha;<sub>FMS</sub> &plus; (&nu; &minus; M)
-                    </p>
-                    <p>
-                        这并不是火星自转导致的太阳的运动，而是一年中在火星上看到的太阳运动。
-                    </p>
                 </div>
             </div>
 
-            <div class="clear"></div>
-            <div class="credits">
-                部分公式来自
-                Allison, M., and M. McEwen 2000. <a href="http://pubs.giss.nasa.gov/abs/al05000n.html">A post-Pathfinder evaluation of aerocentric solar coordinates with improved timing recipes for Mars seasonal/diurnal climate studies.</a> <i>Planet. Space Sci.</i> <b>48</b>, 215-235.
-                以及 <a href="http://www.giss.nasa.gov/tools/mars24/help/algorithm.html">Mars24 Algorithm and Worked Examples</a>
+            <div class="card"  style="text-align:center;width:80%;margin-left:auto;margin-right:auto;">
+                <div class="content">
+                    <div class="row">
+                        <div class="time mt_interimm_tz"></div>
+                    </div>
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            当前时区时间
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        
+
+    </div>
+    <div class="footer">
+                <hr>
+                <div class="chart-legend">
+                    火星共有 25 个时区，请输入 0 - 24 之内的数据。
+                </div>
             </div>
 
         </div>
-        <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-<script>
-if (!window.jQuery) {
-var script = document.createElement('script');
-script.src = "/assets/jquery.min.js";
-document.body.appendChild(script);
-}
-</script>
-        <script>
-            function cos(deg) {
-                return Math.cos(deg * Math.PI / 180);
-            }
-            function sin(deg) {
-                return Math.sin(deg * Math.PI / 180);
-            }
-            function h_to_hms(h) {
-                var x = h * 3600;
-                var hh = Math.floor(x / 3600);
-                if (hh < 10) hh = "0" + hh;
-                var y = x % 3600;
-                var mm = Math.floor(y / 60);
-                if (mm < 10) mm = "0" + mm;
-                var ss = Math.round(y % 60);
-                if (ss < 10) ss = "0" + ss;
-                return hh + ":" + mm + ":" + ss;
-            }
-            function add_commas(n) {
-                n += "";
-                var x = n.split(".");
-                var x1 = x[0];
-                var x2 = x.length > 1 ? "." + x[1] : "";
-                var rgx = /(\d+)(\d{3})/;
-                while (rgx.test(x1)) {
-                    x1 = x1.replace(rgx, "$1" + "," + "$2");
+</div>
+
+
+<div class="clock col-md-6" style="text-align:center;">
+<div class="header">
+            <h4 class="title">常用时区时间</h4>
+        </div>
+    <div class="card">
+        
+        <div class="content table-responsive table-full-width">
+            <table class="table table-striped" align="center">
+                <thead>
+                    <tr>
+                    <th style="text-align:center;">地点</th>
+                    <th style="text-align:center;">时区</th>
+                    <th style="text-align:center;">备注</th>
+                </tr></thead>
+                <tbody>
+                    <tr>
+                        <td>伊希地城市圈</td>
+                        <td>5</td>
+                        <td>-</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td>端点城</td>
+                        <td>5</td>
+                        <td>-</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>川陀城</td>
+                        <td>4</td>
+                        <td>-</td>
+                    </tr>
+
+                    <tr>
+                        <td>奥林匹斯山</td>
+                        <td>15</td>
+                        <td>-</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>埃律西昂山</td>
+                        <td>9,10</td>
+                        <td>最高点时区为 10</td>
+                    </tr>
+
+                    
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="footer">
+                <hr>
+                <div class="chart-legend">
+                    更多请查看<a href="timezone.html">地区和时区对照表</a>，或者自行通过<a href="http://book.interimm.org/navigator/mars.html#marstimezone">火星时区</a>规定换算。
+                </div>
+            </div>
+    </div>
+
+</div> <!-- END of Row -->
+
+
+<div class="col-md-12" id="accordion" role="tablist" aria-multiselectable="true">
+   <div class="panel panel-info" style="background-color:#fff;">
+    <div class="panel-heading" role="tab" id="headingThree" style="background-color:#fff !important;">
+      <h4 class="panel-title" style="text-align:center;">
+        <a style="color:lightblue;" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsetech" aria-expanded="false" aria-controls="collapsetech">
+          点击查看技术细节
+        </a>
+      </h4>
+    </div>
+    <div id="collapsetech" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+     
+
+                                    <div class="col-md-6">
+                                        <div class="clock-in">
+                                            <h3 style="text-align:center;">地球</h3>
+
+
+                                            <div class="manual-input-invalid" style="display:none;">
+                                                <p>请输入一个有效的日期，格式可以使用 &ldquo;August 6, 2012&rdquo; 等等.</p>
+                                            </div>
+
+
+                                                <div>
+                                                    <div>
+                                                        <i>millis</i> = <span class="millis"></span>
+                                                    </div>
+                                                    <div class="explanation-link" data-explanation="#jd_ut-explanation">
+                                                        JD<sub>UT</sub> = <span class="jd_ut"></span>
+                                                    </div>
+                                                    <div class="explanation-link" data-explanation="#jd_tt-explanation">
+                                                        JD<sub>TT</sub> = <span class="jd_tt"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    自从 <a href="https://en.wikipedia.org/?title=Epoch_(astronomy)#Julian_years_and_J2000" target="_blank" title="点击此处查看解释">J2000</a> 之后的时间：
+                                                    <br>
+                                                    <span class="time j2000"></span>
+                                                </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="clock-in">
+                                            <h3 style="text-align:center;">火星</h3>
+
+                                            <div class="explanation-link" data-explanation="#m-explanation">
+                                                M = <span class="m"></span>&deg;
+                                            </div>
+                                            <div class="explanation-link" data-explanation="#alpha_fms-explanation">
+                                                &alpha;<sub>FMS</sub> = <span class="alpha_fms"></span>&deg;
+                                            </div>
+                                            <div class="explanation-link" data-explanation="#e-explanation">
+                                                <i>e</i> = <span class="e"></span>
+                                            </div>
+                                            <div class="explanation-link" data-explanation="#nu_m-explanation">
+                                                &nu; - M = <span class="nu_m"></span>&deg;
+                                            </div>
+                                            <div class="explanation-link" data-explanation="#l_s-explanation">
+                                                <i>L</i><sub>s</sub> = <span class="l_s"></span>&deg;<br>
+                                            </div>
+                                            &nu; = <span class="nu"></span>&deg;
+                                            <div>
+                                                PBS = <span class="pbs"></span>&deg;
+                                            </div>
+                                            <div>
+                                                EOT = <span class="eot"></span>&deg; = <span class="eot_h"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+                                        <!-- Annotations of Clock -->
+                                        <div class="col-md-12">
+                                            <div class="footer" style="border-top:1px solid lightgrey;margin-top:1em;">
+
+                                                <hr>
+                                                <div class="stats">
+                                                    <i class="ti-info"></i> 感谢 James Tauber 的 <a href="http://jtauber.github.io/mars-clock/" target="_blank">Mars Clock</a>，本程序在其基础上重写并且添加星际移民中心的计时和历法方案。部分公式来自
+                                                    Allison, M., and M. McEwen 2000. <a href="http://pubs.giss.nasa.gov/abs/al05000n.html">A post-Pathfinder evaluation of aerocentric solar coordinates with improved timing recipes for Mars seasonal/diurnal climate studies.</a> <i>Planet. Space Sci.</i> <b>48</b>, 215-235.
+                                                    以及 <a href="http://www.giss.nasa.gov/tools/mars24/help/algorithm.html">Mars24 Algorithm and Worked Examples</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+
+                        <li>
+                            <a href="http://interimm.org">
+                                星际移民中心
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </nav>
+                <div class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://interimm.org">星际移民中心</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="assets/js/bootstrap-checkbox-radio.js"></script>
+
+	<!--  Charts Plugin -->
+	<script src="assets/js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="assets/js/bootstrap-notify.js"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+	<script src="assets/js/paper-dashboard.js"></script>
+
+    <!-- WIP Warning -->
+    <script type="text/javascript">
+    	$(document).ready(function(){
+
+
+        	$.notify({
+            	icon: 'ti-pulse',
+            	message: "欢迎使用火星时钟。提交 BUG 和建议请戳 <a href='https://github.com/InterImm/mars-clock/issues' style='color:black;'>GitHub</a>."
+
+            },{
+                type: 'info',
+                timer: 10000,
+                placement: {
+                    from: 'bottom',
+                    align: 'left'
                 }
-                return x1 + x2;
-            }
-            function within_24(n) {
-                if (n < 0) {
-                    n += 24;
-                } else if (n >= 24) {
-                    n -= 24;
-                }
-                return n;
-            }
-            function update() {
-                var input_date = $(".custom-datetime").val();
-                if (input_date) {
-                    // Slightly evil but mostly functional date parsing from human input.
-                    // Works reasonably well in most browsers :)
-                    var d = new Date(input_date);
-                } else {
-                    var d = new Date();
-                }
-
-                if (d.getTime()) {
-                    $(".manual-input-invalid").hide();
-                    $(".date-conversion-results").show();
-                } else {
-                    $(".manual-input-invalid").show();
-                    $(".date-conversion-results").hide();
-                }
-
-                $(".utc-time").text(d.toUTCString());
-                var millis = d.getTime();
-                var jd_ut = 2440587.5 + (millis / 8.64E7);
-                var jd_tt = jd_ut + (35 + 32.184) / 86400;
-                var j2000 = jd_tt - 2451545.0;
-                var m = (19.3870 + 0.52402075 * j2000) % 360;
-                var alpha_fms = (270.3863 + 0.52403840 * j2000) % 360;
-                var e = (0.09340 + 2.477E-9 * j2000);
-                var pbs =
-                    0.0071 * cos((0.985626 * j2000 /  2.2353) +  49.409) +
-                    0.0057 * cos((0.985626 * j2000 /  2.7543) + 168.173) +
-                    0.0039 * cos((0.985626 * j2000 /  1.1177) + 191.837) +
-                    0.0037 * cos((0.985626 * j2000 / 15.7866) +  21.736) +
-                    0.0021 * cos((0.985626 * j2000 /  2.1354) +  15.704) +
-                    0.0020 * cos((0.985626 * j2000 /  2.4694) +  95.528) +
-                    0.0018 * cos((0.985626 * j2000 / 32.8493) +  49.095);
-                var nu_m = (10.691 + 3.0E-7 * j2000) * sin(m) +
-                    0.623 * sin(2 * m) +
-                    0.050 * sin(3 * m) +
-                    0.005 * sin(4 * m) +
-                    0.0005 * sin(5 * m) +
-                    pbs;
-                var nu = nu_m + m;
-                var l_s = (alpha_fms + nu_m) % 360;
-                var eot = 2.861 * sin(2 * l_s) - 0.071 * sin(4 * l_s) + 0.002 * sin(6 * l_s) - nu_m;
-                var eot_h = eot * 24 / 360;
-                var msd = (((j2000 - 4.5) / 1.027491252) + 44796.0 - 0.00096);
-                var mtc = (24 * msd) % 24;
-
-                var curiosity_lambda = 360 - 137.4;
-                var curiosity_sol = Math.floor(msd - curiosity_lambda / 360) - 49268;
-                var curiosity_lmst = within_24(mtc - curiosity_lambda * 24 / 360);
-                var curiosity_ltst = within_24(curiosity_lmst + eot * 24 / 360);
-
-                var opportunity_sol_date = msd - 46235 - 0.042431;
-                var opportunity_sol = Math.floor(opportunity_sol_date);
-                var opportunity_mission = (24 * opportunity_sol_date) % 24;
-                var opportunity_ltst = within_24(opportunity_mission + eot * 24 / 360);
-
-                $(".millis").text(add_commas(millis));
-                $(".jd_ut").text(add_commas(jd_ut.toFixed(5)));
-                $(".jd_tt").text(add_commas(jd_tt.toFixed(5)));
-                $(".j2000").text(add_commas(j2000.toFixed(5)));
-                $(".m").text(m.toFixed(5));
-                $(".alpha_fms").text(alpha_fms.toFixed(5));
-                $(".pbs").text(pbs.toFixed(5));
-                $(".e").text(e.toFixed(5));
-                $(".nu_m").text(nu_m.toFixed(5));
-                $(".nu").text(nu.toFixed(5));
-                $(".l_s").text(l_s.toFixed(5));
-                $(".eot").text(eot.toFixed(5));
-                $(".eot_h").text(h_to_hms(eot_h.toFixed(5)));
-                $(".msd").text(add_commas(msd.toFixed(5)));
-                $(".mtc").text(h_to_hms(mtc));
-
-                $(".curiosity_lmst").text(h_to_hms(curiosity_lmst));
-                $(".curiosity_ltst").text(h_to_hms(curiosity_ltst));
-                $(".curiosity_sol").text(curiosity_sol);
-
-                $(".opportunity_mission").text(h_to_hms(opportunity_mission));
-                $(".opportunity_ltst").text(h_to_hms(opportunity_ltst));
-                $(".opportunity_sol").text(opportunity_sol);
-            }
-            $(function() {
-                update();
-                $(".explanation").hide();
-                setInterval(update, 10);
-                $(".explanation-link").hover(function() {
-                    $(".explanation").hide();
-                    $(this).css("font-weight", "bold");
-                    $(".help").hide();
-                    $($(this).data("explanation")).show();
-                }, function() {
-                    $(this).css("font-weight", "300");
-                    $(".help").show();
-                    $($(this).data("explanation")).hide();
-                });
-                $('.automatic-input').mouseup(function() {
-                    // Changing the contents of this element so frequently
-                    // stops the click handler from firing, so we need to
-                    // watch for mouseup instead
-                    $('.automatic-input').hide();
-                    $('.manual-input').show();
-                    $('.custom-datetime').select();
-                });
-                $('.custom-datetime').blur(function() {
-                    if (! $('.custom-datetime').val()) {
-                        $('.manual-input').hide();
-                        $('.automatic-input').show();
-                    }
-                });
-                $('.earth-date-input .clear-button').click(function() {
-                    $('.custom-datetime').val('');
-                    $('.manual-input').hide();
-                    $('.automatic-input').show();
-                });
             });
-        </script>
-        <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-50146153-7', 'auto');
-  ga('send', 'pageview');
+    	});
+	</script>
 
-</script>
+    <!-- Javascript BEGIN -->
 
 
-    </body>
+
+    <script>
+    if (!window.jQuery) {
+    var script = document.createElement('script');
+    script.src = "/assets/jquery.min.js";
+    document.body.appendChild(script);
+    }
+    </script>
+
+
+
+    <script src="assets/marstimezone.js"></script>
+    <script src="assets/marsclock.js"></script>
+    
+
+
+
+    <!-- Google Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-50146153-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+
+    <!-- Javascript END -->
+
 </html>
