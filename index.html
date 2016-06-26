@@ -21,6 +21,9 @@
     <!--  Paper Dashboard core CSS    -->
     <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
 
+    <!-- Bootstrap Slider Bar -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-slider.css">
+    <script type="text/javascript" src="assets/js/bootstrap-slider.min.js"></script>
 
 
 
@@ -63,6 +66,8 @@
     <link href="assets/main.css" rel="stylesheet" type="text/css">
     <!-- Mars Clock Specific END -->
 
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
 
 
 </head>
@@ -94,6 +99,12 @@
                     <a href="timing-doc.html">
                         <i class="ti-book"></i>
                         <p>火星计时</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="timing-doc.html">
+                        <i class="ti-world"></i>
+                        <p>火星时区</p>
                     </a>
                 </li>
                 <li>
@@ -273,6 +284,129 @@
                                         </div>
                                     </div>
 
+<div class="row"> <!-- BEGIN of Row -->
+<div class="clock col-md-6">
+        <div class="header" style="text-align:center;">
+            <h4 class="title">火星时区时间</h4>
+            <!-- <p class="category">火星上不同时区的时间</p> -->
+        </div>
+ 
+    <div style="text-align:center;">
+        
+        <div class="content">
+            <div class="form-group" style="text-align:center;">
+                <label>选择你所在的火星时区</label>
+                <input id="setLocalTimezone" type="number" class="form-control border-input" placeholder="火星时区" value="0" style="width:50%;text-align:center;margin-left:auto;margin-right:auto;">
+
+            
+                
+            </div>
+
+            <div class="card" style="text-align:center;width:80%;margin-left:auto;margin-right:auto;">
+                <div class="content">
+                    <div class="row">
+                        <div class="time mymd_interimm_tz"></div>
+                    </div>
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            当前时区火星日期
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card"  style="text-align:center;width:80%;margin-left:auto;margin-right:auto;">
+                <div class="content">
+                    <div class="row">
+                        <div class="time mt_interimm_tz"></div>
+                    </div>
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            当前时区时间
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        
+
+    </div>
+    <div class="footer">
+                <hr>
+                <div class="chart-legend">
+                    火星共有 25 个时区，请输入 0 - 24 之内的数据。
+                </div>
+            </div>
+
+        </div>
+</div>
+
+
+<div class="clock col-md-6" style="text-align:center;">
+<div class="header">
+            <h4 class="title">常用时区时间</h4>
+        </div>
+    <div class="card">
+        
+        <div class="content table-responsive table-full-width">
+            <table class="table table-striped" align="center">
+                <thead>
+                    <tr>
+                    <th style="text-align:center;">地点</th>
+                    <th style="text-align:center;">时区</th>
+                    <th style="text-align:center;">备注</th>
+                </tr></thead>
+                <tbody>
+                    <tr>
+                        <td>伊希地城市圈</td>
+                        <td>5</td>
+                        <td>-</td>
+                        
+                    </tr>
+                    
+                    <tr>
+                        <td>端点城</td>
+                        <td>5</td>
+                        <td>-</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>川陀城</td>
+                        <td>4</td>
+                        <td>-</td>
+                    </tr>
+
+                    <tr>
+                        <td>奥林匹斯山</td>
+                        <td>15</td>
+                        <td>-</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>埃律西昂山</td>
+                        <td>9,10</td>
+                        <td>最高点时区为 10</td>
+                    </tr>
+
+                    
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="footer">
+                <hr>
+                <div class="chart-legend">
+                    更多请查看<a href="timezone.html">地区和时区对照表</a>，或者自行通过<a href="http://book.interimm.org/navigator/mars.html#marstimezone">火星时区</a>规定换算。
+                </div>
+            </div>
+    </div>
+
+</div> <!-- END of Row -->
+
+
 <div class="col-md-12" id="accordion" role="tablist" aria-multiselectable="true">
    <div class="panel panel-info" style="background-color:#fff;">
     <div class="panel-heading" role="tab" id="headingThree" style="background-color:#fff !important;">
@@ -425,7 +559,7 @@
 
         	$.notify({
             	icon: 'ti-pulse',
-            	message: "Welcome to <b>Neutrino Oscillations JS</b> (Work In Progress). We appreciate your bug report and suggestions on <a href='https://github.com/NeuPhysics/neutrino-oscillation-js/issues' style='color:black;'>github</a>."
+            	message: "欢迎使用火星时钟。提交 BUG 和建议请戳 <a href='https://github.com/InterImm/mars-clock/issues' style='color:black;'>GitHub</a>."
 
             },{
                 type: 'info',
@@ -441,7 +575,7 @@
 
     <!-- Javascript BEGIN -->
 
-    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
 
     <script>
     if (!window.jQuery) {
@@ -453,7 +587,9 @@
 
 
 
+    <script src="assets/marstimezone.js"></script>
     <script src="assets/marsclock.js"></script>
+    
 
 
 
