@@ -121,9 +121,9 @@
         var month_flag = 1;
         var return_month;
         var return_day;
-        
+
         while (month_flag < 25) {
-           
+
             if (month_flag == 24) {     // the last month is special because it might change with year
             	return_month = month_flag;
                 return_day = days_flag;   // using tuple to avoid modification
@@ -149,16 +149,16 @@
   function mars_year_month(days) {
       var year_flag = 1;
       var mars_calendar_data_list;
-      
+
       var md = days // #InterImm# calculate the total martian days since year 0
-      
+
       while (md > (668.0 + is_leap_year_mars(year_flag) ) ) {
       	year_flag = year_flag + 1
         md = md - 668.0 - is_leap_year_mars(year_flag)
       }
-      
+
       mars_calendar_data_list = mars_calendar_date(md+1,year_flag-1);
-        
+
       return [year_flag, mars_calendar_data_list[0], Math.floor(mars_calendar_data_list[1]) ]
   }
 
@@ -174,7 +174,7 @@
       return tz_set_value;
     //}
 
-    
+
   }
 
   document.getElementById("setLocalTimezone").value
@@ -200,7 +200,7 @@
       }
 
       $(".utc-time").text(d.toUTCString());
-      var millis = d.getTime();
+      var millis = d.getTime(); // Get the number of milliseconds since 1970/01/01
       var jd_ut = 2440587.5 + (millis / 8.64E7);
       var jd_tt = jd_ut + (35 + 32.184) / 86400;
       var j2000 = jd_tt - 2451545.0;
@@ -227,24 +227,24 @@
       var eot_h = eot * 24 / 360;
       var msd = (((j2000 - 4.5) / 1.027491252) + 44796.0 - 0.00096);
       var mtc = (24 * msd) % 24;
-      
+
       var m2e = 1.027491252; // 88775.0/86400; // #InterImm# the ratio of mars sol day and earth 24-hour day; we can use 1.027491252 or 88775.0/86400 which are different from each other
 
       var setCurrentTimezoneValue = set_current_tz(); // Get Input TimeZone from Input Label
 
-      
+
 
       var yeah_0_days_to_j2000 = 10845.1403356/m2e; // #Interimm# calculate the number of days from mars year 0 to j2000
-       
+
 //      var mars_days_from_j2000 = (((j2000 - 4.5) / 1.027491252) - 0.00096) + yeah_0_days_to_j2000 ; // #Interimm# calculate days passed since yeah 0
       var mars_days_from_year_0 = msd - 34242.27180 - 0.73027  + 1/m2e // 35183.387152777777778/m2e ; // #Interimm# calculate days passed since yeah 0
       var mars_days_from_year_0_tz = msd - 34242.27180 - 0.73027  + 1/m2e + mtz_diff0_sec(setCurrentTimezoneValue)/3600/24/m2e; // WITH TIMEZONE SET // #Interimm# calculate days passed since yeah 0
       var mtc_interimm = (mars_days_from_year_0) % 1; // MTC using InterImm method
       var mtc_interimm_tz = (mars_days_from_year_0_tz) % 1; // WITH TIMEZONE SET // MTC using InterImm method
-       
+
       var mars_calendar_list = mars_year_month( mars_days_from_year_0 );
       var mars_calendar_list_tz = mars_year_month( mars_days_from_year_0_tz ); // WITH TIMEZONE SET
-       
+
       var mymd_year = mars_calendar_list[0] ; // #Interimm# mars calendar year
       var mymd_month = mars_calendar_list[1]; // #Interimm# mars calendar month
       var mymd_day = mars_calendar_list[2]; // #Interimm# mars calendar day
@@ -281,33 +281,33 @@
       $(".eot").text(eot.toFixed(5));
       $(".eot_h").text(h_to_hms(eot_h.toFixed(5)));
 //      $(".msd").text(add_commas(msd.toFixed(5)));
-      $(".msd").text(add_commas(mars_days_from_year_0.toFixed(5)));       
+      $(".msd").text(add_commas(mars_days_from_year_0.toFixed(5)));
       $(".mymd_interimm").text( mymd_interimm); // #Interimm# the year layout using interimm's calendar
-      
+
       // if ( (setCurrentTimezoneValue < 0) || (setCurrentTimezoneValue > 24) || (setCurrentTimezoneValue == Undifined) ) {
       //   $(".mymd_interimm_tz").text('错误时区输入');
       //   $(".mt_interimm_tz").text('错误时区输入');
       // }
-      // else {    
+      // else {
       $(".mymd_interimm_tz").text( mymd_interimm_tz); // #Interimm# the year layout using interimm's calendar
       //}
 
 
 //      $(".mtc").text(h_to_hms(mtc));
-       
+
       if (mtc_interimm > 0) {
-	      $(".mtc").text(h_to_hms(mtc_interimm));
-	//	  $(".mtc").text(h_to_hms(mtc_interimm));       
+	      $(".mtc").text(h_to_hms(mtc));
+	//	  $(".mtc").text(h_to_hms(mtc_interimm));
     	  $(".mt_interimm").text(h_to_hms_interimm(mtc_interimm)); // #Interimm# clock using interimm's time keeping
         $(".mt_interimm_tz").text(h_to_hms_interimm(mtc_interimm_tz)); //WITH TIMEZONE SET // #Interimm# clock using interimm's time keeping
-        $(".msd_interimm").text(add_commas(mars_days_from_year_0.toFixed(5)));       
+        $(".msd_interimm").text(add_commas(mars_days_from_year_0.toFixed(5)));
         $(".mymd_interimm").text( mymd_interimm); // #Interimm# the year layout using interimm's calendar
   //      $(".mtc").text(h_to_hms(mtc));
-       
+
   } else {
 	      $(".mtc").text("试试其它时间");
           $(".mt_interimm").text("试试其它时间"); // #Interimm# clock using interimm's time keeping
-         $(".msd_interimm").text("试试其它时间");       
+         $(".msd_interimm").text("试试其它时间");
           $(".mymd_interimm").text("试试其它时间"); // #Interimm# the year layout using interimm's calendar
   //      $(".mtc").text(h_to_hms(mtc));
   }
