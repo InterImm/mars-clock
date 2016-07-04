@@ -61,7 +61,11 @@
          var mm_extra = Math.floor(total_seconds_extra / 60);
          if (mm_extra < 10) mm_extra = "0" + mm_extra;
          var ss_extra = Math.round(total_seconds_extra % 60);
-         if (ss_extra < 10) ss_extra = "0" + ss_extra;
+         if (ss_extra < 10) {
+            ss_extra = "0" + ss_extra;
+         } else if (ss_extra == 60 ) {
+            ss_extra = "00";
+         }
          return " " + "+" + mm_extra + ":" + ss_extra;
       }
    }
