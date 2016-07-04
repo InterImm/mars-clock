@@ -17,9 +17,18 @@
       if (hh < 10) hh = "0" + hh;
       var y = x % 3600;
       var mm = Math.floor(y / 60);
-      if (mm < 10) mm = "0" + mm;
+      if (mm < 10) {
+         mm = "0" + mm;
+      } else if (mm == 60) {
+         mm = "00";
+      }
+
       var ss = Math.round(y % 60);
-      if (ss < 10) ss = "0" + ss;
+      if (ss < 10) {
+         ss = "0" + ss;
+      } else if (ss == 60) {
+         ss = "00";
+      }
       return hh + ":" + mm + ":" + ss;
    }
 
@@ -31,12 +40,20 @@
          var h_24 = h_interimm // - 0.659790025; // to calculate within 24 earth hours
          var x = h_24 * 3600; // in earth seconds
          var hh = Math.floor(x / 3600 ); // number of earth hours
-         if (hh < 10 && hh > 0) hh = "0" + hh;
+         if (hh < 10 && hh >= 0) hh = "0" + hh;
          var y = x % 3600; // the earth seconds left
          var mm = Math.floor(y / 60);
-         if (mm < 10 && mm > 0) mm = "0" + mm;
+         if (mm < 10 && mm >= 0) {
+            mm = "0" + mm;
+         } else if (mm == 60) {
+            mm = "00";
+         }
          var ss = Math.round(y % 60);
-         if (ss < 10 && ss > 0) ss = "0" + ss;
+         if (ss < 10 && ss >= 0) {
+            ss = "0" + ss;
+         } else if (ss == 60) {
+            ss = "00";
+         }
          return hh + ":" + mm + ":" + ss + " " + "+" + "00" + ":" + "00";
       } else {
          var h_extra = h_interimm - 24.0;
