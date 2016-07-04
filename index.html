@@ -25,6 +25,10 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-slider.css">
     <script type="text/javascript" src="assets/js/bootstrap-slider.min.js"></script>
 
+    <!-- Bootstrap Datepicker CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
+
+
 
 
     <!--  Fonts and icons     -->
@@ -181,7 +185,14 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="earth-date-input form-group">
-                                            <label>地球时间（输入格式举例：2016-07-16 01:58:16 GMT）默认时区为 GMT：</label>
+                                            <div class='input-group date' id='datetimepicker'>
+                                                <input type='text' class="form-control" />
+                                                <span class="input-group-addon">
+                                                    <span class="fa fa-calendar"></span>
+                                                </span>
+                                            </div>
+
+                                            <label>地球时间（输入格式举例：2016-07-16 01:58:16 GMT+8）默认时区为 GMT：</label>
                                             <span class="automatic-input">
                                                 <a class="utc-time form-control border-input" title="点击此处可以输入日期"></a>
                                             </span>
@@ -524,10 +535,31 @@
 
     <!--   Core JS Files   -->
     <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+
+    <!-- Moment.js -->
+    <script src="assets/js/moment.js"></script>
+
+    <!--  Bootstrap Translation Plugins -->
+	<script src="assets/js/bootstrap-transition.js"></script>
+
+
+	<!--  Bootstrap Collapse Plugins -->
+	<script src="assets/js/bootstrap-collapse.js"></script>
+
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="assets/js/bootstrap-checkbox-radio.js"></script>
+
+
+
+
+
+
+
+    <!--  Bootstrap Datepicker Plugin -->
+    <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+
 
 	<!--  Charts Plugin -->
 	<script src="assets/js/chartist.min.js"></script>
@@ -537,6 +569,16 @@
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="assets/js/paper-dashboard.js"></script>
+
+
+    <script type="text/javascript">
+        $(function () {
+        $('#datetimepicker').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss',
+            locale:          
+        });
+    });
+    </script>
 
     <!-- WIP Warning -->
     <script type="text/javascript">

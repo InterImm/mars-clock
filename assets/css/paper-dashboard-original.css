@@ -472,7 +472,7 @@ hr {
   min-height: calc(100% - 123px);
 }
 .main-panel > .footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
 }
 .main-panel .navbar {
   margin-bottom: 0;
@@ -1589,8 +1589,7 @@ textarea.form-control {
   color: #EB5E28;
 }
 
-/*.dropdown-menu {*/ /* Modified for Datetimepicker */
-ul> .dropdown-menu {
+.dropdown-menu {
   background-color: #FFFCF5;
   border: 0 none;
   border-radius: 6px;
@@ -1605,7 +1604,7 @@ ul> .dropdown-menu {
   -webkit-box-shadow: 0 2px rgba(17, 16, 15, 0.1), 0 2px 10px rgba(17, 16, 15, 0.1);
   box-shadow: 0 2px rgba(17, 16, 15, 0.1), 0 2px 10px rgba(17, 16, 15, 0.1);
 }
-.open .dropdown-menu {
+.open .dropdown-menu { 
   opacity: 1;
   filter: alpha(opacity=100);
   visibility: visible;
