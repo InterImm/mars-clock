@@ -25,14 +25,14 @@
 
 
     <!--  Fonts and icons     -->
-    <link href="assets/fonts/font-awesome-4.6.3/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/fonts/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href='assets/fonts/google-fonts.css' rel='stylesheet' type='text/css'>
-    
+
     <link href="assets/css/themify-icons.css" rel="stylesheet">
 
     <!-- Mathjax BEGIN -->
 
-    <script type="text/javascript" src="http://libs.cdnjs.net/mathjax/2.6.1-rc.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="http://libs.cdnjs.net/mathjax/2.6.1-rc.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -52,7 +52,7 @@
           imageFont: null
         }
       });
-    </script>
+    </script> -->
 
     <!-- Mathjax END -->
 
@@ -79,7 +79,7 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="#" class="simple-text">
+                <a href="index.html" class="simple-text">
                     火星时钟
                 </a>
             </div>
@@ -191,7 +191,7 @@
                                 </thead>
 
                                 <tbody>
-                                
+
                                 <tr><td>立春月（二十二月）</td>
                                 <td>立夏月（四月）</td>
                                 <td>立秋月（十月）</td>
@@ -235,8 +235,8 @@
                             </p>
 
                             <table class="table table-striped">
-                                
-                                
+
+
                                 <thead>
                                 <tr><th>星期日</th>
                                 <th>星期一</th>
@@ -316,7 +316,7 @@
                                 <p>火星上一些具有重要天文意义的节日：</p>
 
                                 <table class="table table-striped">
-                                
+
                                 <thead valign="bottom">
                                 <tr class="row-odd"><th class="head">火星历日期</th>
                                 <th class="head">节日</th>
@@ -360,8 +360,14 @@
 
                         <li>
                             <a href="http://interimm.org">
-                                星际移民中心
+                                <i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;星际移民中心
                             </a>
+                        </li>
+                        <li>
+                            <a href="http://weibo.com/735345046" target="_blank">
+<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;小地球旅行
+                            </a>
+
                         </li>
 
 
@@ -392,36 +398,15 @@
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
 
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="assets/js/paper-dashboard.js"></script>
 
     <!-- WIP Warning -->
-    <script type="text/javascript">
-    	$(document).ready(function(){
 
-
-        	$.notify({
-            	icon: 'ti-pulse',
-            	message: "Welcome to <b>Neutrino Oscillations JS</b> (Work In Progress). We appreciate your bug report and suggestions on <a href='https://github.com/NeuPhysics/neutrino-oscillation-js/issues' style='color:black;'>github</a>."
-
-            },{
-                type: 'info',
-                timer: 10000,
-                placement: {
-                    from: 'bottom',
-                    align: 'left'
-                }
-            });
-
-    	});
-	</script>
 
     <!-- Javascript BEGIN -->
-
-    <!-- <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script> -->
 
     <script>
     if (!window.jQuery) {

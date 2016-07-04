@@ -28,16 +28,16 @@
 
 
     <!--  Fonts and icons     -->
-    <link href="assets/fonts/font-awesome-4.6.3/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/fonts/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link href='assets/fonts/google-fonts.css' rel='stylesheet' type='text/css'>
-    
+
      <link href="assets/css/themify-icons.css" rel="stylesheet">
 
     <!-- Mathjax BEGIN -->
 
-    <script type="text/javascript" src="http://libs.cdnjs.net/mathjax/2.6.1-rc.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- <script type="text/javascript" src="http://libs.cdnjs.net/mathjax/2.6.1-rc.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 
-    <script type="text/x-mathjax-config">
+    <!-- <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
         showProcessingMessages: false,
         messageStyle: 'none',
@@ -55,7 +55,7 @@
           imageFont: null
         }
       });
-    </script>
+    </script> -->
 
     <!-- Mathjax END -->
 
@@ -67,7 +67,6 @@
     <link href="assets/main.css" rel="stylesheet" type="text/css">
     <!-- Mars Clock Specific END -->
 
-    <!-- <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script> -->
 
 
 
@@ -84,7 +83,7 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="#" class="simple-text">
+                <a href="index.html" class="simple-text">
                     火星时钟
                 </a>
             </div>
@@ -291,16 +290,16 @@
             <h4 class="title">火星时区时间</h4>
             <!-- <p class="category">火星上不同时区的时间</p> -->
         </div>
- 
+
     <div style="text-align:center;">
-        
+
         <div class="content">
             <div class="form-group" style="text-align:center;">
                 <label>选择你所在的火星时区</label>
                 <input id="setLocalTimezone" type="number" class="form-control border-input" placeholder="火星时区" value="0" style="width:50%;text-align:center;margin-left:auto;margin-right:auto;">
 
-            
-                
+
+
             </div>
 
             <div class="card" style="text-align:center;width:80%;margin-left:auto;margin-right:auto;">
@@ -331,7 +330,7 @@
                 </div>
 
             </div>
-        
+
 
     </div>
     <div class="footer">
@@ -350,7 +349,7 @@
             <h4 class="title">常用时区时间</h4>
         </div>
     <div class="card">
-        
+
         <div class="content table-responsive table-full-width">
             <table class="table table-striped" align="center">
                 <thead>
@@ -364,15 +363,15 @@
                         <td>伊希地城市圈</td>
                         <td>5</td>
                         <td>-</td>
-                        
+
                     </tr>
-                    
+
                     <tr>
                         <td>端点城</td>
                         <td>5</td>
                         <td>-</td>
                     </tr>
-                    
+
                     <tr>
                         <td>川陀城</td>
                         <td>4</td>
@@ -383,7 +382,7 @@
                         <td>奥林匹斯山</td>
                         <td>15</td>
                         <td>-</td>
-                        
+
                     </tr>
                     <tr>
                         <td>埃律西昂山</td>
@@ -391,7 +390,7 @@
                         <td>最高点时区为 10</td>
                     </tr>
 
-                    
+
                 </tbody>
             </table>
 
@@ -408,7 +407,7 @@
 </div> <!-- END of Row -->
 
 
-<div class="col-md-12" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="col-md-12" id="accordion" role="tablist" aria-multiselectable="true" style="visibility:hidden;">
    <div class="panel panel-info" style="background-color:#fff;">
     <div class="panel-heading" role="tab" id="headingThree" style="background-color:#fff !important;">
       <h4 class="panel-title" style="text-align:center;">
@@ -418,7 +417,7 @@
       </h4>
     </div>
     <div id="collapsetech" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-     
+
 
                                     <div class="col-md-6">
                                         <div class="clock-in">
@@ -515,8 +514,14 @@
 
                         <li>
                             <a href="http://interimm.org">
-                                星际移民中心
+                                <i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;星际移民中心
                             </a>
+                        </li>
+                        <li>
+                            <a href="http://weibo.com/735345046" target="_blank">
+<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;小地球旅行
+                            </a>
+
                         </li>
 
 
@@ -546,9 +551,6 @@
 
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="assets/js/paper-dashboard.js"></script>
@@ -590,7 +592,7 @@
 
     <script src="assets/marstimezone.js"></script>
     <script src="assets/marsclock.js"></script>
-    
+
 
 
 
