@@ -176,29 +176,12 @@
                             <div class="content">
 
 
-                                <!-- Input Parameters BEGIN -->
-                                <!--
-                                <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Energy of Neutrinos (MeV)</label>
-                                                <input type="text" class="form-control border-input" placeholder="Energy" id="vacEnergy" value="1">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Mass Squared Difference (×10<sup>-5</sup>eV<sup>2</sup>)</label>
-                                                <input type="text" class="form-control border-input" placeholder="Mass Squared Difference" id="vacMassSquared" value=7.53>
-                                            </div>
-                                        </div>
-                                </div>
-                                -->
-                                <!-- Input Parameters EMD -->
+
 
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="earth-date-input form-group">
-                                            <label>地球时间（输入格式举例：2016-07-16 01:58:16 GMT）：</label>
+                                            <label>地球时间（输入格式举例：2016-07-16 01:58:16 GMT）默认时区为 GMT：</label>
                                             <span class="automatic-input">
                                                 <a class="utc-time form-control border-input" title="点击此处可以输入日期"></a>
                                             </span>
@@ -209,7 +192,7 @@
                                         </div>
 
                                         <div class="manual-input-invalid" style="display:none;">
-                                                <p>请输入一个有效的日期，格式可以使用 &ldquo;August 6, 2012&rdquo;，或者 &ldquo;Aug 6, 2012&rdquo;，或者 &ldquo;2012-08-29&rdquo; 等等.</p>
+                                                <p>请输入一个有效的日期，格式可以使用 &ldquo;August 6, 2012&rdquo;，或者 &ldquo;Aug 6, 2012&rdquo;，或者 &ldquo;2012-08-29&rdquo; 等等，默认时区为 GMT.</p>
                                         </div>
 
                                     </div>
@@ -296,7 +279,7 @@
         <div class="content">
             <div class="form-group" style="text-align:center;">
                 <label>选择你所在的火星时区</label>
-                <input id="setLocalTimezone" type="number" class="form-control border-input" placeholder="火星时区" value="0" style="width:50%;text-align:center;margin-left:auto;margin-right:auto;">
+                <input id="setLocalTimezone" type="number" min="0" max="24" class="form-control border-input" placeholder="火星时区" value="0" style="width:50%;text-align:center;margin-left:auto;margin-right:auto;">
 
 
 
