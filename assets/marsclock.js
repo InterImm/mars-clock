@@ -17,9 +17,18 @@
       if (hh < 10) hh = "0" + hh;
       var y = x % 3600;
       var mm = Math.floor(y / 60);
-      if (mm < 10) mm = "0" + mm;
+      if (mm < 10) {
+         mm = "0" + mm;
+      } else if (mm == 60) {
+         mm = "00";
+      }
+
       var ss = Math.round(y % 60);
-      if (ss < 10) ss = "0" + ss;
+      if (ss < 10) {
+         ss = "0" + ss;
+      } else if (ss == 60) {
+         ss = "00";
+      }
       return hh + ":" + mm + ":" + ss;
    }
 
@@ -31,12 +40,20 @@
          var h_24 = h_interimm // - 0.659790025; // to calculate within 24 earth hours
          var x = h_24 * 3600; // in earth seconds
          var hh = Math.floor(x / 3600 ); // number of earth hours
-         if (hh < 10 && hh > 0) hh = "0" + hh;
+         if (hh < 10 && hh >= 0) hh = "0" + hh;
          var y = x % 3600; // the earth seconds left
          var mm = Math.floor(y / 60);
-         if (mm < 10 && mm > 0) mm = "0" + mm;
+         if (mm < 10 && mm >= 0) {
+            mm = "0" + mm;
+         } else if (mm == 60) {
+            mm = "00";
+         }
          var ss = Math.round(y % 60);
-         if (ss < 10 && ss > 0) ss = "0" + ss;
+         if (ss < 10 && ss >= 0) {
+            ss = "0" + ss;
+         } else if (ss == 60) {
+            ss = "00";
+         }
          return hh + ":" + mm + ":" + ss + " " + "+" + "00" + ":" + "00";
       } else {
          var h_extra = h_interimm - 24.0;
@@ -44,7 +61,11 @@
          var mm_extra = Math.floor(total_seconds_extra / 60);
          if (mm_extra < 10) mm_extra = "0" + mm_extra;
          var ss_extra = Math.round(total_seconds_extra % 60);
-         if (ss_extra < 10) ss_extra = "0" + ss_extra;
+         if (ss_extra < 10) {
+            ss_extra = "0" + ss_extra;
+         } else if (ss_extra == 60 ) {
+            ss_extra = "00";
+         }
          return " " + "+" + mm_extra + ":" + ss_extra;
       }
    }
@@ -182,14 +203,17 @@
    // END-InterImm
 
    function update() {
-      var input_date = $(".custom-datetime").val();
-      if (input_date) {
+      var input_date = $(".custom-datetime").val() + ' UTC+'+$("#set-datetime-tz-earth").val();
+      if ($(".custom-datetime").val()) {
            // Slightly evil but mostly functional date parsing from human input.
            // Works reasonably well in most browsers :)
            var d = new Date(input_date);
       } else {
-           var d = new Date();
-      }
+      //      var d_temp = new Date();
+
+      //      var d = new Date(d_temp.getFullYear(),d_temp.getMonth(),d_temp.getDay(),d_temp.getHours(),d_temp.getMinutes(),d_temp.getSeconds());
+            var d = new Date(); 
+    }
 
       if (d.getTime()) {
            $(".manual-input-invalid").hide();

@@ -25,6 +25,10 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-slider.css">
     <script type="text/javascript" src="assets/js/bootstrap-slider.min.js"></script>
 
+    <!-- Bootstrap Datepicker CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
+
+
 
 
     <!--  Fonts and icons     -->
@@ -181,18 +185,44 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="earth-date-input form-group">
-                                            <label>地球时间（输入格式举例：2016-07-16 01:58:16 GMT）默认时区为 GMT：</label>
+                                            
+
+                                            
+
+                                            <label>地球时间（输入格式举例：2016-07-16 01:58:16）</label>
+
                                             <span class="automatic-input">
                                                 <a class="utc-time form-control border-input" title="点击此处可以输入日期"></a>
                                             </span>
-                                            <span class="manual-input" style="display:none;">
+
+
+
+                                            <div class="col-md-12 manual-input input-group date" style="display:none;" id='datetimepicker-earth'>
+                                                
                                                 <input type="datetime" name="custom-datetime" class="custom-datetime form-control border-input" />
+                                                <span class="input-group-addon">
+                                                        <span class="fa fa-calendar"></span>
+                                                </span>
+
                                                 <!-- <a class="clear-button">&#x232b;</a> -->
-                                            </span>
+
+                                            </div>
+
+
+                                            <div class="col-md-6 manual-input" style="display:none;text-align:center;vertical-align: middle；">
+                                             <a type="text" class="form-control" style="background-color:white;"><b>时区为 UTC+</b></a>
+                                            </div>
+
+                                                <div class="col-md-6 manual-input" style="display:none;">
+                                                    
+                                                        <input type="number" id="set-datetime-tz-earth" name="custom-datetime-tz-earth" class="form-control border-input" value="8" style="text-align:center;" min="0" max="24" />
+                                                </div>
+
+
                                         </div>
 
                                         <div class="manual-input-invalid" style="display:none;">
-                                                <p>请输入一个有效的日期，格式可以使用 &ldquo;August 6, 2012&rdquo;，或者 &ldquo;Aug 6, 2012&rdquo;，或者 &ldquo;2012-08-29&rdquo; 等等，默认时区为 GMT.</p>
+                                                <p>请输入一个有效的日期，格式可以使用 &ldquo;August 6, 2012&rdquo;，或者 &ldquo;Aug 6, 2012&rdquo;，或者 &ldquo;2012-08-29&rdquo; 等等，默认时区为 GMT. <b>或者尝试一个更晚的日期和时间。</b></p>
                                         </div>
 
                                     </div>
@@ -209,7 +239,7 @@
                                                         <div class="footer">
                                                             <hr>
                                                             <div class="stats">
-                                                                火星日期
+                                                                <a href="cal-doc.html">火星日期</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -227,7 +257,7 @@
                                                     <div class="footer">
                                                         <hr>
                                                         <div class="stats">
-                                                            <a href="http://book.interimm.org/navigator/mars.html#marstime" target="_blank">火星 0 时区时间</a>
+                                                            <a href="timing-doc.html">火星 0 时区时间</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -382,7 +412,7 @@
     <div class="footer">
                 <hr>
                 <div class="chart-legend">
-                    更多请查看<a href="timezone.html">地区和时区对照表</a>，或者自行通过<a href="http://book.interimm.org/navigator/mars.html#marstimezone">火星时区</a>规定换算。
+                    更多请查看<a href="timezones.html">地区和时区对照表</a>，或者自行通过<a href="timing-doc.html">火星时区</a>规定换算。
                 </div>
             </div>
     </div>
@@ -524,10 +554,31 @@
 
     <!--   Core JS Files   -->
     <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+
+    <!-- Moment.js -->
+    <script src="assets/js/moment.js"></script>
+
+    <!--  Bootstrap Translation Plugins -->
+	<script src="assets/js/bootstrap-transition.js"></script>
+
+
+	<!--  Bootstrap Collapse Plugins -->
+	<script src="assets/js/bootstrap-collapse.js"></script>
+
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="assets/js/bootstrap-checkbox-radio.js"></script>
+
+
+
+
+
+
+
+    <!--  Bootstrap Datepicker Plugin -->
+    <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+
 
 	<!--  Charts Plugin -->
 	<script src="assets/js/chartist.min.js"></script>
@@ -537,6 +588,24 @@
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 	<script src="assets/js/paper-dashboard.js"></script>
+
+
+    <script type="text/javascript">
+        $(function () {
+        $('#datetimepicker').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+        $('#datetimepicker-earth').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss',
+            sideBySide: true
+        });
+    });
+    </script>
 
     <!-- WIP Warning -->
     <script type="text/javascript">
