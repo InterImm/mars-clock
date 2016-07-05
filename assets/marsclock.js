@@ -203,14 +203,17 @@
    // END-InterImm
 
    function update() {
-      var input_date = $(".custom-datetime").val();
-      if (input_date) {
+      var input_date = $(".custom-datetime").val() + ' UTC+'+$("#set-datetime-tz-earth").val();
+      if ($(".custom-datetime").val()) {
            // Slightly evil but mostly functional date parsing from human input.
            // Works reasonably well in most browsers :)
            var d = new Date(input_date);
       } else {
-           var d = new Date();
-      }
+      //      var d_temp = new Date();
+
+      //      var d = new Date(d_temp.getFullYear(),d_temp.getMonth(),d_temp.getDay(),d_temp.getHours(),d_temp.getMinutes(),d_temp.getSeconds());
+            var d = new Date(); 
+    }
 
       if (d.getTime()) {
            $(".manual-input-invalid").hide();
