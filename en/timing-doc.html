@@ -124,45 +124,45 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle">
-                        <span class="sr-only">切换导航栏</span>
+                        <span class="sr-only">Toggle Nav</span>
                         <span class="icon-bar bar1"></span>
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">火星计时</a>
+                    <a class="navbar-brand" href="#">Mars Timekeeping</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="https://github.com/InterImm/app/releases" target="_blank">
-                                    <i class="ti-apple"></i>
-                                    <p>桌面程序</p>
-                                </a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-th"></i>
-                                    <p class="notification"></p>
-                                    <b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="http://interimm.org/">星际移民中心</a></li>
-                                    <li>
-                                        <a href="http://book.interimm.org/navigator/mars.html#marscalendar">
-                                            火星计时历法文档
-                                        </a>
-                                    </li>
-                                    <li><a href="http://book.interimm.org/">星际移民之书</a></li>
-                                    <li><a href="https://github.com/InterImm/mars-clock">源码 @ GitHub</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="en/timing-doc.html">
-                                    <i class="fa fa-language"></i>
-                                    <p>EN</p>
-                                </a>
-                            </li>
-                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="https://github.com/InterImm/app/releases" target="_blank">
+                                        <i class="ti-apple"></i>
+                                        <p>Desktop App</p>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="fa fa-th"></i>
+                                        <p class="notification"></p>
+                                        <b class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="http://interimm.org/">Interplanetary Immigration Center</a></li>
+                                        <li>
+                                            <a href="http://book.interimm.org/navigator/mars.html#marscalendar">
+                                                Martian Timekeeping and Calendar
+                                            </a>
+                                        </li>
+                                        <li><a href="http://book.interimm.org/">The Book of Interplanetary Civilization</a></li>
+                                        <li><a href="https://github.com/InterImm/mars-clock">Source Code @ GitHub</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="../timing-doc.html">
+                                        <i class="fa fa-language"></i>
+                                        <p>中文</p>
+                                    </a>
+                                </li>
+                            </ul>
 
                 </div>
             </div>
@@ -175,25 +175,22 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">火星计时简介</h4>
-                                <p class="category">火星上的计时方法</p>
+                                <h4 class="title">Introduction to Timekeeping on Mars</h4>
+                                <p class="category">How is time calculated on Mars</p>
                             </div>
                             <div class="content">
 
 
                                 <p>
-
-                                火星沿用了地球上秒、分钟以及小时，但是由于火星上一个太阳日的时间要比地球上的太阳日要长，因此火星上一天除了二十四个小时，还有一段的扩展时间，长度为 39 分 35.24409 秒。
+                                    On Mars, seconds, minutes, and hours are exactly the same as those on Earth. However, martian days are longer than days on Earth. Martian time is denoted using hh:mm:ss or +mm:ss. For example, we would have 13:43 of the day. We also have +25:53 which is after the first 24 hours. This extended notation must be less than +39:35.24409.
                                 </p>
 
-                                <p>文字记录方法在每天的二十四小时内与地球的记录方法相同，超出二十四小时的部分采用“+时间”来记录，例如二十四小时后十三分钟二十六秒记作：+13:26.</p>
 
                                 <p>
-                                由于火星上一天的时间并不是 24 小时，这给时期的划分造成了一定的麻烦。
+                                There are 25 timezones on Mars. For easier time conversions, each timezone is separated by 1 hour. Thus each timezone covers 14.5987 degrees instead of 15 degrees.
 
-为了时间换算的方便，火星上相邻两个时区之间时差均为 1 个小时，这样的话，一个时区的所跨的经度就不再是 15°，而是 14.5987°。
+                                As a side note, the prime meridian on Mars is the longitude that passes through Airy-0. Longitudes are from 0 to 360.
 
-火星上的本初子午线为穿过艾里-0 陨石坑的经线，并且火星上的经度均以东经表示，从东经 0°-东经 360°，并没有西经，因此，火星上的时区也是以本初子午线为起点，向东每隔 14.5987° 为一个时区。这样一来，火星上最先进入一天的时区为 24 区，即靠近 0 区左侧的时区。
                                 </p>
 
 
@@ -201,134 +198,134 @@
                                         <table class="table table-striped">
 
                                         <thead>
-                                        <tr style="font-weight:bold;"><th style="font-weight:bold;">时区</th>
-                                        <th style="font-weight:bold;">起始经度</th>
-                                        <th style="font-weight:bold;">终止经度</th>
-                                        <th style="font-weight:bold;">与0区时差</th>
+                                        <tr style="font-weight:bold;"><th style="font-weight:bold;">Timezone</th>
+                                        <th style="font-weight:bold;">Start Longitude</th>
+                                        <th style="font-weight:bold;">End Longitude</th>
+                                        <th style="font-weight:bold;">Hours Deficit from 0 Timezone</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr><td>0区</td>
+                                        <tr><td>0</td>
                                         <td>0°</td>
                                         <td>14.5987°</td>
                                         <td>0</td>
                                         </tr>
-                                        <tr><td>1区</td>
+                                        <tr><td>1</td>
                                         <td>14.5987°</td>
                                         <td>29.1974°</td>
                                         <td>+1</td>
                                         </tr>
-                                        <tr><td>2区</td>
+                                        <tr><td>2</td>
                                         <td>29.1974°</td>
                                         <td>43.7961°</td>
                                         <td>+2</td>
                                         </tr>
-                                        <tr><td>3区</td>
+                                        <tr><td>3</td>
                                         <td>43.7961°</td>
                                         <td>58.3948°</td>
                                         <td>+3</td>
                                         </tr>
-                                        <tr><td>4区</td>
+                                        <tr><td>4</td>
                                         <td>58.3948°</td>
                                         <td>72.9935°</td>
                                         <td>+4</td>
                                         </tr>
-                                        <tr><td>5区</td>
+                                        <tr><td>5</td>
                                         <td>72.9935°</td>
                                         <td>87.5922°</td>
                                         <td>+5</td>
                                         </tr>
-                                        <tr><td>6区</td>
+                                        <tr><td>6</td>
                                         <td>87.5922°</td>
                                         <td>102.1909°</td>
                                         <td>+6</td>
                                         </tr>
-                                        <tr><td>7区</td>
+                                        <tr><td>7</td>
                                         <td>102.1909°</td>
                                         <td>116.7896°</td>
                                         <td>+7</td>
                                         </tr>
-                                        <tr><td>8区</td>
+                                        <tr><td>8</td>
                                         <td>116.7896°</td>
                                         <td>131.3883°</td>
                                         <td>+8</td>
                                         </tr>
-                                        <tr><td>9区</td>
+                                        <tr><td>9</td>
                                         <td>131.3883°</td>
                                         <td>145.9870°</td>
                                         <td>+9</td>
                                         </tr>
-                                        <tr><td>10区</td>
+                                        <tr><td>10</td>
                                         <td>145.9870°</td>
                                         <td>160.5858°</td>
                                         <td>+10</td>
                                         </tr>
-                                        <tr><td>11区</td>
+                                        <tr><td>11</td>
                                         <td>160.5858°</td>
                                         <td>175.1845°</td>
                                         <td>+11</td>
                                         </tr>
-                                        <tr><td>12区</td>
+                                        <tr><td>12</td>
                                         <td>175.1845°</td>
                                         <td>189.7832°</td>
                                         <td>+12</td>
                                         </tr>
-                                        <tr><td>13区</td>
+                                        <tr><td>13</td>
                                         <td>189.7832°</td>
                                         <td>204.3819°</td>
                                         <td>+13</td>
                                         </tr>
-                                        <tr><td>14区</td>
+                                        <tr><td>14</td>
                                         <td>204.3819°</td>
                                         <td>218.9806°</td>
                                         <td>+14</td>
                                         </tr>
-                                        <tr><td>15区</td>
+                                        <tr><td>15</td>
                                         <td>218.9806°</td>
                                         <td>233.5793°</td>
                                         <td>+15</td>
                                         </tr>
-                                        <tr><td>16区</td>
+                                        <tr><td>16</td>
                                         <td>233.5793°</td>
                                         <td>248.1780°</td>
                                         <td>+16</td>
                                         </tr>
-                                        <tr><td>17区</td>
+                                        <tr><td>17</td>
                                         <td>248.1780°</td>
                                         <td>262.7767°</td>
                                         <td>+17</td>
                                         </tr>
-                                        <tr><td>18区</td>
+                                        <tr><td>18</td>
                                         <td>262.7767°</td>
                                         <td>277.3754°</td>
                                         <td>+18</td>
                                         </tr>
-                                        <tr><td>19区</td>
+                                        <tr><td>19</td>
                                         <td>277.3754°</td>
                                         <td>291.9741°</td>
                                         <td>+19</td>
                                         </tr>
-                                        <tr><td>20区</td>
+                                        <tr><td>20</td>
                                         <td>291.9741°</td>
                                         <td>306.5728°</td>
                                         <td>+20</td>
                                         </tr>
-                                        <tr><td>21区</td>
+                                        <tr><td>21</td>
                                         <td>306.5728°</td>
                                         <td>321.1715°</td>
                                         <td>+21</td>
                                         </tr>
-                                        <tr><td>22区</td>
+                                        <tr><td>22</td>
                                         <td>321.1715°</td>
                                         <td>335.7702°</td>
                                         <td>+22</td>
                                         </tr>
-                                        <tr><td>23区</td>
+                                        <tr><td>23</td>
                                         <td>335.7702°</td>
                                         <td>350.3689°</td>
                                         <td>+23</td>
                                         </tr>
-                                        <tr><td>24区</td>
+                                        <tr><td>24</td>
                                         <td>350.3689°</td>
                                         <td>360°</td>
                                         <td>+36:35</td>
@@ -356,7 +353,7 @@
 
                         <li>
                             <a href="http://interimm.org">
-                                <i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;星际移民中心
+                                <i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;Interplanetary Immigration Center
                             </a>
                         </li>
                         <li>
@@ -370,7 +367,7 @@
                     </ul>
                 </nav>
                 <div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://interimm.org">星际移民中心</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://interimm.org">Interplanetary Immigration Center</a>
                 </div>
             </div>
         </footer>
