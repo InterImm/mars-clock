@@ -1,0 +1,100 @@
+body {
+      font-family: "Open Sans", sans-serif;
+      font-weight: 300;
+      color: #222;
+   }
+   h1, h2 {
+      margin: 1.5em 0 0;
+      font-weight: 700;
+   }
+   h1 span, h2 span {
+      font-weight: 300;
+      color: #666;
+      font-size: 70%;
+   }
+   .container {
+      width: 960px;
+      margin: 50px auto;
+      text-align: center;
+   }
+   .clock {
+      background: white;
+      /*width: 250px;*/
+      margin: 10px auto;
+      padding: 5px 10px;
+      text-align: center;
+      /*border: 1px solid lightgrey;*/
+   }
+   .clock h3 {
+      margin: 0;
+      font-weight: 300;
+
+   }
+   .clock .time {
+      font-size: 180%;
+
+   }
+   .clear {
+      clear: both;
+   }
+   .credits {
+      font-weight: 400;
+      margin-top: 50px;
+      font-size: 8pt;
+
+   }
+   a {
+      color: #222;
+   }
+   .column {
+      float: left;
+      width: 480px;
+   }
+   .explanation-link {
+      cursor: pointer;
+   }
+
+   .earth-date-input .utc-time {
+      /*display: inline;*/
+      position: relative;
+      cursor: pointer;
+      /*padding: 1px 2px 1px 2px;*/
+      /*margin: 2px;*/
+      text-align:center;
+   }
+   .earth-date-input .utc-time:hover,
+   .earth-date-input .utc-time:focus {
+      text-decoration: underline;
+   }
+   .earth-date-input .manual-input {
+      /*position: relative;*/
+      /*margin: 0 auto;*/
+   }
+   .earth-date-input .custom-datetime {
+      /*font: inherit;*/
+      /*padding: 1px 22px 0 2px;*/
+      /*border: none;*/
+      /*border-bottom: dotted 1px #999;*/
+      /*margin: 2px;*/
+      position: relative;
+      cursor: pointer;
+      text-align:center;
+   }
+   .earth-date-input .clear-button {
+      position: absolute;
+      font-size: 12px;
+      line-height: 1em;
+      padding: 7px 2px;
+      color: #999;
+      cursor: pointer;
+      margin-left: -48px;
+      width: 24px;
+      overflow: hidden;
+   }
+   .earth-date-input .clear-button:hover,
+   .earth-date-input .clear-button:focus {
+      color: #333;
+   }
+   .stats {
+      color:#222 !important;
+   }
