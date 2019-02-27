@@ -23,7 +23,7 @@
 
     <!-- Bootstrap Slider Bar -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-slider.css">
-    <script type="text/javascript" src="assets/js/bootstrap-slider.min.js"></script>
+    
 
     <!-- Bootstrap Datepicker CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
@@ -33,32 +33,6 @@
     <link href='assets/fonts/google-fonts.css' rel='stylesheet' type='text/css'>
 
     <link href="assets/css/themify-icons.css" rel="stylesheet">
-
-    <!-- Mathjax BEGIN -->
-
-    <!-- <script type="text/javascript" src="http://libs.cdnjs.net/mathjax/2.6.1-rc.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-
-    <!-- <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        showProcessingMessages: false,
-        messageStyle: 'none',
-        tex2jax: {
-          inlineMath: [['$','$']],
-          displayMath: [['$$','$$']],
-          processEnvironments: false
-        },
-        TeX: {
-          equationNumbers: {
-            autoNumber: "AMS"
-          }
-        },
-        'HTML-CSS': {
-          imageFont: null
-        }
-      });
-    </script> -->
-
-    <!-- Mathjax END -->
 
     <!-- Mars Clock Specific BEGIN -->
     <link href="assets/googlefonts.css" rel="stylesheet" type="text/css">
@@ -584,8 +558,23 @@
 <!--   Core JS Files   -->
 <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 
+
+
+<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+
 <!-- Moment.js -->
 <script src="assets/js/moment.js"></script>
+
+
+<!--  Bootstrap Datepicker Plugin -->
+<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+
+<!--  Checkbox, Radio & Switch Plugins -->
+<script src="assets/js/bootstrap-checkbox-radio.js"></script>
+
+<script type="text/javascript" src="assets/js/bootstrap-slider.min.js"></script>
+
+
 
 <!--  Bootstrap Translation Plugins -->
 <script src="assets/js/bootstrap-transition.js"></script>
@@ -594,23 +583,9 @@
 <!--  Bootstrap Collapse Plugins -->
 <script src="assets/js/bootstrap-collapse.js"></script>
 
-<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-<!--  Checkbox, Radio & Switch Plugins -->
-<script src="assets/js/bootstrap-checkbox-radio.js"></script>
-
-
-
-
-
-
-
-<!--  Bootstrap Datepicker Plugin -->
-<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-
 
 <!--  Charts Plugin -->
-<script src="assets/js/chartist.min.js"></script>
+<!-- <script src="assets/js/chartist.min.js"></script> -->
 
 <!--  Notifications Plugin    -->
 <script src="assets/js/bootstrap-notify.js"></script>
@@ -664,7 +639,7 @@
 <script>
     if (!window.jQuery) {
         var script = document.createElement('script');
-        script.src = "/assets/jquery.min.js";
+        script.src = "/static/jquery/jquery.min.js";
         document.body.appendChild(script);
     }
 </script>
