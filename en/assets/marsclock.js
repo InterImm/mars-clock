@@ -148,6 +148,7 @@
             if (month_flag == 24) {     // the last month is special because it might change with year
             	return_month = month_flag;
                 return_day = days_flag;   // using tuple to avoid modification
+                break;
             } else if ( (month_flag < 24) &&  (days_flag < (27 + 1 + (month_flag % 6!= 0 ))) ) {   // the condition for days makes sure that days is never larger than days in that month
             	return_month = month_flag;
                 return_day = days_flag;
