@@ -8,8 +8,7 @@ const T = {
     season: (s) => `Northern ${s.north}, southern ${s.south}`,
     weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     weekShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-    date: (i) => `Year ${i.year}, month ${i.month} (${i.monthName.en}), day ${i.day}`,
-    dateShort: (i) => `${i.year}-${i.month}-${i.day}`,
+    date: (i) => `${i.iso} · ${i.monthName.en}`,
     zone: (z) => `Zone ${z}`,
     sol: (n) => `Sol ${n.toLocaleString('en')}`,
     my: (n) => `Mars Year ${n}`,
@@ -24,8 +23,7 @@ const T = {
     season: (s) => `北半球${s.north}季，南半球${s.south}季`,
     weekdays: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
     weekShort: ['日', '一', '二', '三', '四', '五', '六'],
-    date: (i) => `${i.year}年${i.month}月（${i.monthName.zh}）${i.day}日`,
-    dateShort: (i) => `${i.year}年${i.month}月${i.day}日`,
+    date: (i) => `${i.iso} · ${i.monthName.zh}`,
     zone: (z) => `${z} 区`,
     sol: (n) => `火星日 ${n}`,
     my: (n) => `火星年 MY ${n}`,
@@ -149,7 +147,7 @@ function tick(force = false) {
 
 function renderMonth(today) {
   const { year, month } = today;
-  set('cal-title', lang === 'zh' ? `${year}年${month}月 · ${today.monthName.zh}` : `Year ${year}, month ${month} · ${today.monthName.en}`);
+  set('cal-title', `${today.iso.slice(0, -3)} · ${lang === 'zh' ? today.monthName.zh : today.monthName.en}`);
   set('cal-leap', T.leap(today.leapYear));
   const days = mt.interimmMonthLength(year, month);
   const grid = $('cal-grid');

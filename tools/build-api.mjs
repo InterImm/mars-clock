@@ -56,7 +56,7 @@ for (let year = FIRST_YEAR; year <= LAST_YEAR; year++) {
   for (let ms = Date.UTC(year, 0, 1); ms < Date.UTC(year + 1, 0, 1); ms += 86400e3) {
     const m = mt.marsTime(ms), i = mt.interimmTime(ms);
     const sol = (k) => (Date.parse(mt.MISSIONS[k].landed) <= ms ? mt.missionTime(ms, k).sol : null);
-    rows.push([day(ms), r(m.msd, 5), mt.formatHms(m.mtc), r(m.ls, 3), m.marsYear, `${i.year}-${i.month}-${i.day}`, i.clock,
+    rows.push([day(ms), r(m.msd, 5), mt.formatHms(m.mtc), r(m.ls, 3), m.marsYear, i.iso, i.clock,
       sol('curiosity'), sol('perseverance')]);
   }
   write(`daily/${year}.json`, { about: `Mars time at 00:00 UTC on each day of ${year}.`, columns, rows });
@@ -87,7 +87,7 @@ write('openapi.json', {
             rows: { type: 'array', items: { type: 'array', prefixItems: [
               { ...str, description: 'UTC date' }, { ...num, description: 'Mars Sol Date' }, { ...str, description: 'Coordinated Mars Time hh:mm:ss' },
               { ...num, description: 'Solar longitude Ls, degrees' }, { ...int, description: 'Mars Year (Clancy)' },
-              { ...str, description: 'InterImm date year-month-day, zone 0' }, { ...str, description: 'InterImm clock, zone 0' },
+              { ...str, description: 'InterImm date YYYY-MM-DD, zone 0' }, { ...str, description: 'InterImm clock, zone 0' },
               { type: ['integer', 'null'], description: 'Curiosity sol' }, { type: ['integer', 'null'], description: 'Perseverance sol' }] } } } } } } } },
       },
     },

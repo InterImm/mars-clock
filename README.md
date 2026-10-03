@@ -18,7 +18,7 @@ marstime.marsTime(new Date(), { longitude: 137.44 });
 // { msd, mtc, ls, marsYear, eot, lmst, ltst, subsolarLongitude, solarDeclination, heliocentricDistance, meanAnomaly, sol }
 
 marstime.interimmTime(new Date(), { zone: 5 });
-// { year: 31, month: 1, day: 3, weekday: 'Tuesday', monthName: { zh: '春分', en: 'Chunfen' }, clock: '06:19:12', hours, ... }
+// { iso: '0031-01-03', year: 31, month: 1, day: 3, weekday: 'Tuesday', monthName: { zh: '春分', en: 'Chunfen' }, clock: '06:19:12', hours, ... }
 ```
 
 Runs in browsers, Node 18+, Deno and Bun. Every function is pure and takes a `Date` or milliseconds since 1970.
@@ -31,6 +31,7 @@ Runs in browsers, Node 18+, Deno and Bun. Every function is pure and takes a `Da
 | `missionTime(date, 'curiosity')` | `{ sol, lmst, ltst }` for a lander or rover in `MISSIONS`, or for `{ landed, longitude }`. |
 | `interimmTime(date, { zone })` | InterImm calendar date and clock in one of the 25 zones. |
 | `dateFromInterimm({ year, month, day, hours, zone })` | The Earth instant of an InterImm date and time. |
+| `formatInterimmDate(d)` / `parseInterimmDate('0031-01-03')` | InterImm dates in ISO 8601 style: four-digit year, two-digit month and day. |
 | `interimmZone(longitude)` / `interimmZoneOffset(zone)` | Zone for a longitude, and its offset from zone 0 in Earth hours. |
 | `taiMinusUtc(date)`, `julianDates(date)` | Earth time scales used underneath. |
 | `formatHms(hours)`, `formatInterimmClock(hours)` | `"hh:mm:ss"` and the InterImm `"hh:mm:ss"` / `"+mm:ss"` reading. |
