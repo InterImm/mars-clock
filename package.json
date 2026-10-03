@@ -1,0 +1,32 @@
+{
+  "name": "@interimm/marstime",
+  "version": "1.0.0",
+  "description": "Martian time from Earth time: Mars24 (MSD, MTC, Ls, local solar time, Mars Year, rover sols) plus the InterImm calendar and timezones. No dependencies.",
+  "type": "module",
+  "private": true,
+  "main": "lib/marstime.js",
+  "exports": {
+    ".": "./lib/marstime.js",
+    "./element": "./lib/mars-clock-element.js",
+    "./card": "./lib/mars-clock-card.js"
+  },
+  "files": [
+    "lib/marstime.js",
+    "lib/mars-clock-element.js",
+    "lib/mars-clock-card.js",
+    "mcp/server.mjs"
+  ],
+  "scripts": {
+    "test": "node --test lib/marstime.test.mjs mcp/server.test.mjs",
+    "build:api": "node tools/build-api.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "repository": "github:InterImm/mars-clock",
+  "homepage": "https://interimm.org/mars-clock/en/",
+  "bin": {
+    "marstime-mcp": "mcp/server.mjs"
+  }
+}
