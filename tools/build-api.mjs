@@ -87,7 +87,7 @@ write('openapi.json', {
             rows: { type: 'array', items: { type: 'array', prefixItems: [
               { ...str, description: 'UTC date' }, { ...num, description: 'Mars Sol Date' }, { ...str, description: 'Coordinated Mars Time hh:mm:ss' },
               { ...num, description: 'Solar longitude Ls, degrees' }, { ...int, description: 'Mars Year (Clancy)' },
-              { ...str, description: 'InterImm date YYYY-MM-DD, zone 0' }, { ...str, description: 'InterImm clock, zone 0' },
+              { ...str, description: 'InterImm date year-MM-DD, zone 0' }, { ...str, description: 'InterImm clock, zone 0' },
               { type: ['integer', 'null'], description: 'Curiosity sol' }, { type: ['integer', 'null'], description: 'Perseverance sol' }] } } } } } } } },
       },
     },

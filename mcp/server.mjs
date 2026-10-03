@@ -49,7 +49,7 @@ function marsTimeAt({ utc, longitude = 0, zone } = {}) {
 
 function interimmToEarth({ date, year, month = 1, day = 1, time = '00:00:00', zone = 0 }) {
   if (date) ({ year, month, day } = mt.parseInterimmDate(date));
-  if (year === undefined) throw new Error('Give date (e.g. "0031-01-03") or year, month and day');
+  if (year === undefined) throw new Error('Give date (e.g. "31-01-03") or year, month and day');
   let hours;
   if (/^\+\d{1,2}:\d{2}$/.test(time)) {
     const [m, s] = time.slice(1).split(':').map(Number);
@@ -125,7 +125,7 @@ const TOOLS = [
     inputSchema: {
       type: 'object',
       properties: {
-        date: { type: 'string', description: 'InterImm date as YYYY-MM-DD, e.g. "0031-01-03". Use this or year/month/day.' },
+        date: { type: 'string', description: 'InterImm date as year-MM-DD, e.g. "31-01-03". Use this or year/month/day.' },
         year: { type: 'integer', description: 'InterImm year; Year 1 began 1970-04-28' },
         month: { type: 'integer', minimum: 1, maximum: 24 },
         day: { type: 'integer', minimum: 1, maximum: 28 },
