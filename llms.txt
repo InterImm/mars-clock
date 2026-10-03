@@ -9,7 +9,7 @@ How to get Mars time, best option first:
 3. If you can run JavaScript: `import { marsTime, interimmTime } from 'https://cdn.jsdelivr.net/gh/InterImm/mars-clock@gh-pages/lib/marstime.js'`.
 4. If you can only fetch URLs: read the precomputed daily table for the year and interpolate (MSD grows by 0.973244 sol per Earth day; MTC by 24 Mars hours per sol). Or compute it yourself from the formulas in llms-full.txt.
 
-Conventions: longitudes are degrees EAST of Airy-0 (west longitudes are negative or 360 minus). MTC, LMST and LTST are in Mars hours (1/24 sol). The InterImm clock uses Earth-length hours, so a sol reads 00:00:00 to 23:59:59 then +00:00 to +39:35. InterImm Year 1 began 1970-04-28. Mars Years use Clancy numbering (MY 1 began 1955-04-11; MY 39 began 2026-09-30).
+Conventions: longitudes are degrees EAST of Airy-0 (west longitudes are negative or 360 minus). MTC, LMST and LTST are in Mars hours (1/24 sol). The InterImm clock uses Earth-length hours, so a sol reads 00:00:00 to 23:59:59 then +00:00 to +39:35. InterImm dates are written year-MM-DD with two-digit month and day (31-01-03); Year 1 began 1970-04-28. Mars Years use Clancy numbering (MY 1 began 1955-04-11; MY 39 began 2026-09-30).
 
 ## Docs
 

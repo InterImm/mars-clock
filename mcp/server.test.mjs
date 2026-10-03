@@ -47,7 +47,7 @@ test('MCP handshake, tool list and calls', async () => {
   assert.equal(r.missions.curiosity.sol, 5033);
   assert.equal(JSON.parse(now.result.content[0].text).marsSolDate, r.marsSolDate);
 
-  const back = await s.call('tools/call', { name: 'interimm_to_earth', arguments: { year: 31, month: 1, day: 3, time: '06:19:13', zone: 5 } });
+  const back = await s.call('tools/call', { name: 'interimm_to_earth', arguments: { date: '31-01-03', time: '06:19:13', zone: 5 } });
   assert.ok(Math.abs(Date.parse(back.result.structuredContent.utc) - Date.parse('2026-10-03T10:00:00Z')) < 2000);
 
   const sol = await s.call('tools/call', { name: 'sol_to_earth', arguments: { mission: 'curiosity', sol: 5033 } });
@@ -66,6 +66,6 @@ test('MCP handshake, tool list and calls', async () => {
 
 test('one-shot CLI prints JSON', () => {
   const out = JSON.parse(execFileSync(process.execPath, [SERVER, 'now', '--utc', '2026-10-03T10:00:00Z', '--zone', '5']));
-  assert.equal(out.interimm.date, '31-1-3');
+  assert.equal(out.interimm.date, '31-01-03');
   assert.equal(out.interimm.zone, 5);
 });

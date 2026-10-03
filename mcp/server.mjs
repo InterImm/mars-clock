@@ -38,7 +38,7 @@ function marsTimeAt({ utc, longitude = 0, zone } = {}) {
     solarDeclination: s.mars.solarDeclination,
     sunDistanceAU: s.mars.heliocentricDistance,
     interimm: {
-      zone: s.interimm.zone, date: `${s.interimm.year}-${s.interimm.month}-${s.interimm.day}`,
+      zone: s.interimm.zone, date: s.interimm.iso,
       year: s.interimm.year, month: s.interimm.month, monthName: s.interimm.monthName, day: s.interimm.day,
       weekday: s.interimm.weekday, clock: s.interimm.clock, leapYear: s.interimm.leapYear,
     },
@@ -47,7 +47,9 @@ function marsTimeAt({ utc, longitude = 0, zone } = {}) {
   });
 }
 
-function interimmToEarth({ year, month = 1, day = 1, time = '00:00:00', zone = 0 }) {
+function interimmToEarth({ date, year, month = 1, day = 1, time = '00:00:00', zone = 0 }) {
+  if (date) ({ year, month, day } = mt.parseInterimmDate(date));
+  if (year === undefined) throw new Error('Give date (e.g. "31-01-03") or year, month and day');
   let hours;
   if (/^\+\d{1,2}:\d{2}$/.test(time)) {
     const [m, s] = time.slice(1).split(':').map(Number);
@@ -57,7 +59,7 @@ function interimmToEarth({ year, month = 1, day = 1, time = '00:00:00', zone = 0
     hours = h + m / 60 + s / 3600;
   }
   const d = mt.dateFromInterimm({ year, month, day, hours, zone });
-  return { utc: d.toISOString(), interimm: `${year}-${month}-${day} ${time} (zone ${zone})`, mars: marsTimeAt({ utc: d.toISOString() }) };
+  return { utc: d.toISOString(), interimm: `${mt.formatInterimmDate({ year, month, day })} ${time} (zone ${zone})`, mars: marsTimeAt({ utc: d.toISOString() }) };
 }
 
 function missionSol({ mission, utc }) {
@@ -122,8 +124,8 @@ const TOOLS = [
     description: 'Converts an InterImm calendar date and clock time (24 months, Earth-length hours, 25 zones) to the Earth UTC instant.',
     inputSchema: {
       type: 'object',
-      required: ['year'],
       properties: {
+        date: { type: 'string', description: 'InterImm date as year-MM-DD, e.g. "31-01-03". Use this or year/month/day.' },
         year: { type: 'integer', description: 'InterImm year; Year 1 began 1970-04-28' },
         month: { type: 'integer', minimum: 1, maximum: 24 },
         day: { type: 'integer', minimum: 1, maximum: 28 },

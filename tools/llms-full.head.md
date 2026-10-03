@@ -42,5 +42,6 @@ Recent starts: MY 36 2021-02-07, MY 37 2022-12-26, MY 38 2024-11-12, MY 39 2026-
 - Year Y has 668 sols, or 669 when Y + 1 is "leap": n is leap if n is odd or divisible by 10, except multiples of 100 are not, multiples of 1000 are, multiples of 3000 are not.
 - 24 months: months 6, 12, 18, 24 have 27 sols, others 28; in a 669-sol year month 24 has 28. Every month starts on a Sunday (7-sol weeks restart each month).
 - Month names (solar terms): 1 春分 Chunfen, 2 清明 Qingming, 3 谷雨 Guyu, 4 立夏 Lixia, 5 小满 Xiaoman, 6 芒种 Mangzhong, 7 夏至 Xiazhi, 8 小暑 Xiaoshu, 9 大暑 Dashu, 10 立秋 Liqiu, 11 处暑 Chushu, 12 白露 Bailu, 13 秋分 Qiufen, 14 寒露 Hanlu, 15 霜降 Shuangjiang, 16 立冬 Lidong, 17 小雪 Xiaoxue, 18 大雪 Daxue, 19 冬至 Dongzhi, 20 小寒 Xiaohan, 21 大寒 Dahan, 22 立春 Lichun, 23 雨水 Yushui, 24 惊蛰 Jingzhe.
+- Dates are written Y-MM-DD, with two-digit month and day and the year unpadded: 31-01-03 is Year 31, month 1, day 3.
 - Clock: Earth-length hours. hours = frac(S + offset/24.6598) × 24.6598, shown as hh:mm:ss below 24 h and +mm:ss after (up to +39:35).
 - Timezones 0-24, each 14.5987° wide eastward from Airy-0; zone k is k hours ahead of zone 0, except zone 24 which is 39 min 35 s behind (24 h ahead modulo the 24.6598 h sol).
