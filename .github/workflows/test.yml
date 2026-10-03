@@ -20,4 +20,4 @@ jobs:
       - name: JSON API is up to date
         run: |
           npm run build:api
-          git diff --exit-code -- api/ || (echo "api/ is stale: run 'npm run build:api' and commit the result" && exit 1)
+          git diff --exit-code -- api/ llms-full.txt || (echo "api/ or llms-full.txt is stale: run 'npm run build:api' and commit the result" && exit 1)

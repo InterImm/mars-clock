@@ -9,10 +9,12 @@
 <link rel="icon" href="../assets/img/favicon.ico">
 <link rel="apple-touch-icon" href="../assets/img/favicon/apple-touch-icon.png">
 <link rel="alternate" hreflang="zh-CN" href="https://interimm.org/mars-clock/">
+<link rel="alternate" type="text/plain" title="Guide for language models" href="../llms.txt">
 <link rel="stylesheet" href="https://interimm.org/kit/interimm.css">
 <link rel="stylesheet" href="../app/clock.css">
 <script src="https://interimm.org/kit/interimm.js" defer></script>
 <script type="module" src="../app/app.js"></script>
+<script type="module" src="../app/embed.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -190,6 +192,34 @@
     </div>
   </section>
 
+  <section class="section" aria-labelledby="embed-title" id="embed">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="embed-title">Put a Mars clock on your site</h2>
+        <p class="section-lede">Pick the options, then copy one snippet. The widget runs in the visitor's browser and costs nothing to host.</p>
+      </div>
+      <div class="embed-wrap">
+        <form id="embed-form" class="card" onsubmit="return false">
+          <div class="form-row">
+            <label class="field">Language <select name="lang"><option value="en">English</option><option value="zh">中文</option></select></label>
+            <label class="field">Timezone <select name="zone"></select></label>
+            <label class="field">Theme <select name="theme"><option value="auto">Follow visitor</option><option value="dark">Dark</option><option value="light">Light</option></select></label>
+          </div>
+          <div class="form-row">
+            <label class="check"><input name="rovers" type="checkbox"> Rover sols</label>
+            <label class="check"><input name="compact" type="checkbox"> Compact</label>
+          </div>
+          <div class="form-row">
+            <label class="field">Embed as <select name="method"><option value="script">Script tag (any web page)</option><option value="iframe">iframe (blogs, Notion, CMS)</option></select></label>
+          </div>
+          <pre><code id="embed-code"></code></pre>
+          <button class="btn btn-primary" type="button" id="embed-copy" data-label="Copy snippet" data-done="Copied">Copy snippet</button>
+        </form>
+        <div class="embed-preview"><mars-clock-card id="embed-preview"></mars-clock-card></div>
+      </div>
+    </div>
+  </section>
+
   <section class="section section-alt" aria-labelledby="api-title" id="api">
     <div class="wrap prose">
       <h2 class="section-title" id="api-title">Use it in your own project</h2>
@@ -203,9 +233,20 @@ now.mtc   // Coordinated Mars Time, hours
 now.lmst  // local mean solar time at Gale crater
 now.ls    // season, degrees
 interimmTime(new Date(), { zone: 5 }).clock   // "06:19:12"</code></pre>
-      <h3>As a live element</h3>
+      <h3>As a widget</h3>
+      <p>Use the <a href="#embed">embed builder</a> above for a styled card, or <code>&lt;mars-clock&gt;</code> for bare text that takes your page's style:</p>
 <pre><code>&lt;script type="module" src="https://cdn.jsdelivr.net/gh/InterImm/mars-clock@gh-pages/lib/mars-clock-element.js"&gt;&lt;/script&gt;
 &lt;mars-clock&gt;&lt;/mars-clock&gt;  &lt;!-- or show="interimm" zone="5", show="sol" mission="perseverance" --&gt;</code></pre>
+      <h3>For AI assistants</h3>
+      <p>Add the Mars time tools to Claude, Cursor or any MCP client. Nothing to install beyond Node:</p>
+<pre><code>claude mcp add mars-time -- npx -y github:InterImm/mars-clock#gh-pages
+
+# or in an MCP config file
+{ "mcpServers": { "mars-time": { "command": "npx", "args": ["-y", "github:InterImm/mars-clock#gh-pages"] } } }
+
+# or once, from any shell
+npx -y github:InterImm/mars-clock#gh-pages now --longitude 137.44</code></pre>
+      <p>Language models that browse can start from <a href="../llms.txt">llms.txt</a>; the JSON endpoints are described in <a href="../api/v1/openapi.json">OpenAPI</a>.</p>
       <h3>As JSON, from any language</h3>
       <p>Precomputed tables, one row per day at 00:00 UTC for 2000–2050, plus Mars Year and InterImm year start dates.</p>
 <pre><code>curl https://interimm.org/mars-clock/api/v1/daily/2026.json

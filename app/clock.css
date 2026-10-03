@@ -86,3 +86,12 @@ code { font-family: var(--font-mono); font-size: 0.92em; }
 :not(pre) > code { padding: 0.08em 0.35em; border-radius: 0.35rem; background: var(--accent-soft); }
 
 .note { color: var(--muted); font-size: 0.92rem; }
+
+/* embed builder */
+.embed-wrap { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); align-items: start; }
+.embed-wrap .card { gap: 1rem; }
+.embed-wrap pre { margin: 0; white-space: pre-wrap; word-break: break-all; }
+.embed-wrap .btn { align-self: flex-start; }
+.embed-preview { display: grid; place-items: center; min-height: 16rem; padding: 2rem 1rem; border: 1px dashed var(--border-strong); border-radius: var(--radius);
+  background: repeating-conic-gradient(var(--bg-alt) 0 25%, transparent 0 50%) 0 0 / 24px 24px; }
+.embed-preview mars-clock-card { width: min(100%, 22rem); }

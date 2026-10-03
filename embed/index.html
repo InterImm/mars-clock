@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Mars Clock widget | InterImm</title>
+<style>
+  html, body { margin: 0; background: transparent; }
+  body { padding: 2px; }
+  mars-clock-card { max-width: 100%; }
+</style>
+<script type="module" src="../lib/mars-clock-card.js"></script>
+</head>
+<body>
+<!-- Iframe version of <mars-clock-card>. Every URL parameter becomes an attribute:
+     ?lang=zh&zone=5&theme=dark&rovers&compact&longitude=77.45&place=Jezero -->
+<mars-clock-card></mars-clock-card>
+<script>
+  const card = document.querySelector('mars-clock-card');
+  const allowed = ['lang', 'zone', 'longitude', 'place', 'theme', 'rovers', 'compact'];
+  for (const [k, v] of new URLSearchParams(location.search)) if (allowed.includes(k)) card.setAttribute(k, v);
+  if (card.getAttribute('lang') === 'zh') document.documentElement.lang = 'zh-CN';
+</script>
+</body>
+</html>

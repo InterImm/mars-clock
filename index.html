@@ -9,10 +9,12 @@
 <link rel="icon" href="assets/img/favicon.ico">
 <link rel="apple-touch-icon" href="assets/img/favicon/apple-touch-icon.png">
 <link rel="alternate" hreflang="en" href="https://interimm.org/mars-clock/en/">
+<link rel="alternate" type="text/plain" title="Guide for language models" href="llms.txt">
 <link rel="stylesheet" href="https://interimm.org/kit/interimm.css">
 <link rel="stylesheet" href="app/clock.css">
 <script src="https://interimm.org/kit/interimm.js" defer></script>
 <script type="module" src="app/app.js"></script>
+<script type="module" src="app/embed.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">跳到正文</a>
@@ -190,6 +192,34 @@
     </div>
   </section>
 
+  <section class="section" aria-labelledby="embed-title" id="embed">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="embed-title">把火星时钟放到你的网站上</h2>
+        <p class="section-lede">选好选项，复制一段代码即可。小组件在访客的浏览器里运行，托管没有任何成本。</p>
+      </div>
+      <div class="embed-wrap">
+        <form id="embed-form" class="card" onsubmit="return false">
+          <div class="form-row">
+            <label class="field">语言 <select name="lang"><option value="en">English</option><option value="zh">中文</option></select></label>
+            <label class="field">火星时区 <select name="zone"></select></label>
+            <label class="field">主题 <select name="theme"><option value="auto">跟随访客系统</option><option value="dark">深色</option><option value="light">浅色</option></select></label>
+          </div>
+          <div class="form-row">
+            <label class="check"><input name="rovers" type="checkbox"> 火星车任务日</label>
+            <label class="check"><input name="compact" type="checkbox"> 精简</label>
+          </div>
+          <div class="form-row">
+            <label class="field">嵌入方式 <select name="method"><option value="script">脚本标签（任意网页）</option><option value="iframe">iframe（博客、Notion、内容管理系统）</option></select></label>
+          </div>
+          <pre><code id="embed-code"></code></pre>
+          <button class="btn btn-primary" type="button" id="embed-copy" data-label="复制代码" data-done="已复制">复制代码</button>
+        </form>
+        <div class="embed-preview"><mars-clock-card id="embed-preview"></mars-clock-card></div>
+      </div>
+    </div>
+  </section>
+
   <section class="section section-alt" aria-labelledby="api-title" id="api">
     <div class="wrap prose">
       <h2 class="section-title" id="api-title">在你的项目里使用</h2>
@@ -203,9 +233,20 @@ now.mtc   // 协调火星时（小时）
 now.lmst  // 盖尔撞击坑的地方平太阳时
 now.ls    // 季节（度）
 interimmTime(new Date(), { zone: 5 }).clock   // "06:19:12"</code></pre>
-      <h3>作为网页元素</h3>
+      <h3>作为小组件</h3>
+      <p>想要带样式的卡片，用上面的<a href="#embed">嵌入生成器</a>；想要沿用你网页样式的纯文字，用 <code>&lt;mars-clock&gt;</code>：</p>
 <pre><code>&lt;script type="module" src="https://cdn.jsdelivr.net/gh/InterImm/mars-clock@gh-pages/lib/mars-clock-element.js"&gt;&lt;/script&gt;
 &lt;mars-clock&gt;&lt;/mars-clock&gt;  &lt;!-- 或 show="interimm" zone="5"，show="sol" mission="perseverance" --&gt;</code></pre>
+      <h3>给 AI 助手用</h3>
+      <p>把火星时间工具加到 Claude、Cursor 或任何支持 MCP 的客户端，只需要 Node：</p>
+<pre><code>claude mcp add mars-time -- npx -y github:InterImm/mars-clock#gh-pages
+
+# 或写进 MCP 配置文件
+{ "mcpServers": { "mars-time": { "command": "npx", "args": ["-y", "github:InterImm/mars-clock#gh-pages"] } } }
+
+# 或在命令行直接查询一次
+npx -y github:InterImm/mars-clock#gh-pages now --longitude 137.44</code></pre>
+      <p>会浏览网页的大语言模型可以从 <a href="llms.txt">llms.txt</a> 开始；JSON 接口有 <a href="api/v1/openapi.json">OpenAPI 描述</a>。</p>
       <h3>以 JSON 形式，任何语言都能用</h3>
       <p>预先算好的数据表：2000–2050 年每天 UTC 00:00 一行，另有每个火星年和星际移民历年份的起始时间。</p>
 <pre><code>curl https://interimm.org/mars-clock/api/v1/daily/2026.json
