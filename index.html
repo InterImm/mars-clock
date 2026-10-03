@@ -1,699 +1,229 @@
 <!doctype html>
-<html lang="en">
-
+<html lang="zh-CN" class="js">
 <head>
-    <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicon/apple-icon.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.ico">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-    <title>火星时钟 | 星际移民中心</title>
-
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
-
-
-    <!-- Bootstrap core CSS     -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Animation library for notifications   -->
-    <link href="assets/css/animate.min.css" rel="stylesheet" />
-
-    <!--  Paper Dashboard core CSS    -->
-    <link href="assets/css/paper-dashboard.css" rel="stylesheet" />
-
-    <!-- Bootstrap Slider Bar -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-slider.css">
-    
-
-    <!-- Bootstrap Datepicker CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-datetimepicker.min.css">
-
-
-
-
-    <!--  Fonts and icons     -->
-    <link href="assets/fonts/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet">
-    <link href='assets/fonts/google-fonts.css' rel='stylesheet' type='text/css'>
-
-    <link href="assets/css/themify-icons.css" rel="stylesheet">
-
-    <!-- Mathjax BEGIN -->
-
-    <!-- <script type="text/javascript" src="http://libs.cdnjs.net/mathjax/2.6.1-rc.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
-
-    <!-- <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        showProcessingMessages: false,
-        messageStyle: 'none',
-        tex2jax: {
-          inlineMath: [['$','$']],
-          displayMath: [['$$','$$']],
-          processEnvironments: false
-        },
-        TeX: {
-          equationNumbers: {
-            autoNumber: "AMS"
-          }
-        },
-        'HTML-CSS': {
-          imageFont: null
-        }
-      });
-    </script> -->
-
-    <!-- Mathjax END -->
-
-    <!-- Mars Clock Specific BEGIN -->
-    <link href="assets/googlefonts.css" rel="stylesheet" type="text/css">
-
-    <link rel="canonical" href="http://interimm.org/mars-clock/index.html" />
-
-    <link href="assets/main.css" rel="stylesheet" type="text/css">
-    <!-- Mars Clock Specific END -->
-
-
-
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>火星时钟 | 星际移民中心</title>
+<meta name="description" content="火星现在几点？协调火星时、火星季节、星际移民中心的火星历法与时区、火星车任务日、地球与火星时间换算，以及免费的数据接口。">
+<link rel="icon" href="assets/img/favicon.ico">
+<link rel="apple-touch-icon" href="assets/img/favicon/apple-touch-icon.png">
+<link rel="alternate" hreflang="en" href="https://interimm.org/mars-clock/en/">
+<link rel="stylesheet" href="https://interimm.org/kit/interimm.css">
+<link rel="stylesheet" href="app/clock.css">
+<script src="https://interimm.org/kit/interimm.js" defer></script>
+<script type="module" src="app/app.js"></script>
 </head>
-
 <body>
+<a class="skip-link" href="#main">跳到正文</a>
 
-    <div class="wrapper">
-        <div class="sidebar" data-background-color="black" data-active-color="success">
+<header class="site-header" data-interimm-header data-lang="cn">
+  <div class="wrap header-inner">
+    <a class="brand" href="https://interimm.org/"><span class="brand-name">星际移民中心</span></a>
+  </div>
+</header>
 
-            <!--
-		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
-		Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
-	-->
+<main id="main">
+  <header class="page-hero space clock-page-hero">
+    <div class="hero-mars" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-controls">
+        <p class="kicker"><span class="pulse"></span>火星时钟 · 星际移民中心时间</p>
+        <a class="btn btn-ghost lang-switch" href="en/" hreflang="en" lang="en">English</a>
+      </div>
+      <h1 class="sr-only">火星现在几点？</h1>
+      <output class="clock-hero" id="hero-clock" aria-live="off">--:--:--</output>
+      <p class="hero-date" id="hero-date">&nbsp;</p>
+      <div class="hero-controls">
+        <label class="inline-field">火星时区 <select id="zone"></select></label>
+      </div>
+      <dl class="hero-stats">
+        <div><dt>协调火星时</dt><dd id="hero-mtc">--:--:--</dd></div>
+        <div><dt>季节（L<sub>s</sub>）</dt><dd id="hero-ls">–</dd></div>
+        <div><dt>火星年</dt><dd id="hero-my">–</dd></div>
+      </dl>
+    </div>
+  </header>
 
-            <div class="sidebar-wrapper">
-                <div class="logo">
-                    <a href="index.html" class="simple-text">
-                        火星时钟
-                    </a>
-                </div>
+  <section class="section" aria-labelledby="now-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="now-title">此刻的火星</h2>
+        <p class="section-lede">根据你设备的时钟，用 NASA 的 Mars24 算法在浏览器里直接计算，不向任何服务器发送数据。</p>
+      </div>
+      <div class="bento">
+        <article class="tile">
+          <p class="tile-kicker">协调火星时（MTC）</p>
+          <span class="readout" id="mtc">--:--:--</span>
+          <p class="sub">本初子午线（艾里-0）的平太阳时，以 1/24 火星日为一小时。</p>
+        </article>
+        <article class="tile">
+          <p class="tile-kicker">火星太阳日（MSD）</p>
+          <span class="readout" id="msd">–</span>
+          <p class="sub">从 1873 年 12 月 29 日起累计的火星日数，相当于火星上的儒略日。</p>
+        </article>
+        <article class="tile">
+          <p class="tile-kicker">季节</p>
+          <span class="readout" id="ls">–</span>
+          <p class="sub"><span id="season"></span>。<span id="mars-year"></span>。</p>
+        </article>
+        <article class="tile">
+          <p class="tile-kicker">好奇号</p>
+          <span class="readout" id="curiosity-sol">–</span>
+          <p class="sub mono" id="curiosity-lmst"></p>
+        </article>
+        <article class="tile">
+          <p class="tile-kicker">毅力号</p>
+          <span class="readout" id="perseverance-sol">–</span>
+          <p class="sub mono" id="perseverance-lmst"></p>
+        </article>
+        <article class="tile">
+          <p class="tile-kicker">火星上的太阳</p>
+          <span class="readout" id="distance">–</span>
+          <p class="sub">直射点经度 <span class="mono" id="subsolar"></span>，赤纬 <span class="mono" id="declination"></span>。</p>
+        </article>
+        <article class="tile">
+          <p class="tile-kicker">地球</p>
+          <span class="readout" id="utc" style="font-size:1.15rem">–</span>
+          <p class="sub mono" id="tai"></p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-                <ul class="nav">
-                    <li class="active">
-                        <a href="index.html">
-                            <i class="ti-time"></i>
-                            <p>查询火星时间</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="timing-doc.html">
-                            <i class="ti-book"></i>
-                            <p>火星计时</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="timezones.html">
-                            <i class="ti-world"></i>
-                            <p>火星时区</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="cal-doc.html">
-                            <i class="ti-calendar"></i>
-                            <p>火星历法</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="about.html">
-                            <i class="ti-pulse"></i>
-                            <p>关于</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+  <section class="section section-alt" aria-labelledby="local-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="local-title">火星任意地点的当地时间</h2>
+        <p class="section-lede">选择一个着陆点或星际移民城市，或输入东经度数。</p>
+      </div>
+      <div class="place-grid">
+        <label class="field">地点 <select id="place"><option value="">自定义经度</option></select></label>
+        <label class="field">经度（东经 °） <input id="longitude" type="number" step="0.01" min="-360" max="360"></label>
+      </div>
+      <div class="bento">
+        <article class="tile"><p class="tile-kicker">地方平太阳时</p><span class="readout" id="place-lmst">–</span><p class="sub">按这个经度校准的火星钟显示的时间。</p></article>
+        <article class="tile"><p class="tile-kicker">地方真太阳时</p><span class="readout" id="place-ltst">–</span><p class="sub">日晷显示的时间，12:00 时太阳最高。</p></article>
+        <article class="tile"><p class="tile-kicker">星际移民中心时间 · <span id="place-zone"></span></p><span class="readout" id="place-interimm">–</span><p class="sub">使用与地球相同长度的小时，火星日末尾多出 39 分 35 秒。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="convert-title" id="convert">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="convert-title">时间换算</h2>
+        <p class="section-lede">地球时间换算成火星时间，或把火星日期换算回地球。</p>
+      </div>
+      <div class="converter">
+        <div class="card">
+          <h3 class="card-title">地球 → 火星</h3>
+          <div class="form-row">
+            <label class="field">地球日期和时间 <input id="earth-in" type="datetime-local" step="1"></label>
+            <label class="field" style="flex:0 1 9rem">时区 <select id="earth-tz"><option value="local">本地时区</option><option value="utc">UTC</option></select></label>
+            <button class="btn" type="button" id="earth-now">现在</button>
+          </div>
+          <dl class="results" id="earth-out" hidden>
+            <dt>UTC</dt><dd id="c-utc"></dd>
+            <dt>火星太阳日</dt><dd id="c-msd"></dd>
+            <dt>协调火星时</dt><dd id="c-mtc"></dd>
+            <dt>季节</dt><dd id="c-ls"></dd>
+            <dt>星际移民历</dt><dd id="c-interimm"></dd>
+            <dt>火星车任务日</dt><dd id="c-missions"></dd>
+          </dl>
+          <p class="note">火星日期使用页面顶部选择的火星时区。</p>
         </div>
-
-        <div class="main-panel">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle">
-                            <span class="sr-only">切换导航栏</span>
-                            <span class="icon-bar bar1"></span>
-                            <span class="icon-bar bar2"></span>
-                            <span class="icon-bar bar3"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">查询火星时间</a>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="https://github.com/InterImm/app/releases" target="_blank">
-                                    <i class="ti-apple"></i>
-                                    <p>桌面程序</p>
-                                </a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-th"></i>
-                                    <p class="notification"></p>
-                                    <b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="http://interimm.org/">星际移民中心</a></li>
-                                    <li>
-                                        <a href="http://book.interimm.org/navigator/mars.html#marscalendar">
-                                            火星计时历法文档
-                                        </a>
-                                    </li>
-                                    <li><a href="http://book.interimm.org/">星际移民之书</a></li>
-                                    <li><a href="https://github.com/InterImm/mars-clock">源码 @ GitHub</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="en/">
-                                    <i class="fa fa-language"></i>
-                                    <p>EN</p>
-                                </a>
-                            </li>
-                        </ul>
-
-                    </div>
-                </div>
-            </nav>
-
-
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="header">
-                                    <h4 class="title">地球—火星时间换算</h4>
-                                    <p class="category">地球时间与火星时间的换算</p>
-                                </div>
-                                <div class="content">
-
-
-
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="earth-date-input form-group">
-
-
-
-
-                                                <label>地球时间（输入格式举例：2016-07-16 01:58:16）</label>
-
-                                                <span class="automatic-input">
-                                                    <a class="utc-time form-control border-input" title="点击此处可以输入日期"></a>
-                                                </span>
-
-
-
-                                                <div class="col-md-12 manual-input input-group date" style="display:none;"
-                                                    id='datetimepicker-earth'>
-
-                                                    <input type="datetime" name="custom-datetime" class="custom-datetime form-control border-input" />
-                                                    <span class="input-group-addon">
-                                                        <span class="fa fa-calendar"></span>
-                                                    </span>
-
-                                                    <!-- <a class="clear-button">&#x232b;</a> -->
-
-                                                </div>
-
-
-                                                <div class="col-md-6 manual-input" style="display:none;text-align:center;vertical-align: middle；">
-                                                    <a type="text" class="form-control" style="background-color:white;"><b>时区为
-                                                            UTC+</b></a>
-                                                </div>
-
-                                                <div class="col-md-6 manual-input" style="display:none;">
-
-                                                    <input type="number" id="set-datetime-tz-earth" name="custom-datetime-tz-earth"
-                                                        class="form-control border-input" value="8" style="text-align:center;"
-                                                        min="0" max="24" />
-                                                </div>
-
-
-                                            </div>
-
-                                            <div class="manual-input-invalid" style="display:none;">
-                                                <p>请输入一个有效的日期，格式可以使用 &ldquo;August 6, 2012&rdquo;，或者 &ldquo;Aug 6,
-                                                    2012&rdquo;，或者 &ldquo;2012-08-29&rdquo; 等等，默认时区为 GMT. <b>或者尝试一个更晚的日期和时间。</b></p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="clock col-md-3">
-
-                                                <div class="card">
-                                                    <div class="content">
-                                                        <div class="row">
-                                                            <div class="time mymd_interimm"></div>
-                                                        </div>
-                                                        <div class="footer">
-                                                            <hr>
-                                                            <div class="stats">
-                                                                <a href="cal-doc.html">火星日期</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-
-                                            </div>
-                                            <div class="clock col-md-3">
-                                                <div class="card">
-                                                    <div class="content">
-                                                        <div class="row">
-                                                            <div class="time mt_interimm"></div>
-                                                        </div>
-                                                        <div class="footer">
-                                                            <hr>
-                                                            <div class="stats">
-                                                                <a href="timing-doc.html">火星 0 时区时间</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clock col-md-3">
-
-                                                <div class="card">
-                                                    <div class="content">
-                                                        <div class="row">
-                                                            <div class="time mtc"></div>
-                                                        </div>
-                                                        <div class="footer">
-                                                            <hr>
-                                                            <div class="stats">
-                                                                <a href="https://en.wikipedia.org/wiki/Timekeeping_on_Mars#Coordinated_Mars_Time_.28MTC.29"
-                                                                    target="_blank">协调火星时</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="clock col-md-3">
-                                                <div class="card">
-                                                    <div class="content">
-                                                        <div class="row">
-                                                            <div class="time msd_interimm"></div>
-                                                        </div>
-                                                        <div class="footer">
-                                                            <hr>
-                                                            <div class="stats">
-                                                                火星太阳日
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="clock col-md-6">
-                                            <div class="header" style="text-align:center;">
-                                                <h4 class="title">火星时区时间</h4>
-                                                <!-- <p class="category">火星上不同时区的时间</p> -->
-                                            </div>
-
-                                            <div style="text-align:center;">
-
-                                                <div class="content">
-                                                    <div class="form-group" style="text-align:center;">
-                                                        <label>选择你所在的火星时区</label>
-                                                        <input id="setLocalTimezone" type="number" min="0" max="24"
-                                                            class="form-control border-input" placeholder="火星时区" value="0"
-                                                            style="width:50%;text-align:center;margin-left:auto;margin-right:auto;">
-
-
-
-                                                    </div>
-
-                                                    <div class="card" style="text-align:center;width:80%;margin-left:auto;margin-right:auto;">
-                                                        <div class="content">
-                                                            <div class="row">
-                                                                <div class="time mymd_interimm_tz"></div>
-                                                            </div>
-                                                            <div class="footer">
-                                                                <hr>
-                                                                <div class="stats">
-                                                                    当前时区火星日期
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="card" style="text-align:center;width:80%;margin-left:auto;margin-right:auto;">
-                                                        <div class="content">
-                                                            <div class="row">
-                                                                <div class="time mt_interimm_tz"></div>
-                                                            </div>
-                                                            <div class="footer">
-                                                                <hr>
-                                                                <div class="stats">
-                                                                    当前时区时间
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-
-                                                </div>
-                                                <div class="footer">
-                                                    <hr>
-                                                    <div class="chart-legend">
-                                                        火星共有 25 个时区，请输入 0 - 24 之内的数据。
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-
-                                        <div class="clock col-md-6" style="text-align:center;">
-                                            <div class="header">
-                                                <h4 class="title">常用时区时间</h4>
-                                            </div>
-                                            <div class="card">
-
-                                                <div class="content table-responsive table-full-width">
-                                                    <table class="table table-striped" align="center">
-                                                        <thead>
-                                                            <tr>
-                                                                <th style="text-align:center;">地点</th>
-                                                                <th style="text-align:center;">时区</th>
-                                                                <th style="text-align:center;">备注</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>伊希地城市圈</td>
-                                                                <td>5</td>
-                                                                <td>-</td>
-
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td>端点城</td>
-                                                                <td>5</td>
-                                                                <td>-</td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td>川陀城</td>
-                                                                <td>4</td>
-                                                                <td>-</td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td>奥林匹斯山</td>
-                                                                <td>15</td>
-                                                                <td>-</td>
-
-                                                            </tr>
-                                                            <tr>
-                                                                <td>埃律西昂山</td>
-                                                                <td>9,10</td>
-                                                                <td>最高点时区为 10</td>
-                                                            </tr>
-
-
-                                                        </tbody>
-                                                    </table>
-
-                                                </div>
-                                            </div>
-                                            <div class="footer">
-                                                <hr>
-                                                <div class="chart-legend">
-                                                    更多请查看<a href="timezones.html">地区和时区对照表</a>，或者自行通过<a href="timing-doc.html">火星时区</a>规定换算。
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-
-                                        <div class="col-md-12" id="accordion" role="tablist" aria-multiselectable="true"
-                                            style="visibility:hidden;">
-                                            <div class="panel panel-info" style="background-color:#fff;">
-                                                <div class="panel-heading" role="tab" id="headingThree" style="background-color:#fff !important;">
-                                                    <h4 class="panel-title" style="text-align:center;">
-                                                        <a style="color:lightblue;" class="collapsed" data-toggle="collapse"
-                                                            data-parent="#accordion" href="#collapsetech" aria-expanded="false"
-                                                            aria-controls="collapsetech">
-                                                            点击查看技术细节
-                                                        </a>
-                                                    </h4>
-                                                </div>
-                                                <div id="collapsetech" class="panel-collapse collapse" role="tabpanel"
-                                                    aria-labelledby="headingThree">
-
-
-                                                    <div class="col-md-6">
-                                                        <div class="clock-in">
-                                                            <h3 style="text-align:center;">地球</h3>
-
-
-                                                            <div class="manual-input-invalid" style="display:none;">
-                                                                <p>请输入一个有效的日期，格式可以使用 &ldquo;August 6, 2012&rdquo; 等等.</p>
-                                                            </div>
-
-
-                                                            <div>
-                                                                <div>
-                                                                    <i>millis</i> = <span class="millis"></span>
-                                                                </div>
-                                                                <div class="explanation-link" data-explanation="#jd_ut-explanation">
-                                                                    JD<sub>UT</sub> = <span class="jd_ut"></span>
-                                                                </div>
-                                                                <div class="explanation-link" data-explanation="#jd_tt-explanation">
-                                                                    JD<sub>TT</sub> = <span class="jd_tt"></span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div>
-                                                                自从 <a href="https://en.wikipedia.org/?title=Epoch_(astronomy)#Julian_years_and_J2000"
-                                                                    target="_blank" title="点击此处查看解释">J2000</a> 之后的时间：
-                                                                <br>
-                                                                <span class="time j2000"></span>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <div class="clock-in">
-                                                            <h3 style="text-align:center;">火星</h3>
-
-                                                            <div class="explanation-link" data-explanation="#m-explanation">
-                                                                M = <span class="m"></span>&deg;
-                                                            </div>
-                                                            <div class="explanation-link" data-explanation="#alpha_fms-explanation">
-                                                                &alpha;<sub>FMS</sub> = <span class="alpha_fms"></span>&deg;
-                                                            </div>
-                                                            <div class="explanation-link" data-explanation="#e-explanation">
-                                                                <i>e</i> = <span class="e"></span>
-                                                            </div>
-                                                            <div class="explanation-link" data-explanation="#nu_m-explanation">
-                                                                &nu; - M = <span class="nu_m"></span>&deg;
-                                                            </div>
-                                                            <div class="explanation-link" data-explanation="#l_s-explanation">
-                                                                <i>L</i><sub>s</sub> = <span class="l_s"></span>&deg;<br>
-                                                            </div>
-                                                            &nu; = <span class="nu"></span>&deg;
-                                                            <div>
-                                                                PBS = <span class="pbs"></span>&deg;
-                                                            </div>
-                                                            <div>
-                                                                EOT = <span class="eot"></span>&deg; = <span class="eot_h"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-                                        <!-- Annotations of Clock -->
-                                        <div class="col-md-12">
-                                            <div class="footer" style="border-top:1px solid lightgrey;margin-top:1em;">
-
-                                                <hr>
-                                                <div class="stats">
-                                                    <i class="ti-info"></i> 感谢 James Tauber 的 <a href="http://jtauber.github.io/mars-clock/"
-                                                        target="_blank">Mars Clock</a>，本程序在其基础上重写并且添加星际移民中心的计时和历法方案。部分公式来自
-                                                    Allison, M., and M. McEwen 2000. <a href="http://pubs.giss.nasa.gov/abs/al05000n.html">A
-                                                        post-Pathfinder evaluation of aerocentric solar coordinates
-                                                        with improved timing recipes for Mars seasonal/diurnal climate
-                                                        studies.</a> <i>Planet. Space Sci.</i> <b>48</b>, 215-235.
-                                                    以及 <a href="http://www.giss.nasa.gov/tools/mars24/help/algorithm.html">Mars24
-                                                        Algorithm and Worked Examples</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <footer class="footer">
-                        <div class="container-fluid">
-                            <nav class="pull-left">
-                                <ul>
-
-                                    <li>
-                                        <a href="http://interimm.org">
-                                            <i class="fa fa-rocket" aria-hidden="true"></i>&nbsp;星际移民中心
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="http://weibo.com/735345046" target="_blank">
-                                            <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;小地球旅行
-                                        </a>
-
-                                    </li>
-
-
-                                </ul>
-                            </nav>
-                            <div class="copyright pull-right">
-                                &copy; <script>
-                                    document.write(new Date().getFullYear())
-                                </script>, made with <i class="fa fa-heart heart"></i> by <a href="http://interimm.org">星际移民中心</a>
-                            </div>
-                        </div>
-                    </footer>
-
-                </div>
-            </div>
-
-
+        <form class="card" id="mars-form" onsubmit="return false">
+          <h3 class="card-title">火星日期 → 地球</h3>
+          <div class="form-row">
+            <label class="field">年 <input name="year" type="number" step="1"></label>
+            <label class="field" style="flex-basis:11rem">月 <select name="month"></select></label>
+            <label class="field">日 <input name="day" type="number" min="1" max="28" step="1"></label>
+          </div>
+          <div class="form-row">
+            <label class="field">时间 <input name="time" type="time" step="1" value="00:00:00"></label>
+            <label class="field">时区 <select name="zone"></select></label>
+            <label class="check"><input name="extra" type="checkbox"> 24 点之后（“+mm:ss”）</label>
+          </div>
+          <dl class="results" id="mars-out">
+            <dt>UTC</dt><dd id="m-utc"></dd>
+            <dt>本地时间</dt><dd id="m-local"></dd>
+            <dt>季节</dt><dd id="m-ls"></dd>
+          </dl>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="calendar-title" id="calendar">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="calendar-title">星际移民中心火星历</h2>
+        <p class="section-lede">一年 24 个月，以二十四节气命名。每年从北半球春分开始，每个月的第一天都是星期日。</p>
+      </div>
+      <div class="cal-wrap">
+        <div>
+          <h3 id="cal-title">&nbsp;</h3>
+          <p class="note" id="cal-leap"></p>
+          <div class="cal-grid" id="cal-grid"></div>
+        </div>
+        <div class="prose">
+          <div class="table-scroll"><table class="data-table" id="months"></table></div>
+          <p class="note" style="margin-top:1rem">6、12、18、24 月有 27 天，其余各月 28 天，平年共 668 天。闰年在 24 月多加一天，每十年有六个闰年，平均每年 668.59 天，接近火星回归年的 668.5921 个火星日。第 1 年始于 1970 年 4 月 28 日。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="zones-title" id="timezones">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="zones-title">火星时区</h2>
+        <p class="section-lede">星际移民中心时间使用与地球相同长度的小时，所以一个火星日是 24 小时 39 分 35 秒。火星因此分为 25 个时区，每个时区相差一小时、宽 14.5987 经度，从艾里-0 向东计算。</p>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table" id="zones">
+          <thead><tr><th scope="col">时区</th><th scope="col">经度（东经）</th><th scope="col">比 0 区快</th><th scope="col">现在时间</th><th scope="col">地点</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="api-title" id="api">
+    <div class="wrap prose">
+      <h2 class="section-title" id="api-title">在你的项目里使用</h2>
+      <p>本页所有数据都来自一个没有任何依赖、带完整测试的 JavaScript 小文件。它以 MIT 许可证免费使用，以静态文件发布，运行没有任何成本。</p>
+      <h3>在网页或 Node 中</h3>
+<pre><code>import { marsTime, interimmTime } from
+  'https://cdn.jsdelivr.net/gh/InterImm/mars-clock@gh-pages/lib/marstime.js';
+
+const now = marsTime(new Date(), { longitude: 137.44 });
+now.mtc   // 协调火星时（小时）
+now.lmst  // 盖尔撞击坑的地方平太阳时
+now.ls    // 季节（度）
+interimmTime(new Date(), { zone: 5 }).clock   // "06:19:12"</code></pre>
+      <h3>作为网页元素</h3>
+<pre><code>&lt;script type="module" src="https://cdn.jsdelivr.net/gh/InterImm/mars-clock@gh-pages/lib/mars-clock-element.js"&gt;&lt;/script&gt;
+&lt;mars-clock&gt;&lt;/mars-clock&gt;  &lt;!-- 或 show="interimm" zone="5"，show="sol" mission="perseverance" --&gt;</code></pre>
+      <h3>以 JSON 形式，任何语言都能用</h3>
+      <p>预先算好的数据表：2000–2050 年每天 UTC 00:00 一行，另有每个火星年和星际移民历年份的起始时间。</p>
+<pre><code>curl https://interimm.org/mars-clock/api/v1/daily/2026.json
+curl https://interimm.org/mars-clock/api/v1/mars-years.json</code></pre>
+      <p>所有函数和字段见<a href="api/v1/index.json">接口索引</a>和 <a href="https://github.com/InterImm/mars-clock#readme">README</a>。</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="about-title" id="about">
+    <div class="wrap prose">
+      <h2 class="section-title" id="about-title">关于</h2>
+      <p>火星时间按照 <a href="https://www.giss.nasa.gov/tools/mars24/help/algorithm.html">NASA GISS 的 Mars24 算法</a>计算（Allison &amp; McEwen 2000, Planet. Space Sci. 48, 215–235）。本页最初基于 James Tauber 的 <a href="https://github.com/jtauber/mars-clock">Mars Clock</a>，星际移民中心在 2016 年加入了自己的历法、计时和时区。源码在 <a href="https://github.com/InterImm/mars-clock">GitHub</a>。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>星际移民中心 · InterImm</span></p></div>
+</footer>
 </body>
-
-<!--   Core JS Files   -->
-<script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-
-<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-<!-- Moment.js -->
-<script src="assets/js/moment.js"></script>
-
-<!--  Bootstrap Datepicker Plugin -->
-<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-
-<!--  Checkbox, Radio & Switch Plugins -->
-<script src="assets/js/bootstrap-checkbox-radio.js"></script>
-
-<!--  Charts Plugin -->
-<!-- <script src="assets/js/chartist.min.js"></script> -->
-
-<!--  Bootstrap Translation Plugins -->
-<script src="assets/js/bootstrap-transition.js"></script>
-
-<!--  Bootstrap Collapse Plugins -->
-<script src="assets/js/bootstrap-collapse.js"></script>
-
-<!--  Notifications Plugin    -->
-<script src="assets/js/bootstrap-notify.js"></script>
-
-<script type="text/javascript" src="assets/js/bootstrap-slider.min.js"></script>
-
-<!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-<script src="assets/js/paper-dashboard.js"></script>
-
-
-
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss'
-        });
-    });
-</script>
-
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker-earth').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss',
-            sideBySide: true
-        });
-    });
-</script>
-
-<!-- WIP Warning -->
-<script type="text/javascript">
-    $(document).ready(function () {
-
-
-        $.notify({
-            icon: 'ti-pulse',
-            message: "欢迎使用火星时钟。提交 BUG 和建议请戳 <a href='https://github.com/InterImm/mars-clock/issues' style='color:black;'>GitHub</a>."
-
-        }, {
-            type: 'info',
-            timer: 10000,
-            placement: {
-                from: 'bottom',
-                align: 'left'
-            }
-        });
-
-    });
-</script>
-
-<!-- Javascript BEGIN -->
-
-
-
-<script>
-    if (!window.jQuery) {
-        var script = document.createElement('script');
-        script.src = "/static/jquery/jquery.min.js";
-        document.body.appendChild(script);
-    }
-</script>
-
-
-
-<script src="assets/marstimezone.js"></script>
-<script src="assets/marsclock.js"></script>
-
-
-
-
-<!-- Google Analytics -->
-<script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-    ga('create', 'UA-50146153-7', 'auto');
-    ga('send', 'pageview');
-</script>
-
-
-<!-- Javascript END -->
-
 </html>
