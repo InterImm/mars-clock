@@ -4,12 +4,14 @@
 
 How to get Mars time, best option first:
 
-1. If you can use MCP tools: add the server `npx -y github:InterImm/mars-clock#gh-pages` (stdio). Tools: `get_mars_time` (now or any instant, any longitude), `interimm_to_earth`, `mission_sol`, `sol_to_earth`, `mars_year_dates`.
+1. If you can use MCP tools: add the server `npx -y github:InterImm/mars-clock#gh-pages` (stdio). Tools: `get_mars_time` (now or any instant, any longitude), `interimm_to_earth`, `mission_sol`, `sol_to_earth`, `mars_year_dates`, `light_message`, `interstellar_voyage`.
 2. If you can run a shell with Node 18+: `npx -y github:InterImm/mars-clock#gh-pages now --longitude 137.44` prints JSON.
 3. If you can run JavaScript: `import { marsTime, interimmTime } from 'https://cdn.jsdelivr.net/gh/InterImm/mars-clock@gh-pages/lib/marstime.js'`.
 4. If you can only fetch URLs: read the precomputed daily table for the year and interpolate (MSD grows by 0.973244 sol per Earth day; MTC by 24 Mars hours per sol). Or compute it yourself from the formulas in llms-full.txt.
 
 Conventions: longitudes are degrees EAST of Airy-0 (west longitudes are negative or 360 minus). MTC, LMST and LTST are in Mars hours (1/24 sol). The InterImm clock uses Earth-length hours, so a sol reads 00:00:00 to 23:59:59 then +00:00 to +39:35. InterImm dates are written year-MM-DD with two-digit month and day (31-01-03); Year 1 began 1970-04-28. Mars Years use Clancy numbering (MY 1 began 1955-04-11; MY 39 began 2026-09-30).
+
+Light-year time: `lib/lightyear.js` (same CDN path) and MCP tools `light_message` (when a message to a nearby star arrives, earliest reply) and `interstellar_voyage` (relativistic trip: years on Mars vs aboard). Distances in light years, c = 1 ly/yr. The InterImm story calendar is real time + 70,491 days (2026-10-03 = 2219-10-03).
 
 ## Docs
 
@@ -25,6 +27,7 @@ Conventions: longitudes are degrees EAST of Airy-0 (west longitudes are negative
 - [Mars Year start dates](https://interimm.org/mars-clock/api/v1/mars-years.json)
 - [InterImm calendar years](https://interimm.org/mars-clock/api/v1/interimm-years.json)
 - [Missions](https://interimm.org/mars-clock/api/v1/missions.json)
+- [Nearby stars and trip times](https://interimm.org/mars-clock/api/v1/stars.json)
 
 ## Code
 
@@ -33,5 +36,6 @@ Conventions: longitudes are degrees EAST of Airy-0 (west longitudes are negative
 
 ## Optional
 
+- [Light Years page](https://interimm.org/mars-clock/en/lightyear/): letters to stars, voyage clock
 - [Embeddable widget](https://interimm.org/mars-clock/en/#embed): `<mars-clock-card>` or an iframe
 - [Mars24 algorithm (NASA GISS)](https://www.giss.nasa.gov/tools/mars24/help/algorithm.html)

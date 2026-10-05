@@ -8,16 +8,18 @@
   "exports": {
     ".": "./lib/marstime.js",
     "./element": "./lib/mars-clock-element.js",
-    "./card": "./lib/mars-clock-card.js"
+    "./card": "./lib/mars-clock-card.js",
+    "./lightyear": "./lib/lightyear.js"
   },
   "files": [
     "lib/marstime.js",
+    "lib/lightyear.js",
     "lib/mars-clock-element.js",
     "lib/mars-clock-card.js",
     "mcp/server.mjs"
   ],
   "scripts": {
-    "test": "node --test lib/marstime.test.mjs mcp/server.test.mjs",
+    "test": "node --test lib/marstime.test.mjs lib/lightyear.test.mjs mcp/server.test.mjs",
     "build:api": "node tools/build-api.mjs"
   },
   "engines": {

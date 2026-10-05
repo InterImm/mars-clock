@@ -8,6 +8,7 @@
 // It also works as a one-shot command for agents with a shell:
 //   npx -y github:InterImm/mars-clock#gh-pages now [--longitude 137.44] [--zone 5] [--utc 2026-10-03T10:00:00Z]
 import * as mt from '../lib/marstime.js';
+import * as ly from '../lib/lightyear.js';
 
 const SERVER = { name: 'mars-time', title: 'InterImm Mars time', version: mt.VERSION };
 
@@ -103,6 +104,38 @@ function marsYearDates({ marsYear }) {
   return out;
 }
 
+// Instants for the light-year tools may be real (utc) or in the InterImm story calendar (story, real + 70,491 days).
+const instant = ({ utc, story }) => (story ? Date.parse(story) - ly.STORY_OFFSET_DAYS * 86400e3 : parseUtc(utc));
+const both = (d) => ({ utc: d.toISOString(), story: ly.storyFromReal(d).toISOString() });
+const target = ({ star, distance_ly }) => {
+  if (distance_ly !== undefined) return ly.star(Number(distance_ly));
+  return ly.star(star ?? 'epsilon-eridani');
+};
+
+function lightMessage(args) {
+  const s = target(args);
+  const sent = instant(args);
+  if (!Number.isFinite(sent)) throw new Error('Could not read the date; use ISO 8601');
+  const m = ly.message(sent, s.distance, { replyAfter: args.reply_after_years ?? 0 });
+  return { star: s.name.en, distanceLy: s.distance, sent: both(m.sent), arrives: both(m.arrives), earliestReply: both(m.earliestReply),
+    roundTripYears: m.roundTripYears, note: 'Light covers one light year per Julian year. Story dates are real dates + 70,491 days (InterImm, 2026-10-03 = 2219-10-03).' };
+}
+
+function interstellarVoyage(args) {
+  const s = target(args);
+  const v = args.profile ? ly.profileVoyage(args.profile, s.distance)
+    : ly.voyage({ distance: s.distance, accel: args.accel_g ?? 1, cruise: args.cruise_c ?? null, decelerate: args.decelerate ?? true });
+  const out = { star: s.name.en, distanceLy: s.distance, ...roundAll({
+    earthYears: v.earthYears, shipYears: v.shipYears, marsYears: v.marsYears, peakSpeedC: v.peakBeta, peakGamma: v.peakGamma,
+    photonRocketMassRatio: v.photonRocketMassRatio, phases: v.phases }) };
+  if (args.depart_utc || args.depart_story) {
+    const d = ly.voyageDates(v, instant({ utc: args.depart_utc, story: args.depart_story }));
+    out.dates = { depart: both(d.depart), arrives: both(d.arrives), newsOfArrivalHome: both(d.newsHome) };
+  }
+  out.note = 'Special relativity, constant proper acceleration (felt aboard). earthYears are in the Sun/Mars frame, shipYears on the ship clock.';
+  return out;
+}
+
 const TOOLS = [
   {
     name: 'get_mars_time',
@@ -162,6 +195,41 @@ const TOOLS = [
     inputSchema: { type: 'object', required: ['marsYear'], properties: { marsYear: { type: 'integer', minimum: 1, maximum: 200 } } },
     run: marsYearDates,
   },
+  {
+    name: 'light_message',
+    title: 'Message to a star at light speed',
+    description: `When a radio or laser message sent now (or at a given date) reaches a nearby star, and the earliest reply. Stars: ${ly.STARS.map((x) => x.id).join(', ')}.`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        star: { type: 'string', enum: ly.STARS.map((x) => x.id), description: 'Default epsilon-eridani' },
+        distance_ly: { type: 'number', description: 'Use instead of star for any distance in light years' },
+        utc: { type: 'string', description: 'Real send date, ISO 8601. Omit for now.' },
+        story: { type: 'string', description: 'Send date in the InterImm story calendar (e.g. 2219-10-05), instead of utc' },
+        reply_after_years: { type: 'number', description: 'Years the other side takes to answer. Default 0.' },
+      },
+    },
+    run: lightMessage,
+  },
+  {
+    name: 'interstellar_voyage',
+    title: 'Relativistic trip to a star: Mars time vs ship time',
+    description: `Trip time to a star in the departure frame and aboard, peak speed, and dates. Profiles: ${Object.entries(ly.PROFILES).map(([k, p]) => `${k} (${p.name.en})`).join(', ')}; or set accel_g, cruise_c and decelerate.`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        star: { type: 'string', enum: ly.STARS.map((x) => x.id), description: 'Default epsilon-eridani' },
+        distance_ly: { type: 'number' },
+        profile: { type: 'string', enum: Object.keys(ly.PROFILES) },
+        accel_g: { type: 'number', description: 'Proper acceleration in g (default 1); 0 = start at cruise speed' },
+        cruise_c: { type: 'number', description: 'Cruise speed as a fraction of c (0-1); omit to accelerate to the midpoint' },
+        decelerate: { type: 'boolean', description: 'Brake at the destination (default true)' },
+        depart_utc: { type: 'string' },
+        depart_story: { type: 'string', description: 'Departure in the InterImm story calendar, e.g. 2230-01-01' },
+      },
+    },
+    run: interstellarVoyage,
+  },
 ];
 
 // ---------------------------------------------------------------- one-shot CLI
@@ -192,7 +260,7 @@ function handle(req) {
         protocolVersion: params.protocolVersion || '2025-06-18',
         capabilities: { tools: { listChanged: false } },
         serverInfo: SERVER,
-        instructions: 'Use get_mars_time for "what time is it on Mars" questions. Longitudes are degrees east. Results are computed locally with NASA\'s Mars24 algorithm.',
+        instructions: 'Use get_mars_time for "what time is it on Mars" questions. Longitudes are degrees east. Results are computed locally with NASA\'s Mars24 algorithm. For nearby stars use light_message and interstellar_voyage (special relativity; story dates = real + 70,491 days).',
       } });
     case 'ping':
       return send({ id, result: {} });

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Light Years | InterImm</title>
+<meta name="description" content="Write to a nearby star and watch your message travel; work out how long a trip to Epsilon Eridani takes on Mars and aboard the ship. Special relativity, computed in your browser.">
+<link rel="icon" href="../../assets/img/favicon.ico">
+<link rel="apple-touch-icon" href="../../assets/img/favicon/apple-touch-icon.png">
+<link rel="alternate" hreflang="zh-CN" href="https://interimm.org/mars-clock/lightyear/">
+<link rel="alternate" type="text/plain" title="Guide for language models" href="../../llms.txt">
+<link rel="stylesheet" href="https://interimm.org/kit/interimm.css">
+<link rel="stylesheet" href="../../app/clock.css">
+<link rel="stylesheet" href="../../app/lightyear.css">
+<script src="https://interimm.org/kit/interimm.js" defer></script>
+<script type="module" src="../../app/lightyear.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" data-interimm-header data-lang="en" data-lang-cn="https://interimm.org/mars-clock/lightyear/">
+  <div class="wrap header-inner">
+    <a class="brand" href="https://interimm.org/en/"><span class="brand-name">InterImm</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <header class="page-hero space clock-page-hero ly-hero">
+    <div class="hero-mars" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-controls">
+        <p class="kicker"><span class="pulse"></span>Light Years · InterImm time service</p>
+        <a class="btn btn-ghost lang-switch" href="../../lightyear/" hreflang="zh-CN" lang="zh-CN">中文</a>
+      </div>
+      <h1 class="sr-only">Light Years: letters to the stars and a voyage clock</h1>
+      <output class="clock-hero" id="hero-clock" aria-live="off">--:--:--</output>
+      <p class="hero-date" id="hero-date">&nbsp;</p>
+      <div class="hero-controls">
+        <label class="inline-field">Star <select id="star"></select></label>
+        <label class="inline-field">Calendar <select id="calendar"><option value="story">InterImm story (2219)</option><option value="real">Real calendar</option></select></label>
+      </div>
+      <dl class="hero-stats">
+        <div><dt>Distance</dt><dd id="hero-distance">–</dd></div>
+        <div><dt>A message sent today arrives</dt><dd id="hero-arrives">–</dd></div>
+        <div><dt>Tonight's starlight left in</dt><dd id="hero-light">–</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="write-title" id="write">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="write-title">Write to a star</h2>
+        <p class="section-lede">A message travels at light speed, one light year per year. Send it and watch it move out kilometre by kilometre; share the link and your friends can see how far it has got.</p>
+      </div>
+      <div id="shared" hidden></div>
+      <div class="write-wrap">
+        <form class="card" id="write-form">
+          <label class="field">Your message <textarea id="letter" maxlength="1000" placeholder="Hello, Epsilon Eridani. This is Mars."></textarea></label>
+          <div class="form-row">
+            <label class="field">Years they take to answer <input id="reply-after" type="number" min="0" step="0.5" value="0"></label>
+            <button class="btn btn-primary" type="submit">Send</button>
+          </div>
+          <p class="note" id="write-note" role="status"></p>
+          <p class="note">Messages stay in your browser and are never uploaded. Dates use the calendar chosen at the top.</p>
+        </form>
+        <div>
+          <h3 class="card-title">Sent</h3>
+          <div class="outbox" id="outbox"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="voyage-title" id="voyage">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="voyage-title">Voyage clock</h2>
+        <p class="section-lede">The closer a ship gets to light speed, the slower its clock runs. Pick a ship and a departure date to see how many years pass on Mars and how much older the crew gets.</p>
+      </div>
+      <div class="voyage-controls">
+        <label class="field">Ship <select id="profile"></select></label>
+        <label class="field">Acceleration (g) <input id="accel" type="number" min="0" step="0.01"></label>
+        <label class="field">Cruise speed (fraction of c; empty = accelerate to the midpoint) <input id="cruise" type="number" min="0" max="0.999999" step="0.01"></label>
+        <label class="check"><input id="decel" type="checkbox"> Brake on arrival</label>
+        <label class="field">Departure <input id="depart" type="date"></label>
+        <button class="btn btn-ghost" type="button" id="depart-now">Leave today</button>
+      </div>
+      <p class="note" id="profile-note"></p>
+      <p class="note" id="voyage-error" role="alert"></p>
+      <div class="bento">
+        <article class="tile"><p class="tile-kicker">Passes on Mars</p><span class="readout" id="v-earth">–</span><p class="sub">About <span id="v-mars-years"></span> Mars years.</p></article>
+        <article class="tile"><p class="tile-kicker">Passes aboard</p><span class="readout" id="v-ship">–</span><p class="sub">The crew ages <span id="v-saved"></span> less than the people they left.</p></article>
+        <article class="tile"><p class="tile-kicker">Top speed</p><span class="readout" id="v-peak">–</span><p class="sub mono" id="v-gamma"></p></article>
+        <article class="tile"><p class="tile-kicker">Arrival</p><span class="readout" id="v-arrive" style="font-size:1.2rem">–</span><p class="sub">News of arrival reaches Mars: <span class="mono" id="v-news"></span></p></article>
+        <article class="tile"><p class="tile-kicker">Ideal photon rocket mass ratio</p><span class="readout" id="v-mass">–</span><p class="sub">Starting mass over arrival mass with light as the exhaust. A laser-pushed sail carries no fuel.</p></article>
+      </div>
+      <div class="chart-wrap">
+        <svg class="chart" id="chart" viewBox="0 0 640 300" role="img" aria-label="Years passed on Mars against years on the ship clock"></svg>
+      </div>
+      <label class="field">Drag to any moment of the trip <input class="scrub" id="scrub" type="range" min="0" max="1000" value="500"></label>
+      <dl class="results">
+        <dt>Date</dt><dd id="s-date"></dd>
+        <dt>Since departure (Mars)</dt><dd id="s-earth"></dd>
+        <dt>Ship clock</dt><dd id="s-ship"></dd>
+        <dt>Distance flown</dt><dd id="s-distance"></dd>
+        <dt>Speed</dt><dd id="s-speed"></dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="stars-title" id="stars-section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="stars-title">Nearby stars</h2>
+        <p class="section-lede">Trips use the <span id="table-profile"></span>. Click a name to pick it. Procyon, Sirius and Betelgeuse cities on Mars are named after these stars.</p>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table" id="stars">
+          <thead><tr><th scope="col">Star</th><th scope="col">Type</th><th scope="col">Distance</th><th scope="col">Question and answer</th><th scope="col">On Mars</th><th scope="col">Aboard</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="how-title" id="how">
+    <div class="wrap prose">
+      <h2 class="section-title" id="how-title">How it works</h2>
+      <p>The ship accelerates at a constant felt acceleration (hyperbolic motion in special relativity), coasts at its cruise speed and brakes the same way before arrival. With no cruise speed it accelerates to the midpoint and flips. Mars and the Sun share one frame closely enough that time "on Mars" is solar-system time. Star distances are rounded from SIMBAD and Gaia.</p>
+      <p>The InterImm story calendar runs 70,491 days ahead of the real one: 3 October 2026 is 3 October 2219 in the story, the first year of terraforming phase 1.</p>
+      <p>All of it is one JavaScript file with no dependencies that you can use in your own project:</p>
+<pre><code>import { voyage, message } from
+  'https://cdn.jsdelivr.net/gh/InterImm/mars-clock@gh-pages/lib/lightyear.js';
+
+voyage({ distance: 10.47, accel: 1 })   // 1 g to Epsilon Eridani
+// { earthYears: 12.26, shipYears: 4.93, peakBeta: 0.988, ... }</code></pre>
+      <p>The star table with trip times for each ship is also JSON: <a href="../../api/v1/stars.json">stars.json</a>. AI assistants can use the MCP tools <code>light_message</code> and <code>interstellar_voyage</code>; see the <a href="../#api">Mars Clock page</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>星际移民中心 · InterImm</span></p></div>
+</footer>
+</body>
+</html>

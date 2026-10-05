@@ -1,0 +1,45 @@
+/* Light-year page: only what it adds to the kit and clock.css. */
+
+.ly-hero .hero-mars {
+  /* a far, cool star instead of Mars */
+  background: radial-gradient(circle at 50% 50%, #fff6e0 0%, #ffd27a 12%, #e98a3a 30%, rgb(120 60 20 / 0.4) 55%, transparent 72%);
+  box-shadow: none; opacity: 0.45;
+}
+.ly-hero .clock-hero { font-size: clamp(2.6rem, 1.2rem + 7vw, 6rem); }
+
+textarea {
+  width: 100%; min-height: 8rem; padding: 0.6rem 0.75rem; border: 1px solid var(--border-strong); border-radius: 0.6rem;
+  background: var(--surface); color: var(--text); font: inherit; font-size: 1rem; resize: vertical;
+}
+textarea:focus-visible, input[type="date"]:focus-visible { outline: 3px solid var(--focus); outline-offset: 1px; }
+input[type="date"] {
+  min-height: 2.5rem; padding: 0.4rem 0.75rem; border: 1px solid var(--border-strong); border-radius: 0.6rem;
+  background: var(--surface); color: var(--text); font: inherit; font-size: 1rem;
+}
+
+.write-wrap { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); align-items: start; }
+.write-wrap form { gap: 1rem; }
+.outbox { display: grid; gap: 1rem; }
+.letter { gap: 0.4rem; }
+.letter.is-shared { border-color: var(--accent); margin-bottom: 1.5rem; }
+.letter-text { margin: 0.25rem 0 0.5rem; font-family: var(--font-display); font-size: 1.15rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.letter-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+.progress { height: 6px; border-radius: 3px; background: var(--border); overflow: hidden; }
+.progress span { display: block; height: 100%; width: 0; min-width: 2px; background: var(--accent); }
+
+.voyage-controls { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); align-items: end; margin-bottom: 0.5rem; }
+.voyage-controls .check { min-height: 2.5rem; }
+.chart-wrap { margin: 1.5rem 0 0.5rem; }
+.chart { width: 100%; max-width: 52rem; height: auto; display: block; }
+.chart .axis line { stroke: var(--border); }
+.chart .axis text, .chart .mars-label { fill: var(--muted); font: 12px var(--font-mono); }
+.chart .mars-line { stroke: var(--muted); stroke-dasharray: 4 4; stroke-width: 1.5; }
+.chart .ship-line { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.chart .ship-label { fill: var(--accent); font: 600 12px var(--font-mono); }
+.chart .now-line { stroke: var(--border-strong); }
+.chart .ship-dot { fill: var(--accent); stroke: var(--bg); stroke-width: 2; }
+.scrub { width: 100%; accent-color: var(--accent); margin: 0.5rem 0 1rem; }
+
+.link-button { padding: 0; border: 0; background: none; color: var(--text); font: inherit; font-weight: 600; text-align: start; cursor: pointer; text-decoration: underline; text-decoration-color: var(--border-strong); text-underline-offset: 3px; }
+.link-button:hover { text-decoration-color: var(--accent); }
+.data-table tr.is-current > * { background: var(--accent-soft); }

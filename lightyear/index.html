@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>光年 | 星际移民中心</title>
+<meta name="description" content="给邻近恒星写一封信，看它什么时候到；算一算去天苑四要多久，火星上过了多少年、船上又过了多少年。全部在浏览器里按狭义相对论计算。">
+<link rel="icon" href="../assets/img/favicon.ico">
+<link rel="apple-touch-icon" href="../assets/img/favicon/apple-touch-icon.png">
+<link rel="alternate" hreflang="en" href="https://interimm.org/mars-clock/en/lightyear/">
+<link rel="alternate" type="text/plain" title="Guide for language models" href="../llms.txt">
+<link rel="stylesheet" href="https://interimm.org/kit/interimm.css">
+<link rel="stylesheet" href="../app/clock.css">
+<link rel="stylesheet" href="../app/lightyear.css">
+<script src="https://interimm.org/kit/interimm.js" defer></script>
+<script type="module" src="../app/lightyear.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+
+<header class="site-header" data-interimm-header data-lang="cn" data-lang-en="https://interimm.org/mars-clock/en/lightyear/">
+  <div class="wrap header-inner">
+    <a class="brand" href="https://interimm.org/"><span class="brand-name">星际移民中心</span></a>
+  </div>
+</header>
+
+<main id="main">
+  <header class="page-hero space clock-page-hero ly-hero">
+    <div class="hero-mars" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-controls">
+        <p class="kicker"><span class="pulse"></span>光年 · 星际移民中心时间服务</p>
+        <a class="btn btn-ghost lang-switch" href="../en/lightyear/" hreflang="en" lang="en">English</a>
+      </div>
+      <h1 class="sr-only">光年：给恒星的信和星际航程钟</h1>
+      <output class="clock-hero" id="hero-clock" aria-live="off">--:--:--</output>
+      <p class="hero-date" id="hero-date">&nbsp;</p>
+      <div class="hero-controls">
+        <label class="inline-field">目标恒星 <select id="star"></select></label>
+        <label class="inline-field">纪年 <select id="calendar"><option value="story">星际移民中心纪年（2219）</option><option value="real">现实日历</option></select></label>
+      </div>
+      <dl class="hero-stats">
+        <div><dt>距离</dt><dd id="hero-distance">–</dd></div>
+        <div><dt>今天发出的信抵达</dt><dd id="hero-arrives">–</dd></div>
+        <div><dt>今晚看到的星光出发于</dt><dd id="hero-light">–</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="write-title" id="write">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="write-title">给恒星写一封信</h2>
+        <p class="section-lede">信以光速飞行，一年走一光年。写好发出，它会在这里一千米一千米地往前走；把链接发给朋友，他们也能看到它走到了哪里。</p>
+      </div>
+      <div id="shared" hidden></div>
+      <div class="write-wrap">
+        <form class="card" id="write-form">
+          <label class="field">信的内容 <textarea id="letter" maxlength="1000" placeholder="你好，天苑四。这里是火星。"></textarea></label>
+          <div class="form-row">
+            <label class="field">对方想多久再回信（年） <input id="reply-after" type="number" min="0" step="0.5" value="0"></label>
+            <button class="btn btn-primary" type="submit">发出</button>
+          </div>
+          <p class="note" id="write-note" role="status"></p>
+          <p class="note">信只存在你的浏览器里，不会上传到任何服务器。日期用页面顶部选的纪年。</p>
+        </form>
+        <div>
+          <h3 class="card-title">已发出</h3>
+          <div class="outbox" id="outbox"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="voyage-title" id="voyage">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="voyage-title">航程钟</h2>
+        <p class="section-lede">飞得越接近光速，船上的钟走得越慢。选一种飞船和出发日期，看火星上过了多少年、船员又老了多少岁。</p>
+      </div>
+      <div class="voyage-controls">
+        <label class="field">飞船 <select id="profile"></select></label>
+        <label class="field">加速度（g） <input id="accel" type="number" min="0" step="0.01"></label>
+        <label class="field">巡航速度（光速的比例，空着表示一直加速到中点） <input id="cruise" type="number" min="0" max="0.999999" step="0.01"></label>
+        <label class="check"><input id="decel" type="checkbox"> 到达时减速</label>
+        <label class="field">出发日期 <input id="depart" type="date"></label>
+        <button class="btn btn-ghost" type="button" id="depart-now">今天出发</button>
+      </div>
+      <p class="note" id="profile-note"></p>
+      <p class="note" id="voyage-error" role="alert"></p>
+      <div class="bento">
+        <article class="tile"><p class="tile-kicker">火星上经过</p><span class="readout" id="v-earth">–</span><p class="sub">约 <span id="v-mars-years"></span>火星年。</p></article>
+        <article class="tile"><p class="tile-kicker">船上经过</p><span class="readout" id="v-ship">–</span><p class="sub">船员比留在火星的人少老 <span id="v-saved"></span>。</p></article>
+        <article class="tile"><p class="tile-kicker">最高速度</p><span class="readout" id="v-peak">–</span><p class="sub mono" id="v-gamma"></p></article>
+        <article class="tile"><p class="tile-kicker">抵达</p><span class="readout" id="v-arrive" style="font-size:1.2rem">–</span><p class="sub">抵达的消息传回火星：<span class="mono" id="v-news"></span></p></article>
+        <article class="tile"><p class="tile-kicker">理想光子火箭质量比</p><span class="readout" id="v-mass">–</span><p class="sub">出发质量除以到达质量，假设喷出的是光。被激光推动的光帆不带燃料。</p></article>
+      </div>
+      <div class="chart-wrap">
+        <svg class="chart" id="chart" viewBox="0 0 640 300" role="img" aria-label="火星上的年数与船上钟的年数对比"></svg>
+      </div>
+      <label class="field">拖动看航程中的任意时刻 <input class="scrub" id="scrub" type="range" min="0" max="1000" value="500"></label>
+      <dl class="results">
+        <dt>火星日期</dt><dd id="s-date"></dd>
+        <dt>出发后（火星）</dt><dd id="s-earth"></dd>
+        <dt>船上的钟</dt><dd id="s-ship"></dd>
+        <dt>已飞</dt><dd id="s-distance"></dd>
+        <dt>速度</dt><dd id="s-speed"></dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="stars-title" id="stars-section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="stars-title">邻近的恒星</h2>
+        <p class="section-lede">航程按“<span id="table-profile"></span>”计算。点星名可以选它。南河城、天狼城、参宿城就是以这些恒星命名的。</p>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table" id="stars">
+          <thead><tr><th scope="col">恒星</th><th scope="col">光谱型</th><th scope="col">距离</th><th scope="col">一问一答</th><th scope="col">火星上</th><th scope="col">船上</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="how-title" id="how">
+    <div class="wrap prose">
+      <h2 class="section-title" id="how-title">怎么算的</h2>
+      <p>飞船按恒定的“体感”加速度加速（狭义相对论的双曲运动），到巡航速度后滑行，到达前用同样的加速度减速。没有设巡航速度时，飞船一直加速到中点再掉头。火星和太阳几乎静止于同一参考系，所以“火星上经过”的时间就是太阳系里的时间。恒星距离取自 SIMBAD 和 Gaia 并做了四舍五入。</p>
+      <p>星际移民中心纪年比现实日历早 70,491 天：现实的 2026 年 10 月 3 日就是故事里的 2219 年 10 月 3 日，地球化第一阶段开始的那一年。</p>
+      <p>这些计算都在一个没有依赖的 JavaScript 文件里，可以直接在你的项目中使用：</p>
+<pre><code>import { voyage, message } from
+  'https://cdn.jsdelivr.net/gh/InterImm/mars-clock@gh-pages/lib/lightyear.js';
+
+voyage({ distance: 10.47, accel: 1 })   // 1 g 去天苑四
+// { earthYears: 12.26, shipYears: 4.93, peakBeta: 0.988, ... }</code></pre>
+      <p>恒星表和每种飞船的航程也有 JSON 版：<a href="../api/v1/stars.json">stars.json</a>。AI 助手可以用 MCP 工具 <code>light_message</code> 和 <code>interstellar_voyage</code>，见<a href="../#api">火星时钟页面</a>。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" data-interimm-footer>
+  <div class="wrap"><p class="footer-legal"><span>星际移民中心 · InterImm</span></p></div>
+</footer>
+</body>
+</html>

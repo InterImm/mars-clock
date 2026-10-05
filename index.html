@@ -237,6 +237,8 @@ interimmTime(new Date(), { zone: 5 }).clock   // "06:19:12"</code></pre>
       <p>想要带样式的卡片，用上面的<a href="#embed">嵌入生成器</a>；想要沿用你网页样式的纯文字，用 <code>&lt;mars-clock&gt;</code>：</p>
 <pre><code>&lt;script type="module" src="https://cdn.jsdelivr.net/gh/InterImm/mars-clock@gh-pages/lib/mars-clock-element.js"&gt;&lt;/script&gt;
 &lt;mars-clock&gt;&lt;/mars-clock&gt;  &lt;!-- 或 show="interimm" zone="5"，show="sol" mission="perseverance" --&gt;</code></pre>
+      <h3>光年</h3>
+      <p>给邻近恒星的信什么时候到、星际航程中船上和火星上各过了多少年：见<a href="lightyear/">光年</a>页面和 <code>lib/lightyear.js</code>。</p>
       <h3>给 AI 助手用</h3>
       <p>把火星时间工具加到 Claude、Cursor 或任何支持 MCP 的客户端，只需要 Node：</p>
 <pre><code>claude mcp add mars-time -- npx -y github:InterImm/mars-clock#gh-pages

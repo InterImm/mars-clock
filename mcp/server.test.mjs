@@ -37,7 +37,7 @@ test('MCP handshake, tool list and calls', async () => {
 
   const list = await s.call('tools/list', {});
   assert.deepEqual(list.result.tools.map((t) => t.name).sort(),
-    ['get_mars_time', 'interimm_to_earth', 'mars_year_dates', 'mission_sol', 'sol_to_earth']);
+    ['get_mars_time', 'interimm_to_earth', 'interstellar_voyage', 'light_message', 'mars_year_dates', 'mission_sol', 'sol_to_earth']);
   for (const t of list.result.tools) assert.equal(t.inputSchema.type, 'object');
 
   const now = await s.call('tools/call', { name: 'get_mars_time', arguments: { utc: '2026-10-03T10:00:00Z', longitude: 137.44 } });
@@ -56,6 +56,15 @@ test('MCP handshake, tool list and calls', async () => {
 
   const my = await s.call('tools/call', { name: 'mars_year_dates', arguments: { marsYear: 39 } });
   assert.match(my.result.structuredContent.startUtc, /^2026-09-30/);
+
+  const msg = await s.call('tools/call', { name: 'light_message', arguments: { star: 'epsilon-eridani', story: '2219-10-05T00:00:00Z' } });
+  assert.match(msg.result.structuredContent.arrives.story, /^2230-03/);
+  assert.match(msg.result.structuredContent.sent.utc, /^2026-10-05/);
+
+  const trip = await s.call('tools/call', { name: 'interstellar_voyage', arguments: { profile: 'torch', depart_story: '2230-01-01T00:00:00Z' } });
+  const tr = trip.result.structuredContent;
+  assert.ok(Math.abs(tr.shipYears - 4.93) < 0.01 && Math.abs(tr.earthYears - 12.26) < 0.01);
+  assert.match(tr.dates.arrives.story, /^2242-0[34]/);
 
   const bad = await s.call('tools/call', { name: 'mission_sol', arguments: { mission: 'nope' } });
   assert.equal(bad.result.isError, true);

@@ -2,6 +2,7 @@
 // Output is deterministic (no timestamps), so CI can check the committed files are up to date.
 import { mkdirSync, writeFileSync, rmSync, readFileSync } from 'node:fs';
 import * as mt from '../lib/marstime.js';
+import * as ly from '../lib/lightyear.js';
 
 const OUT = new URL('../api/v1/', import.meta.url);
 const FIRST_YEAR = 2000, LAST_YEAR = 2050;
@@ -48,6 +49,14 @@ write('interimm-years.json', {
 });
 
 write('missions.json', { about: 'Landers and rovers with their own sol counts. Longitude is degrees east; sol 0 is the landing sol.', missions: mt.MISSIONS });
+const voyageRow = (v) => ({ earthYears: r(v.earthYears, 4), shipYears: r(v.shipYears, 4), peakBeta: r(v.peakBeta, 4) });
+write('stars.json', {
+  about: 'Nearby stars: distance from the Sun in light years (= one-way light time in years, from Earth or Mars), ' +
+    'and trip times for each ship profile in years (earthYears in the Sun/Mars frame, shipYears aboard).',
+  storyOffsetDays: ly.STORY_OFFSET_DAYS,
+  profiles: Object.fromEntries(Object.entries(ly.PROFILES).map(([k, p]) => [k, { name: p.name, accel: p.accel, cruise: p.cruise, decelerate: p.decelerate }])),
+  stars: ly.STARS.map((s) => ({ ...s, voyages: Object.fromEntries(Object.keys(ly.PROFILES).map((k) => [k, voyageRow(ly.profileVoyage(k, s.distance))])) })),
+});
 write('leap-seconds.json', { about: 'TAI-UTC in seconds from each UTC date. Source: IERS.', leapSeconds: mt.LEAP_SECONDS });
 
 const columns = ['utc', 'msd', 'mtc', 'ls', 'marsYear', 'interimmDate', 'interimmClock', 'curiositySol', 'perseveranceSol'];
@@ -100,6 +109,8 @@ write('openapi.json', {
         years: { type: 'array', items: { type: 'object', properties: { year: int, start: str, sols: int } } } } } } } } } } },
     '/missions.json': { get: { operationId: 'getMissions', summary: 'Landers and rovers: landing time (UTC) and longitude (degrees east)',
       responses: { 200: { description: 'OK', content: { 'application/json': { schema: { type: 'object' } } } } } } },
+    '/stars.json': { get: { operationId: 'getStars', summary: 'Nearby stars: distance in light years and relativistic trip times per ship profile',
+      responses: { 200: { description: 'OK', content: { 'application/json': { schema: { type: 'object' } } } } } } },
     '/leap-seconds.json': { get: { operationId: 'getLeapSeconds', summary: 'TAI-UTC table used for the conversion',
       responses: { 200: { description: 'OK', content: { 'application/json': { schema: { type: 'object' } } } } } } },
   },
@@ -116,7 +127,9 @@ write('index.json', {
     interimmYears: 'interimm-years.json',
     missions: 'missions.json',
     leapSeconds: 'leap-seconds.json',
+    stars: 'stars.json: nearby stars, light time and trip times',
   },
+  lightyear: 'https://cdn.jsdelivr.net/gh/InterImm/mars-clock@gh-pages/lib/lightyear.js',
   openapi: 'openapi.json',
   llms: 'https://interimm.org/mars-clock/llms.txt',
   mcp: 'npx -y github:InterImm/mars-clock#gh-pages',
@@ -124,7 +137,9 @@ write('index.json', {
 // llms-full.txt = hand-written guide + the library's own source, so a model sees exactly what runs.
 const head = readFileSync(new URL('./llms-full.head.md', import.meta.url), 'utf8');
 const lib = readFileSync(new URL('../lib/marstime.js', import.meta.url), 'utf8');
+const lyLib = readFileSync(new URL('../lib/lightyear.js', import.meta.url), 'utf8');
 writeFileSync(new URL('../llms-full.txt', import.meta.url),
-  `${head}\n## The library source (lib/marstime.js)\n\n\`\`\`js\n${lib}\`\`\`\n`);
+  `${head}\n## The library source (lib/marstime.js)\n\n\`\`\`js\n${lib}\`\`\`\n` +
+  `\n## Light-year time (lib/lightyear.js)\n\n\`\`\`js\n${lyLib}\`\`\`\n`);
 
 console.log(`api/v1 written: ${LAST_YEAR - FIRST_YEAR + 1} daily files`);
